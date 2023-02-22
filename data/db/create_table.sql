@@ -1,3 +1,3 @@
 CREATE TABLE farmerData (
-
+name
 )
