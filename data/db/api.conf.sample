@@ -1,0 +1,5 @@
+db-uri = "postgres://${USERNAME}:${PASSWORD}@localhost:5432/${DB}"
+db-schemas = "api"
+db-anon-role = "web_anon"
+jwt-secret = "${PROJECT_EARTH_JWT_SECRET}"
+server-port = 8000
