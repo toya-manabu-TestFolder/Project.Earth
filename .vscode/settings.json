@@ -28,17 +28,5 @@
   "editor.formatOnSave": false,
   "eslint.packageManager": "yarn",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "sqltools.connections": [
-    {
-      "previewLimit": 50,
-      "server": "localhost",
-      "port": 5432,
-      "driver": "PostgreSQL",
-      "database": "postgres",
-      "username": "msakamoto",
-      "name": "postgres",
-      "password": ""
-    }
-  ]
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

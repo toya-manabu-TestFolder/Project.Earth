@@ -1,6 +1,8 @@
--- INSERT INTO api.items (id,farmer_id,category_id,name, price,expaire) VALUES 
---     (1,1,1,'男前キャベツ 1/4個','50','5日以内'),
---     (2,1,1,'男前キャベツ1/2個','70','5日以内'),
+--@block
+-- items1
+INSERT INTO api.items (id,farmer_id,category_id,name, price,expaire) VALUES 
+    (1,1,1,'男前キャベツ 1/4個','50','5日以内'),
+    (2,1,1,'男前キャベツ1/2個','70','5日以内')
 --     (3,1,1,'男前キャベツ1個','100','5日以内'),
 --     (4,1,1,'男前キャベツ1㎏','100','5日以内')
 --     (5,1,2,'みよばぁの人参1/2個','40','5日以内'),
@@ -21,6 +23,7 @@
 --     (20,1,7,'男前大根1㎏','150','5日以内')
 
 --@block
+-- items2
 -- INSERT INTO api.items (id,farmer_id,category_id,name, price,expaire) VALUES 
 --     (21,2,5,'GODナス1個','80','3日以内'),
 --     (22,2,5,'GODナス2個','150','3日以内'),
@@ -45,38 +48,30 @@
 
 
 --@block
+-- items追加情報
 UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 1; 
 UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 2; 
 
 
 --@block
+-- items追加情報
 UPDATE api.items SET image = '/cabbage/cabbage1:2' WHERE id = 2; 
 
 
--- @block
-SELECT * FROM api.items;
--- @block
--- DELETE FROM api.items;
+--@block
+-- カテゴリー
+INSERT INTO api.category (id,name) VALUES
+ (1,'cabbage'),
+ (2,'carrot'),
+ (3,'tomato'),
+ (4,'pumpkin'),
+ (5,'eggplant'),
+ (6,'spinach'),
+ (7,'radish'),
+ (8,'potato')
 
 
-
-
-
-
--- @block
--- INSERT INTO api.category (id,name) VALUES
---  (1,'cabbage'),
---  (2,'carrot'),
---  (3,'tomato'),
---  (4,'pumpkin'),
---  (5,'eggplant'),
---  (6,'spinach'),
---  (7,'radish'),
---  (8,'potato')
-
-
--- @block
-SELECT * FROM api.category;
-
--- @block
--- DELETE FROM api.category;
+--@block
+-- users情報追加
+INSERT INTO api.users (id,name,email,password,prefecture,city,address,otherAddress) VALUES
+(1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
