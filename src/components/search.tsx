@@ -6,7 +6,7 @@ export default function Search() {
     console.log(name);
   };
   return (
-    <div>
+   <div>
       <form onSubmit={(event) => handleSubmit(event)}>
         <label htmlFor="search">商品名から生産者を探す</label>
         <input
