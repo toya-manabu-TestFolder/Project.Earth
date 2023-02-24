@@ -7,6 +7,7 @@ export default function ChangeAmount() {
             <span>数量: {count} </span>
             <br />
             <button onClick={() => setCount(count + 1)}>+</button>
+            {/* マイナスにならないように制限 */}
             <button onClick={() => setCount(count - 1)}>-</button>
         </div>
     )
