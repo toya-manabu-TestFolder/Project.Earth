@@ -45,11 +45,12 @@
 
 
 --@block
--- UPDATE api.items SET comment = '美味しいよ' WHERE id = 1; 
+UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 1; 
+UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 2; 
 
 
 --@block
--- UPDATE api.items SET image = '/cabbage/cabbage1:2' WHERE id = 2; 
+UPDATE api.items SET image = '/cabbage/cabbage1:2' WHERE id = 2; 
 
 
 -- @block
