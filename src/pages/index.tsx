@@ -3,6 +3,11 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import PostBoughtFarmer from "@/components/postBoughtFarmer";
+import Search from "@/components/search";
+import Farmer from "@/components/farmer";
+import Photo from "@/components/photo";
+import PhotoName from "@/components/photoName";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +22,21 @@ export default function Home() {
       </Head>
       <Header />
       <main>
-        ここにメインコンテンツ
+        <div className="top_cover"></div>
+        <div className="top_purchase_history">
+          <PostBoughtFarmer />
+        </div>
+        <div className="top_search">
+          <Search />
+        </div>
+        <div className="top_category">
+          <p>生産者を探す</p>
+          <Photo />
+          <PhotoName />
+        </div>
+        <div className="top_recommend">
+          <Farmer />
+        </div>
       </main>
       <Footer />
     </>
