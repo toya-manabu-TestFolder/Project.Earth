@@ -7,13 +7,14 @@ import PhotoName from "@/components/photoName";
 import PostBoughtFarmer from "@/components/postBoughtFarmer";
 import Price from "@/components/price";
 import Farmer from "../components/farmer";
+import Header from "../components/header";
 
 export default function Example() {
   return (
     <>
-    <div>
-   <CartItem />
-    </div>
+      <div>
+        <Header />
+      </div>
     </>
   );
 }
