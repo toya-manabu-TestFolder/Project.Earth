@@ -1,13 +1,13 @@
 import ChangeAmount from "./changeAmount";
-import Photo from "./Photo";
+import Photo from "./photo";
 import PhotoName from "./photoName";
 
 export default function CartItem() {
-    return(
-        <>
-        <Photo />
-        <PhotoName />
-        <ChangeAmount/>
-        </>
-    )
+  return (
+    <>
+      <Photo />
+      <PhotoName />
+      <ChangeAmount />
+    </>
+  );
 }
