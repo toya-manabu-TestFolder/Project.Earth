@@ -1,6 +1,6 @@
 import PhotoName from "@/components/photoName";
 import Comment from "@/components/comment";
-import Photo from "./photo";
+import Photo from "./Photo";
 
 export default function Farmer() {
   return (
