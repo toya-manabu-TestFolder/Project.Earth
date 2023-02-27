@@ -71,14 +71,13 @@ DROP TABLE IF EXISTS api.users;
 
 CREATE TABLE api.users (
     id serial PRIMARY KEY,
-    name text NOT NULL,
-    email text NOT NULL,
-    password text NOT NULL UNIQUE,
-    prefecture text NOT NULL,
-    city text NOT NULL,
-    address text NOT NULL,
-    otherAddress text NOT NULL,
-    zipcode text NOT NULL
+    name varchar,
+    zipcode varchar,
+    email varchar,
+    password varchar,
+    prefecture varchar,
+    city varchar,
+    address varchar
 );
 
 GRANT SELECT ON api.users TO web_anon;
