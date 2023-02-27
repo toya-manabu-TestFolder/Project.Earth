@@ -52,13 +52,13 @@ DROP TABLE IF EXISTS api.farmerData;
 CREATE TABLE api.farmerData (
     id serial PRIMARY KEY,
     farmname varchar NOT NULL,
-    representativeName text NOT NULL,
+    representative_name text NOT NULL,
     year integer NOT NULL,
     carryr varchar NOT NULL,
     prefecture varchar NOT NULL,
-    iconImageUrl text NOT NULL,
-    coverImageUrl text NOT NULL,
-    voiceUrl text NOT NULL
+    iconImage_url text NOT NULL,
+    coverImage_url text NOT NULL,
+    voice_url text NOT NULL
 );
 
 GRANT SELECT ON api.farmerData TO web_anon;
@@ -83,6 +83,7 @@ CREATE TABLE api.users (
 
 GRANT SELECT ON api.users TO web_anon;
 GRANT ALL ON api.users to api_user;
+GRANT usage on sequence api.users_id_seq to api_user;
 
 --@block
 -- カートIDテーブル◎

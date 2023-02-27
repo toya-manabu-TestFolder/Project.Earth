@@ -1,5 +1,5 @@
 import ChangeAmount from "./changeAmount";
-import Photo from "./photo";
+import Photo from "./Photo";
 import PhotoName from "./photoName";
 
 export default function CartItem() {
