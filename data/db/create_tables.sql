@@ -1,10 +1,10 @@
 --@block
 -- テーブル作成サンプル
-DROP TABLE IF EXISTS api.テーブル名;
+-- DROP TABLE IF EXISTS api.テーブル名;
 -- CREATE TABLE api.テーブル名 (
 -- );
-GRANT SELECT ON api.テーブル名 TO web_anon;
-GRANT ALL ON api.テーブル名 to api_user;
+-- GRANT SELECT ON api.テーブル名 TO web_anon;
+-- GRANT ALL ON api.テーブル名 to api_user;
 
 -- @block
 -- 商品一覧テーブル
@@ -71,14 +71,14 @@ DROP TABLE IF EXISTS api.users;
 
 CREATE TABLE api.users (
     id serial PRIMARY KEY,
-    name varchar NOT NULL,
-    postcode varchar NOT NULL,
-    email varchar NOT NULL,
-    password varchar NOT NULL,
-    prefecture varchar NOT NULL,
-    city varchar NOT NULL,
-    address varchar NOT NULL,
-    other_address varchar NOT NULL
+    name text NOT NULL,
+    email text NOT NULL,
+    password text NOT NULL UNIQUE,
+    prefecture text NOT NULL,
+    city text NOT NULL,
+    address text NOT NULL,
+    otherAddress text NOT NULL,
+    zipcode text NOT NULL
 );
 
 GRANT SELECT ON api.users TO web_anon;
@@ -98,7 +98,7 @@ GRANT SELECT ON api.cart TO web_anon;
 GRANT ALL ON api.cart to api_user;
 
 --@block
--- カートIDテーブル◎
+-- カート履歴テーブル◎
 DROP TABLE IF EXISTS api.cartItems;
 
 CREATE TABLE api.cartItems (

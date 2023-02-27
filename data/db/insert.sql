@@ -1,5 +1,5 @@
 --@block
--- items1 Insert済み
+-- items情報追加
 INSERT INTO api.items (id,farmer_id,category_id,name, price,image,expaire) VALUES 
 (1	,	1	,	1	,	'惣菜キャベツピクルス'	,	70	,	 ''	,	 '5日以内'	),
 (2	,	1	,	1	,	'男前キャベツ1/2個'	,	100	,	 ''	,	 '5日以内'	),
@@ -42,25 +42,6 @@ INSERT INTO api.items (id,farmer_id,category_id,name, price,image,expaire) VALUE
 (39	,	2	,	2	,	'GOD人参3個'	,	180	,	 ''	,	 '5日以内'	),
 (40	,	2	,	2	,	'GOD人参1kg'	,	300	,	 ''	,	 '5日以内'	)
 
---@block
--- items comment追加
--- UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 1; 
--- UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 2; 
-
-
---@block
--- items image追加
--- UPDATE api.items SET image = '/cabbage/cabbage1:2' WHERE id = 2; 
-
-
---@block
-UPDATE api.items SET image = '/cabbage/cabbage1:2' WHERE id = 2; 
-
-
--- @block
-SELECT * FROM api.items;
--- @block
--- DELETE FROM api.items;
 
 --@block
 INSERT INTO api.category (id,name) VALUES
@@ -73,6 +54,15 @@ INSERT INTO api.category (id,name) VALUES
 (	7	,	'大根'	),
 (	8	,	'じゃがいも'	)
 
+<<<<<<< HEAD
+--@block
+-- users情報追加
+INSERT INTO api.users (id,name,email,password,prefecture,city,address,otheraddress,zipcode) VALUES
+(1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','','')
+
+--@block
+-- farmerData情報追加
+=======
 --@block users情報追加
 INSERT INTO api.users (id,name,email,password,prefecture,city,address,otherAddress,zipcode) VALUES
 (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','','');
