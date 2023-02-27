@@ -1,17 +1,27 @@
 import { FormEvent, useState } from "react";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import Head from "next/head";
 
 export default function User_register() {
   const [name, setName] = useState("");
-  const [postcode, setPostcode] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [zipcode, setZipcode] = useState("");
   const [prefecture, setPrefecture] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const data = {
       name: name,
-      postcode: postcode,
+      email: email,
+      password: password,
+      zipcode: zipcode,
       prefecture: prefecture,
-      email: "to@example.com",
+      city: city,
+      address: address,
     };
     const options = {
       method: "POST",
@@ -29,61 +39,86 @@ export default function User_register() {
 
   return (
     <>
-      <p>新規会員登録</p>
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <div>
-          <label htmlFor="name">姓</label>
-          <input
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-            id="name"
-            name="name"
-          ></input>
-        </div>
-        <div>
-          <label></label>
-          <input></input>
-        </div>
-        <div>
-          <label></label>
-          <input></input>
-        </div>
-        <div>
-          <label htmlFor="postcode">郵便番号</label>
-          <input
-            onChange={(e) => setPostcode(e.target.value)}
-            type="text"
-            id="postcode"
-            name="postcode"
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="prefecture">都道府県</label>
-          <input
-            onChange={(e) => setPrefecture(e.target.value)}
-            type="text"
-            id="prefecture"
-            name="prefecture"
-          ></input>
-        </div>
-        <div>
-          <label></label>
-          <input></input>
-        </div>
-        <div>
-          <label></label>
-          <input></input>
-        </div>
-        <div>
-          <label></label>
-          <input></input>
-        </div>
-        <div>
-          <label></label>
-          <input></input>
-        </div>
-        <button type="submit">登録</button>
-      </form>
+      <Head>
+        <title>ユーザー登録画面</title>
+      </Head>
+      <div>
+        <header>
+          <Header />
+        </header>
+        <h1>会員情報登録</h1>
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <ul>
+            <li>
+              <label htmlFor="name">名前:&nbsp;</label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                id="name"
+                name="name"
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="email">メールアドレス:&nbsp;</label>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                id="email"
+                name="email"
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="password">パスワード:&nbsp;</label>
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                type="text"
+                id="password"
+                name="password"
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="zipcode">郵便番号:&nbsp;</label>
+              <input
+                onChange={(e) => setZipcode(e.target.value)}
+                type="text"
+                id="zipcode"
+                name="zipcode"
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="prefecture">都道府県:&nbsp;</label>
+              <input
+                onChange={(e) => setPrefecture(e.target.value)}
+                type="text"
+                id="prefecture"
+                name="prefecture"
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="city">市町村:&nbsp;</label>
+              <input
+                onChange={(e) => setCity(e.target.value)}
+                type="text"
+                id="city"
+                name="city"
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="address">番地以降:&nbsp;</label>
+              <input
+                onChange={(e) => setAddress(e.target.value)}
+                type="text"
+                id="address"
+                name="address"
+              ></input>
+            </li>
+          </ul>
+          <button type="submit">登録</button>
+        </form>
+      </div>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
