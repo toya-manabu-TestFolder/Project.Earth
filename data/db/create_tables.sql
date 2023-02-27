@@ -1,10 +1,18 @@
+--@block
+-- テーブル作成サンプル
+DROP TABLE IF EXISTS api.テーブル名;
+-- CREATE TABLE api.テーブル名 (
+-- );
+GRANT SELECT ON api.テーブル名 TO web_anon;
+GRANT ALL ON api.テーブル名 to api_user;
+
 -- @block
 -- 商品一覧テーブル
 DROP TABLE IF EXISTS api.items;
 CREATE TABLE api.items (
     id SERIAL PRIMARY KEY,
-    farmer_id INTEGER NOT NULL,
     category_id INTEGER NOT NULL,
+    farmer_id INTEGER NOT NULL,
     name TEXT NOT NULL,
     price INTEGER NOT NULL,
     image TEXT,
@@ -37,30 +45,21 @@ CREATE TABLE api.sales (
 GRANT SELECT ON api.sales TO web_anon;
 GRANT ALL ON api.sales to api_user;
 
--- @block
-
-DROP TABLE IF EXISTS api.テーブル名;
--- CREATE TABLE api.テーブル名 (
--- );
-GRANT SELECT ON api.テーブル名 TO web_anon;
-GRANT ALL ON api.テーブル名 to api_user;
-
-
 --@block
 -- 農家一覧テーブル◎
 DROP TABLE IF EXISTS api.farmerData;
 
 CREATE TABLE api.farmerData (
     id serial PRIMARY KEY,
-    name varchar NOT NULL,
-    carryr varchar NOT NULL,
+    farmname varchar NOT NULL,
+    representativeName text NOT NULL,
     year integer NOT NULL,
+    carryr varchar NOT NULL,
     prefecture varchar NOT NULL,
-    comment text NOT NULL,
     iconImageUrl text NOT NULL,
     coverImageUrl text NOT NULL,
     voiceUrl text NOT NULL
-)
+);
 
 GRANT SELECT ON api.farmerData TO web_anon;
 GRANT ALL ON api.farmerData to api_user;
