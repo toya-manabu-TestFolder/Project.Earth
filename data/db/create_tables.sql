@@ -27,7 +27,8 @@ GRANT ALL ON api.items to api_user;
 DROP TABLE IF EXISTS api.category;
 CREATE TABLE api.category (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    image TEXT NOT NULL
 );
 GRANT SELECT ON api.category TO web_anon;
 GRANT ALL ON api.category to api_user;
@@ -51,14 +52,14 @@ DROP TABLE IF EXISTS api.farmerData;
 
 CREATE TABLE api.farmerData (
     id serial PRIMARY KEY,
-    farmname varchar NOT NULL,
-    representative_name text NOT NULL,
+    farmname text NOT NULL,
+    representativename text NOT NULL,
     year integer NOT NULL,
-    carryr varchar NOT NULL,
-    prefecture varchar NOT NULL,
-    iconImage_url text NOT NULL,
-    coverImage_url text NOT NULL,
-    voice_url text NOT NULL
+    carryr text NOT NULL,
+    prefecture text NOT NULL,
+    iconImageurl text NOT NULL,
+    coverImageurl text NOT NULL,
+    voiceurl text NOT NULL
 );
 
 GRANT SELECT ON api.farmerData TO web_anon;
@@ -73,11 +74,10 @@ CREATE TABLE api.users (
     id serial PRIMARY KEY,
     name text NOT NULL,
     email text NOT NULL,
-    password text NOT NULL UNIQUE,
+    password text NOT NULL,
     prefecture text NOT NULL,
     city text NOT NULL,
     address text NOT NULL,
-    otherAddress text NOT NULL,
     zipcode text NOT NULL
 );
 
