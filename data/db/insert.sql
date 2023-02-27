@@ -1,5 +1,5 @@
 --@block
--- items1 Insert済み
+-- items情報追加
 INSERT INTO api.items (id,farmer_id,category_id,name, price,image,expaire) VALUES 
 (1	,	1	,	1	,	'惣菜キャベツピクルス'	,	70	,	 ''	,	 '5日以内'	),
 (2	,	1	,	1	,	'男前キャベツ1/2個'	,	100	,	 ''	,	 '5日以内'	),
@@ -42,19 +42,9 @@ INSERT INTO api.items (id,farmer_id,category_id,name, price,image,expaire) VALUE
 (39	,	2	,	2	,	'GOD人参3個'	,	180	,	 ''	,	 '5日以内'	),
 (40	,	2	,	2	,	'GOD人参1kg'	,	300	,	 ''	,	 '5日以内'	)
 
---@block
--- items comment追加
--- UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 1; 
--- UPDATE api.items SET comment = '美味しいキャベツだよ' WHERE id = 2; 
-
 
 --@block
--- items image追加
--- UPDATE api.items SET image = '/cabbage/cabbage1:2' WHERE id = 2; 
-
-
---@block
--- カテゴリー Insert済み
+-- 商品カテゴリー情報追加
 INSERT INTO api.category (id,name) VALUES
 (	1	,	'キャベツ'	),
 (	2	,	'人参'	),
@@ -66,12 +56,12 @@ INSERT INTO api.category (id,name) VALUES
 (	8	,	'じゃがいも'	)
 
 --@block
--- users情報追加  Insert済み
-INSERT INTO api.users (id,name,email,password,prefecture,city,address,otherAddress,zipcode) VALUES
+-- users情報追加
+INSERT INTO api.users (id,name,email,password,prefecture,city,address,otheraddress,zipcode) VALUES
 (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','','')
 
 --@block
--- farmerData情報追加  Insert済み
+-- farmerData情報追加
 INSERT INTO api.farmerdata (id	,	farmname	,	representativename	,	year 	,	carryr	,	prefecture	,	iconImageurl	,	coverImageurl	,	voiceurl) VALUES
 (	1	,	'七瀬ファーム'	,	'七瀬 獅童'	,	24	,	'夫婦で農業を始め、はや24年\n同い年の二人は、今年で64歳\n会社員だった旦那さんは、管理職まで上り詰めたものの、日々の激務で疲弊\n40歳の頃、自給自足の生活に憧れを持ち一念発起し、夫婦で北海道へ移住\n現在、有機野菜の世界では知らない人がいないとまで言われる存在に\n夫婦それぞれの名前がついた野菜たちは、道の駅に並べば1時間で売り切れるほどの人気ぶり'	,	'静岡県'	,	''	,	''	,	''	),	
 (	2	,	'溝口ファクトリー'	,	'溝口 由宇'	,	4	,	'23歳\n東京でアパレル店員\n高校時代の友人と群馬へ旅行に行った際に、キャベツの美味しさに感動\n農家の方と意気投合し、21歳の頃勢いで農家で働くことに\n令和の「ギャル農家」として一躍話題に\n自ら考案し命名した「GODキャベツ」は味も見た目も神クラスとのこと'	,	'兵庫県'	,	''	,	''	,	''	)	
