@@ -6,6 +6,25 @@
 -- GRANT SELECT ON api.テーブル名 TO web_anon;
 -- GRANT ALL ON api.テーブル名 to api_user;
 
+--@block
+-- 農家一覧テーブル◎
+DROP TABLE IF EXISTS api.farmerData;
+
+CREATE TABLE api.farmerData (
+    id serial PRIMARY KEY,
+    farm_name text NOT NULL,
+    representative_name text NOT NULL,
+    year integer NOT NULL,
+    carryr text NOT NULL,
+    prefecture text NOT NULL,
+    icon_imageurl text NOT NULL,
+    cover_imageurl text NOT NULL,
+    voiceurl text NOT NULL
+);
+
+GRANT SELECT ON api.farmerData TO web_anon;
+GRANT ALL ON api.farmerData to api_user;
+
 -- @block
 -- 商品一覧テーブル
 DROP TABLE IF EXISTS api.items;
@@ -27,10 +46,30 @@ GRANT ALL ON api.items to api_user;
 DROP TABLE IF EXISTS api.category;
 CREATE TABLE api.category (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    image TEXT NOT NULL
 );
 GRANT SELECT ON api.category TO web_anon;
 GRANT ALL ON api.category to api_user;
+
+--@block
+-- ユーザー情報テーブル◎
+DROP TABLE IF EXISTS api.users;
+
+CREATE TABLE api.users (
+    id serial PRIMARY KEY,
+    name text NOT NULL,
+    email text NOT NULL,
+    password text NOT NULL,
+    prefecture text NOT NULL,
+    city text NOT NULL,
+    address text NOT NULL,
+    zipcode text NOT NULL
+);
+
+GRANT SELECT ON api.users TO web_anon;
+GRANT ALL ON api.users to api_user;
+GRANT usage on sequence api.users_id_seq to api_user;
 
 -- @block
 -- 購入履歴テーブル
@@ -46,51 +85,12 @@ GRANT SELECT ON api.sales TO web_anon;
 GRANT ALL ON api.sales to api_user;
 
 --@block
--- 農家一覧テーブル◎
-DROP TABLE IF EXISTS api.farmerData;
-
-CREATE TABLE api.farmerData (
-    id serial PRIMARY KEY,
-    farmname varchar NOT NULL,
-    representative_name text NOT NULL,
-    year integer NOT NULL,
-    carryr varchar NOT NULL,
-    prefecture varchar NOT NULL,
-    iconImage_url text NOT NULL,
-    coverImage_url text NOT NULL,
-    voice_url text NOT NULL
-);
-
-GRANT SELECT ON api.farmerData TO web_anon;
-GRANT ALL ON api.farmerData to api_user;
-
-
---@block
--- ユーザー情報テーブル◎
-DROP TABLE IF EXISTS api.users;
-
-CREATE TABLE api.users (
-    id serial PRIMARY KEY,
-    name varchar,
-    zipcode varchar,
-    email varchar,
-    password varchar,
-    prefecture varchar,
-    city varchar,
-    address varchar
-);
-
-GRANT SELECT ON api.users TO web_anon;
-GRANT ALL ON api.users to api_user;
-GRANT usage on sequence api.users_id_seq to api_user;
-
---@block
 -- カートIDテーブル◎
 DROP TABLE IF EXISTS api.cart;
 
 CREATE TABLE api.cart (
     id serial PRIMARY KEY,
-    userID integer NOT NULL
+    user_id integer NOT NULL
 );
 
 GRANT SELECT ON api.cart TO web_anon;
@@ -101,8 +101,8 @@ GRANT ALL ON api.cart to api_user;
 DROP TABLE IF EXISTS api.cartItems;
 
 CREATE TABLE api.cartItems (
-    cartID integer NOT NULL,
-    itemID integer NOT NULL,
+    cart_id integer NOT NULL,
+    item_id integer NOT NULL,
     quantity integer NOT NULL
 );
 
