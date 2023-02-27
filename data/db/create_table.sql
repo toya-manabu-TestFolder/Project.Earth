@@ -32,16 +32,18 @@ DROP TABLE IF EXISTS api.users;
 CREATE TABLE api.users (
     id serial PRIMARY KEY,
     name varchar NOT NULL,
+    postcode varchar NOT NULL,
     email varchar NOT NULL,
-    password varchar NOT NULL UNIQUE,
-    prefecture varchar NOT NULL,
-    city varchar NOT NULL,
-    address varchar NOT NULL,
-    otherAddress varchar NOT NULL
+    password varchar,
+    prefecture varchar ,
+    city varchar ,
+    address varchar ,
+    otherAddress varchar
 );
 
 GRANT SELECT ON api.users TO web_anon;
 GRANT ALL ON api.users to api_user;
+GRANT usage on sequence api.users_id_seq to api_user;
 
 --@block
 -- カートIDテーブル◎

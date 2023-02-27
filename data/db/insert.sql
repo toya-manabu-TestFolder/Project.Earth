@@ -76,7 +76,7 @@ SELECT * FROM api.items;
 
 
 -- @block
-SELECT * FROM api.category;
+SELECT * FROM api.users;
 
 -- @block
 -- DELETE FROM api.category;

@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import PostBoughtFarmer from "@/components/postBoughtFarmer";
 import Search from "@/components/search";
 import Farmer from "@/components/farmer";
-import Photo from "@/components/photo";
+import Photo from "@/components/Photo";
 import PhotoName from "@/components/photoName";
 
 const inter = Inter({ subsets: ["latin"] });

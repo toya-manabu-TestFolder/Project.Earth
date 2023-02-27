@@ -1,30 +1,43 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function User_register() {
-  const [lastName, setLastname] = useState("");
+  const [name, setName] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [prefecture, setPrefecture] = useState("");
 
-  const handleSubmit = async (event) => {};
-
-  const data = {
-    lastName: lastName,
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    const data = {
+      name: name,
+      postcode: postcode,
+      prefecture: prefecture,
+      email: "to@example.com",
+    };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    //users.tsファイルを指定してる
+    const response = await fetch("http://localhost:3000/api/users?", options);
+    console.log(response);
+    const result = await response.json();
+    console.log(result);
   };
-  const options = {
-    method: "POST",
-    body: JSON.stringify(data),
-  };
-  const response = await fetch(URL, options);
 
   return (
     <>
       <p>新規会員登録</p>
       <form onSubmit={(event) => handleSubmit(event)}>
         <div>
-          <label htmlFor="lastName">姓</label>
+          <label htmlFor="name">姓</label>
           <input
-            onChange={(e) => setLastname(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             type="text"
-            id="lastName"
-            name="lastName"
+            id="name"
+            name="name"
           ></input>
         </div>
         <div>
@@ -36,12 +49,22 @@ export default function User_register() {
           <input></input>
         </div>
         <div>
-          <label></label>
-          <input></input>
+          <label htmlFor="postcode">郵便番号</label>
+          <input
+            onChange={(e) => setPostcode(e.target.value)}
+            type="text"
+            id="postcode"
+            name="postcode"
+          ></input>
         </div>
         <div>
-          <label></label>
-          <input></input>
+          <label htmlFor="prefecture">都道府県</label>
+          <input
+            onChange={(e) => setPrefecture(e.target.value)}
+            type="text"
+            id="prefecture"
+            name="prefecture"
+          ></input>
         </div>
         <div>
           <label></label>

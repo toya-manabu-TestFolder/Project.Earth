@@ -1,5 +1,5 @@
-import Farmer from "@/components/farmer";
-import Photo from "@/components/photo";
+import Farmer from "./farmer";
+import Photo from "./Photo";
 import IntoCart from "./intoCart";
 import PhotoName from "./photoName";
 
