@@ -62,13 +62,22 @@ SELECT * FROM api.items;
 -- @block
 -- DELETE FROM api.items;
 
--- @block
--- INSERT INTO api.category (id,name) VALUES
---  (1,'cabbage'),
---  (2,'carrot'),
---  (3,'tomato'),
---  (4,'pumpkin'),
---  (5,'eggplant'),
---  (6,'spinach'),
---  (7,'radish'),
---  (8,'potato')
+--@block
+INSERT INTO api.category (id,name) VALUES
+(	1	,	'キャベツ'	),
+(	2	,	'人参'	),
+(	3	,	'トマト'	),
+(	4	,	'かぼちゃ'	),
+(	5	,	'なす'	),
+(	6	,	'ほうれん草'	),
+(	7	,	'大根'	),
+(	8	,	'じゃがいも'	)
+
+--@block users情報追加
+INSERT INTO api.users (id,name,email,password,prefecture,city,address,otherAddress,zipcode) VALUES
+(1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','','');
+
+--@block farmerData情報追加
+INSERT INTO api.farmerdata (id	,	farmname	,	representativename	,	year 	,	carryr	,	prefecture	,	iconImageurl	,	coverImageurl	,	voiceurl) VALUES
+(	1	,	'七瀬ファーム'	,	'七瀬 獅童'	,	24	,	'夫婦で農業を始め、はや24年\n同い年の二人は、今年で64歳\n会社員だった旦那さんは、管理職まで上り詰めたものの、日々の激務で疲弊\n40歳の頃、自給自足の生活に憧れを持ち一念発起し、夫婦で北海道へ移住\n現在、有機野菜の世界では知らない人がいないとまで言われる存在に\n夫婦それぞれの名前がついた野菜たちは、道の駅に並べば1時間で売り切れるほどの人気ぶり'	,	'静岡県'	,	''	,	''	,	''	),	
+(	2	,	'溝口ファクトリー'	,	'溝口 由宇'	,	4	,	'23歳\n東京でアパレル店員\n高校時代の友人と群馬へ旅行に行った際に、キャベツの美味しさに感動\n農家の方と意気投合し、21歳の頃勢いで農家で働くことに\n令和の「ギャル農家」として一躍話題に\n自ら考案し命名した「GODキャベツ」は味も見た目も神クラスとのこと'	,	'兵庫県'	,	''	,	''	,	''	)	;
