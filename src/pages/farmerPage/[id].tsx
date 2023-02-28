@@ -6,7 +6,7 @@ import { useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:8000/farmerdata");
+  const res = await fetch("http://127.0.0.1:8000/farmerdata");
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -22,11 +22,11 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const req1 = await fetch("http://localhost:8000/farmerdata");
+  const req1 = await fetch("http://127.0.0.1:8000/farmerdata");
   const farmerdata = await req1.json();
-  const req2 = await fetch("http://localhost:8000/items");
+  const req2 = await fetch("http://127.0.0.1:8000/items");
   const items = await req2.json();
-  const req3 = await fetch("http://localhost:8000/category");
+  const req3 = await fetch("http://127.0.0.1:8000/category");
   const category = await req3.json();
   return {
     props: {
