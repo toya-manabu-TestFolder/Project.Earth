@@ -8,6 +8,7 @@ import Search from "@/components/search";
 import Farmer from "@/components/farmer";
 import Photo from "@/components/Photo";
 import PhotoName from "@/components/photoName";
+import Record from "@/components/top-record";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function Home() {
       <main>
         <div className="top_cover"></div>
         <div className="top_purchase_history">
-          <PostBoughtFarmer />
+          <Record />
         </div>
         <div className="top_search">
           <Search />

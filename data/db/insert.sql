@@ -99,3 +99,7 @@ INSERT INTO api.cartitems (user_id,item_id,quantity) VALUES
 -- 一旦中止
 -- INSERT INTO api.cart (id,user_id) VALUES
 -- (	1	,	1)
+
+--@block
+INSERT INTO api.sales (id,use_id,item_id,farmer_id,quantity) VALUES
+(1,1,2,1,1);
