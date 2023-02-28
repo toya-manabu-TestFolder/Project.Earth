@@ -24,6 +24,7 @@ CREATE TABLE api.farmerData (
 
 GRANT SELECT ON api.farmerData TO web_anon;
 GRANT ALL ON api.farmerData to api_user;
+GRANT usage on sequence api.farmerData_id_seq to api_user;
 
 -- @block
 -- 商品一覧テーブル
@@ -40,6 +41,7 @@ CREATE TABLE api.items (
 );
 GRANT SELECT ON api.items TO web_anon;
 GRANT ALL ON api.items to api_user;
+GRANT usage on sequence api.items_id_seq to api_user;
 
 -- @block
 -- 商品カテゴリーテーブル
@@ -51,6 +53,7 @@ CREATE TABLE api.category (
 );
 GRANT SELECT ON api.category TO web_anon;
 GRANT ALL ON api.category to api_user;
+GRANT usage on sequence api.category_id_seq to api_user;
 
 --@block
 -- ユーザー情報テーブル◎
@@ -83,28 +86,31 @@ CREATE TABLE api.sales (
 );
 GRANT SELECT ON api.sales TO web_anon;
 GRANT ALL ON api.sales to api_user;
-
---@block
--- カートIDテーブル◎
-DROP TABLE IF EXISTS api.cart;
-
-CREATE TABLE api.cart (
-    id serial PRIMARY KEY,
-    user_id integer NOT NULL
-);
-
-GRANT SELECT ON api.cart TO web_anon;
-GRANT ALL ON api.cart to api_user;
+GRANT usage on sequence api.sales_id_seq to api_user;
 
 --@block
 -- カート履歴テーブル◎
 DROP TABLE IF EXISTS api.cartItems;
 
 CREATE TABLE api.cartItems (
-    cart_id integer NOT NULL,
+    user_id integer NOT NULL,
     item_id integer NOT NULL,
     quantity integer NOT NULL
 );
 
 GRANT SELECT ON api.cartItems TO web_anon;
 GRANT ALL ON api.cartItems to api_user;
+
+--@block
+-- カートIDテーブル◎
+-- 一旦中止
+-- DROP TABLE IF EXISTS api.cart;
+
+-- CREATE TABLE api.cart (
+--     id serial PRIMARY KEY,
+--     user_id integer NOT NULL
+-- );
+
+-- GRANT SELECT ON api.cart TO web_anon;
+-- GRANT ALL ON api.cart to api_user;
+-- GRANT usage on sequence api.cart_id_seq to api_user;
