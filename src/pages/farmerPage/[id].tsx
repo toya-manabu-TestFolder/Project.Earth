@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import IntoCart from "@/components/intoCart";
+import { submitType } from "@/typedata/typescript";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/itemList.module.css";
@@ -38,11 +40,17 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 //  --------------------------↓getStaticPropsで作ったprops: {item}
 export default function page(props: any) {
   // 持っているcookieによって商品一覧変更。
-  let cookie = 2;
+  let cookie = {
+    category_id: 2,
+    user_id: "1",
+  };
   // 商品一覧の表示切替用useState
-  const [itemSelect, setitemSelect] = useState(cookie);
+  const [itemSelect, setitemSelect] = useState(cookie.category_id);
   // カート情報送信用のuseState
-  const [cartItem, setcartItem] = useState({});
+  const [submitData, setsubmitData] = useState<submitType>({
+    userID: cookie.user_id,
+    itemQuantity: 0,
+  });
 
   //   id◎
   const id = Number(props.params.id);
@@ -52,17 +60,15 @@ export default function page(props: any) {
   let items = props.items.filter((item: any) => {
     return item.farmer_id === id;
   });
-
-  // 重複カテゴリーidの商品削除
+  // 重複カテゴリーidの商品削除◎
   const categoryItem = Array.from(
     new Map(items.map((item: any) => [item.category_id, item])).values()
   );
-  console.log(props.items);
-  // 対象カテゴリー名取得
-  const categoryName = categoryItem.map((e: any) => {
+  // 対象カテゴリー名取得◎
+  const categoryArr = categoryItem.map((e: any) => {
     for (const el of props.category) {
       if (e.category_id === el.id) {
-        return el.name;
+        return el;
       }
     }
   });
@@ -80,97 +86,108 @@ export default function page(props: any) {
   };
 
   return (
-    <></>
-    // <div
-    //   className={styles.All}
-    //   style={{ backgroundImage: `url(${farmerData.coverImageUrl})` }}
-    // >
-    //   <div className={styles.farmerMain}>
-    //     <div
-    //       className={styles.farmerCoverImg}
-    //       style={{
-    //         backgroundImage: `url(${farmerData.iconImageUrl})`,
-    //       }}
-    //     ></div>
-    //     <section className={styles.sec1}>
-    //       <h2 className={styles.farmName}>{farmerData.farmeName}</h2>
-    //       <p className={styles.representative}>
-    //         代表&nbsp;&nbsp;{farmerData.representativeName}
-    //       </p>
-    //       <p className={styles.farmYears}>
-    //         農家歴&nbsp;&nbsp;{farmerData.years}年
-    //       </p>
-    //     </section>
-    //   </div>
+    <div
+      className={styles.All}
+      style={{ backgroundImage: `url(${farmerData.cover_imageurl})` }}
+    >
+      <div className={styles.farmerMain}>
+        <div
+          className={styles.farmerCoverImg}
+          style={{
+            backgroundImage: `url(${farmerData.icon_imageurl})`,
+          }}
+        ></div>
+        <section className={styles.sec1}>
+          <h2 className={styles.farmName}>{farmerData.farm_name}</h2>
+          <p className={styles.representative}>
+            代表&nbsp;&nbsp;{farmerData.representative_name}
+          </p>
+          <p className={styles.farmYears}>
+            農家歴&nbsp;&nbsp;{farmerData.years}年
+          </p>
+        </section>
+      </div>
 
-    //   <div className={styles.farmer_career}>
-    //     <pre>{farmerData.carryr}</pre>
-    //   </div>
+      <div className={styles.farmer_career}>
+        <pre>{farmerData.carryr}</pre>
+      </div>
 
-    //   <section className={styles.sec2}>
-    //     <h2>商品一覧</h2>
-    //     <div className={styles.items}>
-    //       {items.map((e: any) => {
-    //         return (
-    //           <div className={styles.sec2_itemSelect} key={e.id}>
-    //             <Image
-    //               src={e.image}
-    //               width={250}
-    //               height={250}
-    //               className={styles.sec2_ImageBox}
-    //               alt={"野菜画像"}
-    //             />
-    //             <div>
-    //               <p>{e.name}</p>
-    //             </div>
-    //             <div>
-    //               <p>価格:&nbsp;{e.price}円</p>
-    //             </div>
-    //             <div>
-    //               <label htmlFor={e.id}>
-    //                 数量:&nbsp;
-    //                 <select id={e.id}>
-    //                   <option value="---">---</option>
-    //                   <option value="1">1</option>
-    //                   <option value="2">2</option>
-    //                   <option value="3">3</option>
-    //                   <option value="4">4</option>
-    //                   <option value="5">5</option>
-    //                 </select>
-    //               </label>
-    //             </div>
-    //             <button>カートに入れる</button>
-    //           </div>
-    //         );
-    //       })}
-    //     </div>
-    //   </section>
+      <section className={styles.sec2}>
+        <h2>商品一覧</h2>
+        <div className={styles.items}>
+          {items.map((e: any) => {
+            return (
+              <div className={styles.sec2_itemSelect} key={e.id}>
+                <form method="POST">
+                  <Image
+                    src={e.image}
+                    width={250}
+                    height={250}
+                    className={styles.sec2_ImageBox}
+                    alt={"野菜画像"}
+                  />
+                  <div>
+                    <p>{e.name}</p>
+                  </div>
+                  <div>
+                    <p>価格:&nbsp;{e.price}円</p>
+                  </div>
+                  <div>
+                    <label htmlFor={e.id}>
+                      数量:&nbsp;
+                      <select
+                        id={e.id}
+                        onChange={(e) =>
+                          setsubmitData({
+                            ...submitData,
+                            itemQuantity: Number(e.target.value),
+                          })
+                        }
+                      >
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </label>
+                  </div>
+                  <IntoCart props={submitData} itemID={e.id}></IntoCart>
+                </form>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
-    //   <section className={styles.sec3}>
-    //     <h2>その他関連商品</h2>
-    //     <div className={styles.otherItems}>
-    //       {categoryItem.map((e: any, index) => {
-    //         return (
-    //           <div
-    //             className={styles.otherItem}
-    //             key={e.id}
-    //             onClick={() => changeItem(e.category_id)}
-    //           >
-    //             <Image
-    //               src={e.image}
-    //               width={250}
-    //               height={250}
-    //               className={styles.sec3_ImageBox}
-    //               alt={"野菜画像"}
-    //             />
-    //             <div>
-    //               <p>{categoryName[index]}の商品一覧</p>
-    //             </div>
-    //           </div>
-    //         );
-    //       })}
-    //     </div>
-    //   </section>
-    // </div>
+      <section className={styles.sec3}>
+        <h2>その他関連商品</h2>
+        <div className={styles.otherItems}>
+          {categoryItem.map((e: any, index) => {
+            if (e.category_id !== itemSelect) {
+              return (
+                <div
+                  className={styles.otherItem}
+                  key={e.id}
+                  onClick={() => changeItem(e.category_id)}
+                >
+                  <Image
+                    src={categoryArr[index].image}
+                    width={250}
+                    height={250}
+                    className={styles.sec3_ImageBox}
+                    alt={"野菜画像"}
+                  />
+                  <div>
+                    <p>{categoryArr[index].name}の商品一覧</p>
+                  </div>
+                </div>
+              );
+            }
+          })}
+        </div>
+      </section>
+    </div>
   );
 }
