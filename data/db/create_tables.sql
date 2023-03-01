@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS api.farmer_data;
 
 CREATE TABLE api.farmer_data (
-    id serial PRIMARY KEY,
+    id serial PRIMARY KEY REFERENCES api.sales(farmer_id),
     farm_name text NOT NULL,
     representative_name text NOT NULL,
     year integer NOT NULL,

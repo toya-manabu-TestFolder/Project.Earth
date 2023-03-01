@@ -91,10 +91,12 @@ INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) V
 (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
 
 --@block
--- INSERT INTO api.cartitems (id,user_id,item_id) VALUES
--- (1,1,1),
--- (2,1,8),
--- (3,1,16)
+INSERT INTO api.cartitems (id,user_id,item_id,quantity) VALUES
+(1,1,1,0),
+(2,1,8,0),
+(3,1,16,0)
+-- (4,2,16,0),
+-- (5,3,16,0)
 
 -- --@block
 -- -- cart情報追加

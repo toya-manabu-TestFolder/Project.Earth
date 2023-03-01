@@ -29,7 +29,7 @@ ALTER TABLE api.items
 ADD FOREIGN KEY (category_id) 
 REFERENCES api.category (id);
 --@block
-ALTER TABLE api.cartItems 
+ALTER TABLE api.cartitems 
 ADD FOREIGN KEY (user_id) 
 REFERENCES api.users (id);
 --@block
