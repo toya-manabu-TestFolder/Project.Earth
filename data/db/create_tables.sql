@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS api.items;
 CREATE TABLE api.items (
     id SERIAL PRIMARY KEY,
     category_id INTEGER NOT NULL,
-    farmer_id INTEGER NOT NULL REFERENCES api.farmerData(id),
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
     name TEXT NOT NULL,
     price INTEGER NOT NULL,
     image TEXT,
