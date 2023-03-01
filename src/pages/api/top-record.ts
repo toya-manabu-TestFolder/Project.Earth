@@ -8,8 +8,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { email, password } = req.body;
-  const url = `http://127.0.0.1:8000/users?email=eq.${email}&password=eq.${password}`;
+  const { id } = req.cookies;
+  console.log("cookie", id);
+  const url = `http://127.0.0.1:8000/sales?user_id=eq.${id}&select=farmer_data(farm_name,icon_imageurl),items(name,image)&order=id.desc`;
   const options = {
     method: "GET",
     headers: {
@@ -18,8 +19,5 @@ export default async function handler(
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  res
-    .setHeader("Set-Cookie", [`id=${data[0].id};path=/`])
-    .status(200)
-    .json(data);
+  res.status(200).json(data);
 }

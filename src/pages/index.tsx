@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Search from "@/components/search";
+import Record from "@/components/top-record";
 import Category from "@/components/category";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <div className="top_cover"></div>
         <div className="top_purchase_history"></div>
+        <Record />
         <div className="top_search">
           <Search />
         </div>

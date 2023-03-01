@@ -80,10 +80,11 @@ GRANT usage on sequence api.users_id_seq to api_user;
 DROP TABLE IF EXISTS api.sales;
 CREATE TABLE api.sales (
     id SERIAL PRIMARY KEY,
-    use_id INTEGER NOT NULL,
-    item_id INTEGER NOT NULL,
-    farmer_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES api.users(id),
+    item_id INTEGER NOT NULL REFERENCES api.items(id),
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
     quantity INTEGER NOT NULL
+    -- name,price
 );
 GRANT SELECT ON api.sales TO web_anon;
 GRANT ALL ON api.sales to api_user;
