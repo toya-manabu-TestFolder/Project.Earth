@@ -23,9 +23,11 @@ const loginuser_cartPage = (props: any) => {
     category_id: 2,
     user_id: 1,
   };
-  const [deleteParam, setdeleteParam] = useState({
-    user_id: cookie.user_id,
+  // カート情報送信用のuseState
+  const [cartData, setcartData] = useState({
+    user_id: Number(cookie.user_id),
     item_id: 0,
+    quantity: 0,
   });
 
   const items = props.items;
@@ -63,6 +65,7 @@ const loginuser_cartPage = (props: any) => {
     let deleteParam = {
       user_id: Number(cookie.user_id),
       item_id: id,
+      quantity: 0,
     };
     fetch("http://localhost:3000/api/cartDelete", {
       method: "POST",
@@ -78,14 +81,21 @@ const loginuser_cartPage = (props: any) => {
   };
 
   // 数量変更ファンクション
-  const changeItemQuantity = (event) => {
+  const changeItemQuantity = (event, id) => {
+    deleteCartItem(id);
+    let cartInport = {
+      user_id: cookie.user_id,
+      item_id: id,
+      quantity: 0,
+    };
+
     for (let i = 1; i <= event.target.value; i++) {
       fetch("http://localhost:3000/api/cartInport", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(cartData),
+        body: JSON.stringify(cartInport),
       });
     }
   };
@@ -130,7 +140,9 @@ const loginuser_cartPage = (props: any) => {
                         <select
                           id={item.id}
                           defaultValue={count}
-                          onChange={(event) => changeItemQuantity(event)}
+                          onChange={(event) =>
+                            changeItemQuantity(event, item.item_id)
+                          }
                         >
                           <option value="0">0</option>
                           <option value="1">1</option>
