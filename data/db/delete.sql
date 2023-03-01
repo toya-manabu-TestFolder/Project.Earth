@@ -19,9 +19,5 @@ DROP TABLE api.users;
 DROP TABLE api.sales;
 
 --@block
--- cart削除
-DROP TABLE api.cart;
-
---@block
 -- cartItems削除
 DROP TABLE api.cartItems;

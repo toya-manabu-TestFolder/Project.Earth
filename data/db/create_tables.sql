@@ -93,6 +93,7 @@ GRANT usage on sequence api.sales_id_seq to api_user;
 DROP TABLE IF EXISTS api.cartItems;
 
 CREATE TABLE api.cartItems (
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     item_id integer NOT NULL,
     quantity integer NOT NULL
@@ -100,6 +101,8 @@ CREATE TABLE api.cartItems (
 
 GRANT SELECT ON api.cartItems TO web_anon;
 GRANT ALL ON api.cartItems to api_user;
+GRANT usage on sequence api.cartItems_id_seq to api_user;
+
 
 --@block
 -- カートIDテーブル◎
