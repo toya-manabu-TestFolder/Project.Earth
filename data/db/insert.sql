@@ -104,4 +104,5 @@ INSERT INTO api.cartitems (id,user_id,item_id,quantity) VALUES
 
 --@block
 INSERT INTO api.sales (id,user_id,item_id,farmer_id,quantity) VALUES
-(1,1,1,1,1)
+(1,1,1,1,1),
+(2,1,2,2,1)
