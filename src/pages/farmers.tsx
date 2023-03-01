@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import handler from "./api/farmer";
 
 // export const getStaticPaths = async () => {
 //   const res = await fetch("http://127.0.0.1:8000/category");
@@ -39,10 +40,10 @@ import Link from "next/link";
 //   // console.log(farmerData);
 //   // console.log(items);
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json);
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
 export default function Farmers() {
   const { data, error, isLoading } = useSWR(
-    "http://127.0.0.1:8000/farmerdata",
+    "http://localhost:3000/api/farmer",
     fetcher
   );
   console.log(data);
