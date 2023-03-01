@@ -87,8 +87,8 @@ INSERT INTO api.category (id,name,image) VALUES
 
 --@block
 -- users情報追加
-INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) VALUES
-(1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
+-- INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) VALUES
+-- (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
 
 --@block
 -- INSERT INTO api.cartitems (id,user_id,item_id) VALUES
@@ -101,3 +101,8 @@ INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) V
 -- 一旦中止
 -- INSERT INTO api.cart (id,user_id) VALUES
 -- (	1	,	1)
+
+--@block
+INSERT INTO api.sales (id,user_id,item_id,farmer_id,quantity) VALUES
+(1,1,1,1,1),
+(2,1,2,2,1)
