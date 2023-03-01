@@ -1,11 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Search from "@/components/search";
 import Category from "@/components/category";
+import Logout from "@/components/logout";
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    let cookie = document.cookie;
+    if (cookie === "") {
+      router.replace("/login");
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -26,6 +37,7 @@ export default function Home() {
         </div>
         <div className="top_recommend"></div>
       </main>
+      <Logout />
       <Footer />
     </>
   );
