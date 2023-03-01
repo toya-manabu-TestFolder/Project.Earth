@@ -19,7 +19,8 @@ CREATE TABLE api.farmer_data (
     prefecture text NOT NULL,
     icon_imageurl text NOT NULL,
     cover_imageurl text NOT NULL,
-    voiceurl text NOT NULL
+    voiceurl text NOT NULL,
+    comment text NOT NULL
 );
 
 GRANT SELECT ON api.farmer_data TO web_anon;
@@ -32,7 +33,7 @@ DROP TABLE IF EXISTS api.items;
 CREATE TABLE api.items (
     id SERIAL PRIMARY KEY,
     category_id INTEGER NOT NULL,
-    farmer_id INTEGER NOT NULL,
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
     name TEXT NOT NULL,
     price INTEGER NOT NULL,
     image TEXT,
