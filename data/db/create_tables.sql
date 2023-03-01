@@ -19,7 +19,8 @@ CREATE TABLE api.farmer_data (
     prefecture text NOT NULL,
     icon_imageurl text NOT NULL,
     cover_imageurl text NOT NULL,
-    voiceurl text NOT NULL
+    voiceurl text NOT NULL,
+    comment text NOT NULL
 );
 
 GRANT SELECT ON api.farmer_data TO web_anon;
