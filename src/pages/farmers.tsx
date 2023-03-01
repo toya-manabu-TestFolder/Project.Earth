@@ -61,45 +61,44 @@ export default function Farmers() {
         <span>生産者検索結果:</span>
         <div>
           <div>
-            {data.map((e: any) => {
-              console.log(e);
+            {data.map((farmer: any) => {
+              console.log(farmer);
               return (
                 <>
-                  <div>
-                    <p>{e.farmer_data.farm_name}</p>
-                  </div>
-                  {/* <Link href={`http://localhost:3000/farmerPage/${e.id}`}>
+                  <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
                     <Image
-                      src={e.icon_imageurl}
+                      src={farmer.icon_imageurl}
                       alt={"画像"}
                       width={100}
                       height={100}
                     />
-                  </Link> */}
+                  </Link>
+                  <div key={farmer.id}>
+                    <p>{farmer.farm_name}</p>
+                    <p>{farmer.items.comment}</p>
+                  </div>
+
+                  <figure>
+                    <button type="button">
+                      <audio controls src={farmer.voiceurl}></audio>
+                    </button>
+                  </figure>
                 </>
               );
             })}
           </div>
           <div>
             {/* itemsテーブルにコメントを挿入後使ってください。 */}
-            {/* {items.map((e: any) => {
-                return (
-                  <div key={e.id}>
-                    <p>{e.comment}</p>
-                  </div>
-                );
-              })} */}
+            {data.map((farmer: any) => {
+              return <div key={farmer.id}></div>;
+            })}
           </div>
           <div>
-            {/* {farmerData.map((e: any) => {
-                return (
-                  <figure>
-                    <button type="button">
-                      <audio controls src={e.voiceurl}></audio>
-                    </button>
-                  </figure>
-                );
-              })} */}
+            {/* {data.map((e: any) => {
+              return (
+                
+              );
+            })} */}
           </div>
         </div>
       </main>

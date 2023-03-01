@@ -5,7 +5,7 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://127.0.0.1:8000/farmerdata");
+  const res = await fetch("http://127.0.0.1:8000/farmer_data");
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
