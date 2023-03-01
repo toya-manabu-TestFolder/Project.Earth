@@ -10,13 +10,13 @@ export default function Category({ onClick }: any) {
 
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
-  console.log(data);
+  console.log("カテゴリー", data);
 
   return (
     <>
       <div className="list">
         {data.map((category: CategoryData) => (
-          <div className="category" key="{category.id}">
+          <div className="category" key={category.id}>
             <button id={category.id} onClick={onClick}>
               <Image
                 src={category.image}
