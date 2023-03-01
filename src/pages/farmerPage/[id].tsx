@@ -5,7 +5,7 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://127.0.0.1:8000/farmerdata");
+  const res = await fetch("http://127.0.0.1:8000/farmer_data");
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -21,7 +21,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const req1 = await fetch("http://127.0.0.1:8000/farmerdata");
+  const req1 = await fetch("http://127.0.0.1:8000/farmer_data");
   const farmerdata = await req1.json();
   const req2 = await fetch("http://127.0.0.1:8000/items");
   const items = await req2.json();
@@ -41,7 +41,7 @@ export default function page(props: any) {
   // 持っているcookieによって商品一覧変更。
   let cookie = {
     category_id: 2,
-    user_id: "1",
+    user_id: 1,
   };
   // 商品一覧の表示切替用useState
   const [itemSelect, setitemSelect] = useState(cookie.category_id);
@@ -51,6 +51,8 @@ export default function page(props: any) {
     item_id: 0,
     quantity: 0,
   });
+  // 商品選択数のuseState
+  const [selectNum, setselectNum] = useState(0);
 
   //   id◎
   const id = Number(props.params.id);
@@ -94,13 +96,15 @@ export default function page(props: any) {
       item_id: Number(e.id),
       quantity: Number(event.target.value),
     });
+    setselectNum(event.target.value);
   };
 
   function cartInport(
+    e,
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
     event.preventDefault();
-    for (let i = 1; i <= cartData.quantity; i++) {
+    for (let i = 1; i <= selectNum; i++) {
       fetch("http://localhost:3000/api/cartInport", {
         method: "POST",
         headers: {
@@ -111,6 +115,7 @@ export default function page(props: any) {
     }
   }
 
+  // 下記JSX
   return (
     <div
       className={styles.All}
@@ -174,7 +179,7 @@ export default function page(props: any) {
                       </select>
                     </label>
                   </div>
-                  <button onClick={(event) => cartInport(event)}>
+                  <button onClick={(event) => cartInport(e, event)}>
                     カートに入れる
                   </button>
                 </form>

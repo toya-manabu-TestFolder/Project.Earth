@@ -1,6 +1,6 @@
 --@block
 -- farmerData削除
-DROP TABLE api.farmerdata;
+DROP TABLE api.farmer_data;
 
 --@block
 -- items削除
@@ -20,4 +20,4 @@ DROP TABLE api.sales;
 
 --@block
 -- cartItems削除
-DROP TABLE api.cartItems;
+DROP TABLE api.cartitems;
