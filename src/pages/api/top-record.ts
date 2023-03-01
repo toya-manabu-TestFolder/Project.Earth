@@ -10,8 +10,7 @@ export default async function handler(
 ) {
   const { id } = req.cookies;
   console.log("cookie", id);
-  //   const url = `http://127.0.0.1:8000/sales?user_id=eq.${id}&select=farmerData(farm_name,icon_imageurl)`;
-  const url = `http://127.0.0.1:8000/sales?user_id=eq.${id}&select=farmerData(farm_name,icon_imageurl)`;
+  const url = `http://127.0.0.1:8000/sales?user_id=eq.${id}&select=farmer_data(farm_name,icon_imageurl),items(name,image)`;
   const options = {
     method: "GET",
     headers: {

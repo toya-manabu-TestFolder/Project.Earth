@@ -81,7 +81,7 @@ CREATE TABLE api.sales (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES api.users(id),
     item_id INTEGER NOT NULL REFERENCES api.items(id),
-    farmer_id INTEGER NOT NULL REFERENCES api.farmerData(id),
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
     quantity INTEGER NOT NULL
     -- name,price
 );

@@ -14,8 +14,6 @@ export default async function handler(
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Prefer: "return=representation",
-      Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
     },
   };
   const response = await fetch(url, options);
