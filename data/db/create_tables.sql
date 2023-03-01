@@ -8,9 +8,9 @@
 
 --@block
 -- 農家一覧テーブル◎
-DROP TABLE IF EXISTS api.farmerData;
+DROP TABLE IF EXISTS api.farmer_data;
 
-CREATE TABLE api.farmerData (
+CREATE TABLE api.farmer_data (
     id serial PRIMARY KEY,
     farm_name text NOT NULL,
     representative_name text NOT NULL,
@@ -22,9 +22,9 @@ CREATE TABLE api.farmerData (
     voiceurl text NOT NULL
 );
 
-GRANT SELECT ON api.farmerData TO web_anon;
-GRANT ALL ON api.farmerData to api_user;
-GRANT usage on sequence api.farmerData_id_seq to api_user;
+GRANT SELECT ON api.farmer_data TO web_anon;
+GRANT ALL ON api.farmer_data to api_user;
+GRANT usage on sequence api.farmer_data_id_seq to api_user;
 
 -- @block
 -- 商品一覧テーブル
@@ -91,16 +91,19 @@ GRANT usage on sequence api.sales_id_seq to api_user;
 
 --@block
 -- カート履歴テーブル◎
-DROP TABLE IF EXISTS api.cartItems;
+DROP TABLE IF EXISTS api.cartitems;
 
-CREATE TABLE api.cartItems (
+CREATE TABLE api.cartitems (
+    id SERIAL PRIMARY KEY,
     user_id integer NOT NULL,
     item_id integer NOT NULL,
     quantity integer NOT NULL
 );
 
-GRANT SELECT ON api.cartItems TO web_anon;
+GRANT SELECT ON api.cartitems TO web_anon;
 GRANT ALL ON api.cartItems to api_user;
+GRANT usage on sequence api.cartItems_id_seq to api_user;
+
 
 --@block
 -- カートIDテーブル◎

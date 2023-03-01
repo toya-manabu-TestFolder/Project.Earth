@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import IntoCart from "@/components/intoCart";
-import { submitType } from "@/typedata/typescript";
+// import IntoCart from "@/components/intoCart";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
@@ -47,9 +46,10 @@ export default function page(props: any) {
   // 商品一覧の表示切替用useState
   const [itemSelect, setitemSelect] = useState(cookie.category_id);
   // カート情報送信用のuseState
-  const [submitData, setsubmitData] = useState<submitType>({
-    userID: cookie.user_id,
-    itemQuantity: 0,
+  const [cartData, setcartData] = useState({
+    user_id: Number(cookie.user_id),
+    item_id: 0,
+    quantity: 0,
   });
 
   //   id◎
@@ -84,6 +84,32 @@ export default function page(props: any) {
     setitemSelect(id);
     itemfunction();
   };
+
+  const itemQuantityChange = (
+    e: { id: any },
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setcartData({
+      ...cartData,
+      item_id: Number(e.id),
+      quantity: Number(event.target.value),
+    });
+  };
+
+  function cartInport(
+    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    event.preventDefault();
+    for (let i = 1; i <= cartData.quantity; i++) {
+      fetch("http://localhost:3000/api/cartInport", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cartData),
+      });
+    }
+  }
 
   return (
     <div
@@ -137,12 +163,7 @@ export default function page(props: any) {
                       数量:&nbsp;
                       <select
                         id={e.id}
-                        onChange={(e) =>
-                          setsubmitData({
-                            ...submitData,
-                            itemQuantity: Number(e.target.value),
-                          })
-                        }
+                        onChange={(event) => itemQuantityChange(e, event)}
                       >
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -153,14 +174,15 @@ export default function page(props: any) {
                       </select>
                     </label>
                   </div>
-                  <IntoCart props={submitData} itemID={e.id}></IntoCart>
+                  <button onClick={(event) => cartInport(event)}>
+                    カートに入れる
+                  </button>
                 </form>
               </div>
             );
           })}
         </div>
       </section>
-
       <section className={styles.sec3}>
         <h2>その他関連商品</h2>
         <div className={styles.otherItems}>

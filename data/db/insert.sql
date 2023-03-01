@@ -1,5 +1,5 @@
---@block farmerData情報追加
-INSERT INTO api.farmerdata (id	,	farm_name	,	representative_name	,	year 	,	carryr	,	prefecture	,	icon_imageurl	,	cover_imageurl	,	voiceurl) VALUES
+--@block farmer_data情報追加
+INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carryr	,	prefecture	,	icon_imageurl	,	cover_imageurl	,	voiceurl) VALUES
 (	1	,	
 '七瀬ファーム'	,	
 '七瀬 獅童'	,	
@@ -91,8 +91,10 @@ INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) V
 (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
 
 --@block
-INSERT INTO api.cartitems (user_id,item_id,quantity) VALUES
-(1,1,2);
+INSERT INTO api.cartitems (id,user_id,item_id,quantity) VALUES
+(1,1,1,2),
+(2,1,8,1),
+(3,1,16,5)
 
 -- --@block
 -- -- cart情報追加
