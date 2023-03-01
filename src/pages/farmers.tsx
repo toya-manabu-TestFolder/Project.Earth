@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import handler from "./api/farmer";
 
 // export const getStaticPaths = async () => {
 //   const res = await fetch("http://127.0.0.1:8000/category");
@@ -39,10 +40,10 @@ import Link from "next/link";
 //   // console.log(farmerData);
 //   // console.log(items);
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json);
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
 export default function Farmers() {
   const { data, error, isLoading } = useSWR(
-    "http://127.0.0.1:8000/farmerdata",
+    "http://localhost:3000/api/farmer",
     fetcher
   );
   console.log(data);
@@ -60,23 +61,24 @@ export default function Farmers() {
         <span>生産者検索結果:</span>
         <div>
           <div>
-            {/* {data.map((e: any) => {
-                return (
-                  <>
-                    <div key={e.id}>
-                      <p>{e.farm_name}</p>
-                    </div>
-                    <Link href={`http://localhost:3000/farmerPage/${e.id}`}>
-                      <Image
-                        src={e.icon_imageurl}
-                        alt={"画像"}
-                        width={100}
-                        height={100}
-                      />
-                    </Link>
-                  </>
-                );
-              })} */}
+            {data.map((e: any) => {
+              console.log(e);
+              return (
+                <>
+                  <div>
+                    <p>{e.farmer_data.farm_name}</p>
+                  </div>
+                  {/* <Link href={`http://localhost:3000/farmerPage/${e.id}`}>
+                    <Image
+                      src={e.icon_imageurl}
+                      alt={"画像"}
+                      width={100}
+                      height={100}
+                    />
+                  </Link> */}
+                </>
+              );
+            })}
           </div>
           <div>
             {/* itemsテーブルにコメントを挿入後使ってください。 */}
