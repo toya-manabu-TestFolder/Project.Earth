@@ -1,24 +1,53 @@
 import React from "react";
 import useSWR from "swr";
-import Farmer from "@/components/farmer";
 import Header from "@/components/header";
 import Head from "next/head";
-// import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function farmers() {
-  const fetcher = (url: string) => {
-    return fetch(url).then((res) => res.json());
-  };
+// export const getStaticPaths = async () => {
+//   const res = await fetch("http://127.0.0.1:8000/category");
+//   const data = await res.json();
+//   const paths = data.map((item: any) => {
+//     return {
+//       params: {
+//         id: String(item.id),
+//       },
+//     };
+//   });
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// };
+// export const getStaticProps = async ({ params }: { params: any }) => {
+//   const req1 = await fetch("http://127.0.0.1:8000/farmerdata");
+//   const farmerData = await req1.json();
+//   const req2 = await fetch("http://127.0.0.1:8000/items");
+//   const items = await req2.json();
+//   return {
+//     props: {
+//       params,
+//       farmerData,
+//       items,
+//     },
+//   };
+// };
+// export default function Farmers(props: any) {
+//   const farmerData = props.farmerData;
+//   const items = props.items;
+//   // console.log(farmerData);
+//   // console.log(items);
 
+const fetcher = (url: any) => fetch(url).then((res) => res.json);
+export default function Farmers() {
   const { data, error, isLoading } = useSWR(
     "http://127.0.0.1:8000/farmerdata",
     fetcher
   );
+  console.log(data);
   if (error) return "An error has occurred.";
   if (isLoading) return "Loading...";
-
   return (
     <div>
       <Head>
@@ -31,8 +60,7 @@ export default function farmers() {
         <span>生産者検索結果:</span>
         <div>
           <div>
-            <div>
-              {data.map((e: any) => {
+            {/* {data.map((e: any) => {
                 return (
                   <>
                     <div key={e.id}>
@@ -48,19 +76,31 @@ export default function farmers() {
                     </Link>
                   </>
                 );
-              })}
-            </div>
-
-            <p>ここにコメントが入る</p>
-            <figure>
-              <button type="button">
-                <audio controls src="/決定ボタンを押す4.mp3"></audio>
-              </button>
-            </figure>
+              })} */}
+          </div>
+          <div>
+            {/* itemsテーブルにコメントを挿入後使ってください。 */}
+            {/* {items.map((e: any) => {
+                return (
+                  <div key={e.id}>
+                    <p>{e.comment}</p>
+                  </div>
+                );
+              })} */}
+          </div>
+          <div>
+            {/* {farmerData.map((e: any) => {
+                return (
+                  <figure>
+                    <button type="button">
+                      <audio controls src={e.voiceurl}></audio>
+                    </button>
+                  </figure>
+                );
+              })} */}
           </div>
         </div>
       </main>
     </div>
   );
-  //   return <p>{JSON.stringify(router.query)}</p>;
 }
