@@ -3,6 +3,8 @@ import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Search from "@/components/search";
+import Record from "@/components/top-record";
+import Category from "@/components/category";
 
 export default function Home() {
   return (

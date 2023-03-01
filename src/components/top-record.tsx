@@ -1,15 +1,31 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
 
 //SWRを使う　indexの中でこのコンポーネントのみCSRをするイメージ
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Record() {
-  let cookie = document.cookie;
+  //   const [cookie, setCookie] = useState(" ");
+  //   useEffect(() => {
+  //     setCookie(document.cookie);
+  //   }, []);
+
+  //   const options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(cookie),
+  //   };
+  //   const response = await fetch("http://localhost:3000/api/top-record", options);
+  //   console.log(response);
+  //   const result = await response.json();
+  //   console.log(result);
   const { data, error } = useSWR(
-    `http://127.0.0.1:8000/sales?id=eq.${cookie}`,
+    `http://localhost:3000/api/top-record`,
     fetcher
   );
 
@@ -19,7 +35,7 @@ export default function Record() {
 
   return (
     <>
-      <p></p>
+      <p>{JSON.stringify(data)}</p>
     </>
   );
 }
