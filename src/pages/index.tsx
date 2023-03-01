@@ -10,14 +10,6 @@ import Category from "@/components/category";
 import Logout from "@/components/logout";
 
 export default function Home() {
-  const router = useRouter();
-  useEffect(() => {
-    let cookie = document.cookie;
-    if (cookie === "") {
-      router.replace("/login");
-    }
-  }, []);
-
   return (
     <>
       <Head>
