@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS api.farmer_data;
 
 CREATE TABLE api.farmer_data (
-    id serial PRIMARY KEY REFERENCES api.sales(farmer_id),
+    id serial PRIMARY KEY,
     farm_name text NOT NULL,
     representative_name text NOT NULL,
     year integer NOT NULL,
@@ -30,8 +30,8 @@ GRANT usage on sequence api.farmer_data_id_seq to api_user;
 -- 商品一覧テーブル
 DROP TABLE IF EXISTS api.items;
 CREATE TABLE api.items (
-    id SERIAL PRIMARY KEY REFERENCES api.cartitems(item_id),
-    category_id INTEGER NOT NULL REFERENCES api.category(id),
+    id SERIAL PRIMARY KEY,
+    category_id INTEGER NOT NULL,
     farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
     name TEXT NOT NULL,
     price INTEGER NOT NULL,
@@ -60,7 +60,7 @@ GRANT usage on sequence api.category_id_seq to api_user;
 DROP TABLE IF EXISTS api.users;
 
 CREATE TABLE api.users (
-    id serial PRIMARY KEY REFERENCES api.sales(user_id),
+    id serial PRIMARY KEY,
     name text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
@@ -94,8 +94,9 @@ DROP TABLE IF EXISTS api.cartitems;
 
 CREATE TABLE api.cartitems (
     id SERIAL PRIMARY KEY,
-    user_id integer NOT NULL REFERENCES api.users(id),
-    item_id integer NOT NULL REFERENCES api.items(d),
+    user_id integer NOT NULL,
+    item_id integer NOT NULL,
+    quantity integer NOT NULL
 );
 
 GRANT SELECT ON api.cartitems TO web_anon;

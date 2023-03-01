@@ -1,5 +1,5 @@
 --@block
--- farmerData削除
+-- farmer_data削除
 DROP TABLE api.farmer_data;
 
 --@block
@@ -19,5 +19,5 @@ DROP TABLE api.users;
 DROP TABLE api.sales;
 
 --@block
--- cartItems削除
+-- cartitems削除
 DROP TABLE api.cartitems;
