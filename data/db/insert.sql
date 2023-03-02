@@ -32,7 +32,7 @@ INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carr
 --@block
 -- items情報追加
 INSERT INTO api.items (id,category_id,farmer_id,name, price,image,comment,expaire) VALUES 
-(	1	,	1	,	1	,	'惣菜キャベツピクルス'	,	70	,	''	,	''	,	'5日以内'),
+(	1	,	1	,	1	,	'惣菜キャベツピクルス'	,	70	,	''	,	'idが1番'	,	'5日以内'),
 (	2	,	1	,	1	,	'男前キャベツ1/2個'	,	100	,	''	,	''	,	'5日以内'),
 (	3	,	1	,	1	,	'男前キャベツ1個'	,	100	,	''	,	''	,	'5日以内'),
 (	4	,	1	,	1	,	'男前キャベツ1㎏'	,	40	,	''	,	''	,	'5日以内'),
