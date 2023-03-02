@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import useUserId from "./checkCookie";
 import Logout from "./logout";
 import Search from "./search";
 
 export default function Header() {
-  const [cookie, setCookie] = useState(false);
+  const cookie = useUserId();
 
-  useEffect(() => {
-    let cookie = document.cookie;
-    setCookie(cookie);
-  });
   return (
     <>
       <main>
