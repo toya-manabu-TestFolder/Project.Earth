@@ -38,7 +38,8 @@ CREATE TABLE api.items (
     price INTEGER NOT NULL,
     image TEXT,
     comment TEXT,
-    expaire TEXT
+    expaire TEXT,
+    items_search TEXT
 );
 GRANT SELECT ON api.items TO web_anon;
 GRANT ALL ON api.items to api_user;

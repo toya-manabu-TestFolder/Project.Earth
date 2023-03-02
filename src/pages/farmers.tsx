@@ -14,7 +14,6 @@ export default function Farmers() {
     !search ? "/api/farmer" : `/api/farmer/?search=${search}`,
     fetcher
   );
-
   if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
 
