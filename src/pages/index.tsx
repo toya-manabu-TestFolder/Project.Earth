@@ -1,10 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Search from "@/components/search";
 import Record from "@/components/top-record";
 import Category from "@/components/category";
+import Logout from "@/components/logout";
 
 export default function Home() {
   return (
@@ -28,6 +31,7 @@ export default function Home() {
         </div>
         <div className="top_recommend"></div>
       </main>
+      <Logout />
       <Footer />
     </>
   );
