@@ -18,6 +18,6 @@ export default async function handler(
     },
   };
   const response = await fetch(url, options);
-  const data = await response.json();
-  res.status(200).json(data);
+  const data = await response.json(); //8000で取ってきたresponseをdataに代入
+  res.status(200).json(data); //この関数handle(req,res)の引数で、元のfetch元のRecord関数へエクスポートする
 }
