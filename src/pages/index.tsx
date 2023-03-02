@@ -11,21 +11,10 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [cookie, setCookie] = useState(false);
-  const record = () => {
-    if (cookie) {
-      return <Record />;
-    } else {
-      return <p>購入履歴はありません</p>;
-    }
-  };
+
   useEffect(() => {
     let cookie = document.cookie;
-
-    if (cookie != null) {
-      setCookie(true);
-    } else {
-      setCookie(false);
-    }
+    setCookie(cookie);
   }, []);
 
   return (
@@ -38,7 +27,11 @@ export default function Home() {
       <Header />
       <main>
         <div className="top_cover"></div>
-        <div className="top_record">{record()}</div>
+        {cookie && (
+          <div className="top_record">
+            <Record />
+          </div>
+        )}
         <div className="top_search">
           <Search />
         </div>
