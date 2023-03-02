@@ -6,7 +6,8 @@ export default function Search() {
   const router = useRouter();
   const handleSubmit = function (event: SyntheticEvent) {
     event.preventDefault();
-    const uri = encodeURI(search);
+    const searchWords = search.toLowerCase();
+    const uri = encodeURI(searchWords);
     router.push(`/farmers?search=${uri}`);
   };
   return (
