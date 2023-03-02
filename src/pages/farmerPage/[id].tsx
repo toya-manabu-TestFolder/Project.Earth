@@ -42,7 +42,7 @@ export default function page(props: any) {
   // 持っているcookieによって商品一覧変更。
   let cookie: cookieType = {
     category_id: 2,
-    user_id: 1,
+    user_id: 0,
   };
   // 商品一覧の表示切替用useState
   const [itemSelect, setitemSelect] = useState(cookie.category_id);
@@ -52,8 +52,6 @@ export default function page(props: any) {
     item_id: 0,
     quantity: 0,
   });
-  // 商品選択数のuseState
-  const [selectNum, setselectNum] = useState(0);
 
   //   id◎
   const id = Number(props.params.id);
@@ -97,7 +95,6 @@ export default function page(props: any) {
       item_id: Number(e.id),
       quantity: Number(event.target.value),
     });
-    setselectNum(Number(event.target.value));
   };
 
   function cartInport(
@@ -105,17 +102,22 @@ export default function page(props: any) {
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
     event.preventDefault();
-    for (let i = 1; i <= selectNum; i++) {
-      fetch("http://localhost:3000/api/cartInport", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cartData),
-      });
+    if (cookie.user_id === 0) {
+      localStorage.setItem(`${cartData.item_id}`, JSON.stringify(cartData));
+    } else {
+      for (let i = 1; i <= cartData.quantity; i++) {
+        fetch("http://localhost:3000/api/cartInport", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cartData),
+        });
+      }
     }
+    console.log(localStorage.getItem(`${cartData.item_id}`));
   }
-
+  let data = localStorage.getItem(`5`);
   // 下記JSX
   return (
     <div
