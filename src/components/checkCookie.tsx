@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 //cookieの有無をチェックする関数(カスタムホック）
 export default function useUserId() {
+  //↑カスタムホックで追加した部分
   const [userId, setUserId] = useState("");
   useEffect(() => {
     let idFoundCookie = document.cookie
@@ -18,5 +19,6 @@ export default function useUserId() {
       setUserId(userId);
     }
   }, []);
+  //↓カスタムホックで追加した部分
   return userId;
 }
