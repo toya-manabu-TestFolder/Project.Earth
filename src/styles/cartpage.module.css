@@ -1,11 +1,8 @@
 .main{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 5%;
-    justify-items: center;
-    align-items: center;
-    margin-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 2% 0 10% 0;
 }
 .itemBox{
     position: relative;
@@ -13,12 +10,14 @@
     height: 100%;
     width: 45vw;
     font-size: 1.5rem;
+    margin-top: 1%;
 }
 .flex{
     display: flex;
     align-items: center;
     margin: 0.5rem auto;
     justify-content: space-evenly;
+    /* margin: 0 auto 2% auto; */
 }
 .selectBox{
     width: 20%;
