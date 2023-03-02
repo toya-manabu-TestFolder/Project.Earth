@@ -1,5 +1,5 @@
 --@block farmer_data情報追加
-INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carryr	,	prefecture	,	icon_imageurl	,	cover_imageurl	,	voiceurl) VALUES
+INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carryr	,	prefecture	,	icon_imageurl	,	cover_imageurl	,	voiceurl,comment) VALUES
 (	1	,	
 '七瀬ファーム'	,	
 '七瀬 獅童'	,	
@@ -13,7 +13,7 @@ INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carr
 ,	'静岡県'	
 ,	'/farmerImages/farmer1.jpg'	
 ,	'/farmerImages/farmerCover1.jpg'	
-,	''	),
+,	''	,''),
 (	2	,	
 '溝口ファクトリー'	,	
 '溝口 由宇'	,	
@@ -27,7 +27,7 @@ INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carr
 '兵庫県'	,	
 '/farmerImages/farmer2.jpg'	,	
 '/farmerImages/farmerCover2.jpg'	,	
-''	)
+'',''	)
 
 --@block
 -- items情報追加
@@ -87,14 +87,16 @@ INSERT INTO api.category (id,name,image) VALUES
 
 --@block
 -- users情報追加
--- INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) VALUES
--- (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
+INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) VALUES
+(1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','54-2','')
 
 --@block
--- INSERT INTO api.cartitems (id,user_id,item_id) VALUES
--- (1,1,1),
--- (2,1,8),
--- (3,1,16)
+INSERT INTO api.cartitems (id,user_id,item_id,quantity) VALUES
+(1,1,1,0),
+(2,1,8,0),
+(3,1,16,0)
+-- (4,2,16,0),
+-- (5,3,16,0)
 
 -- --@block
 -- -- cart情報追加
