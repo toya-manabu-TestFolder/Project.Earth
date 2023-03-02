@@ -11,6 +11,8 @@ export default function useUserId() {
     let useId;
     if (idFoundCookie.length === 1) {
       useId = idFoundCookie[0].split("=")[1];
+    } else {
+      useId = false;
     }
     if (useId) {
       setUserId(userId);
