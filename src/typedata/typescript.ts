@@ -1,4 +1,4 @@
-export type submitType = {
-  userID: string;
-  itemQuantity: number;
+export type cookieType = {
+  category_id: number;
+  user_id: number;
 };

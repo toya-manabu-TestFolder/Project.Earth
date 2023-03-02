@@ -19,7 +19,8 @@ CREATE TABLE api.farmer_data (
     prefecture text NOT NULL,
     icon_imageurl text NOT NULL,
     cover_imageurl text NOT NULL,
-    voiceurl text NOT NULL
+    voiceurl text NOT NULL,
+    comment text NOT NULL
 );
 
 GRANT SELECT ON api.farmer_data TO web_anon;
@@ -58,7 +59,6 @@ GRANT usage on sequence api.category_id_seq to api_user;
 --@block
 -- ユーザー情報テーブル◎
 DROP TABLE IF EXISTS api.users;
-
 CREATE TABLE api.users (
     id serial PRIMARY KEY,
     name text NOT NULL,
@@ -79,10 +79,11 @@ GRANT usage on sequence api.users_id_seq to api_user;
 DROP TABLE IF EXISTS api.sales;
 CREATE TABLE api.sales (
     id SERIAL PRIMARY KEY,
-    use_id INTEGER NOT NULL,
-    item_id INTEGER NOT NULL,
-    farmer_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES api.users(id),
+    item_id INTEGER NOT NULL REFERENCES api.items(id),
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
     quantity INTEGER NOT NULL
+    -- name,price
 );
 GRANT SELECT ON api.sales TO web_anon;
 GRANT ALL ON api.sales to api_user;
@@ -94,14 +95,14 @@ DROP TABLE IF EXISTS api.cartitems;
 
 CREATE TABLE api.cartitems (
     id SERIAL PRIMARY KEY,
-    user_id integer NOT NULL,
-    item_id integer NOT NULL,
+    user_id integer NOT NULL REFERENCES api.users(id),
+    item_id integer NOT NULL REFERENCES api.items(id),
     quantity integer NOT NULL
 );
 
 GRANT SELECT ON api.cartitems TO web_anon;
-GRANT ALL ON api.cartItems to api_user;
-GRANT usage on sequence api.cartItems_id_seq to api_user;
+GRANT ALL ON api.cartitems to api_user;
+GRANT usage on sequence api.cartitems_id_seq to api_user;
 
 
 --@block
