@@ -1,15 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Search from "@/components/search";
 import Record from "@/components/top-record";
 import Category from "@/components/category";
 import Logout from "@/components/logout";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [cookie, setCookie] = useState(false);
+
+  useEffect(() => {
+    let cookie = document.cookie;
+    setCookie(cookie);
+  }, []);
+
   return (
     <>
       <Head>
@@ -19,8 +26,11 @@ export default function Home() {
       </Head>
       <main>
         <div className="top_cover"></div>
-        <div className="top_purchase_history"></div>
-        <Record />
+        {cookie && (
+          <div className="top_record">
+            <Record />
+          </div>
+        )}
         <div className="top_search">
           <Search />
         </div>
