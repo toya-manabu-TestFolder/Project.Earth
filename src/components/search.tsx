@@ -7,8 +7,6 @@ export default function Search() {
   const handleSubmit = function (event: SyntheticEvent) {
     event.preventDefault();
     const uri = encodeURI(search);
-    // 確認用
-    // console.log(uri);
     router.push(`/farmers?search=${uri}`);
   };
   return (

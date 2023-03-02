@@ -4,7 +4,6 @@ import Header from "@/components/header";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import handler from "./api/farmer";
 import { useRouter } from "next/router";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
@@ -15,10 +14,10 @@ export default function Farmers() {
     !search ? "/api/farmer" : `/api/farmer/?search=${search}`,
     fetcher
   );
-  console.log(!data);
+
   if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
-  if (!data) return "検索結果がありません";
+
   return (
     <div>
       <Head>
@@ -31,8 +30,8 @@ export default function Farmers() {
         <span>生産者検索結果:</span>
         <div>
           <div>
+            {data.length === 0 && <p>検索結果はありません</p>}
             {data.map((farmer: any) => {
-              console.log(farmer);
               return (
                 <>
                   <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
