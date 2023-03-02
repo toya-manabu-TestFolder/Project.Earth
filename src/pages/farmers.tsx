@@ -5,50 +5,20 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import handler from "./api/farmer";
-
-// export const getStaticPaths = async () => {
-//   const res = await fetch("http://127.0.0.1:8000/category");
-//   const data = await res.json();
-//   const paths = data.map((item: any) => {
-//     return {
-//       params: {
-//         id: String(item.id),
-//       },
-//     };
-//   });
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// };
-// export const getStaticProps = async ({ params }: { params: any }) => {
-//   const req1 = await fetch("http://127.0.0.1:8000/farmerdata");
-//   const farmerData = await req1.json();
-//   const req2 = await fetch("http://127.0.0.1:8000/items");
-//   const items = await req2.json();
-//   return {
-//     props: {
-//       params,
-//       farmerData,
-//       items,
-//     },
-//   };
-// };
-// export default function Farmers(props: any) {
-//   const farmerData = props.farmerData;
-//   const items = props.items;
-//   // console.log(farmerData);
-//   // console.log(items);
+import { useRouter } from "next/router";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 export default function Farmers() {
+  const router = useRouter();
+  const { search } = router.query;
   const { data, error, isLoading } = useSWR(
-    "http://localhost:3000/api/farmer",
+    !search ? "/api/farmer" : `/api/farmer/?search=${search}`,
     fetcher
   );
-  console.log(data);
-  if (error) return "An error has occurred.";
-  if (isLoading) return "Loading...";
+  console.log(!data);
+  if (error) return "エラーが発生しました";
+  if (isLoading) return "ロード中";
+  if (!data) return "検索結果がありません";
   return (
     <div>
       <Head>
@@ -75,9 +45,8 @@ export default function Farmers() {
                   </Link>
                   <div key={farmer.id}>
                     <p>{farmer.farm_name}</p>
-                    <p>{farmer.items.comment}</p>
+                    <p>{farmer.comment}</p>
                   </div>
-
                   <figure>
                     <button type="button">
                       <audio controls src={farmer.voiceurl}></audio>
@@ -86,19 +55,6 @@ export default function Farmers() {
                 </>
               );
             })}
-          </div>
-          <div>
-            {/* itemsテーブルにコメントを挿入後使ってください。 */}
-            {data.map((farmer: any) => {
-              return <div key={farmer.id}></div>;
-            })}
-          </div>
-          <div>
-            {/* {data.map((e: any) => {
-              return (
-                
-              );
-            })} */}
           </div>
         </div>
       </main>

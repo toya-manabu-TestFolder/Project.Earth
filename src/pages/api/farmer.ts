@@ -8,7 +8,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const url = `http://127.0.0.1:8000/farmer_data`;
+  const { search } = req.query;
+
+  const url = `http://127.0.0.1:8000/farmer_data?select=*,items!inner(*)&items.name=like.*${search}*`;
   const options = {
     method: "GET",
   };
