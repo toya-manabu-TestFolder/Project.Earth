@@ -80,94 +80,96 @@ const loginuser_cartPage = () => {
   };
   // 下記JSX
   return (
-    <div className={styles.main}>
-      {data.map((item: any) => {
-        if (check.includes(item.item_id)) {
-          return;
-        } else {
-          let count = 1;
-          for (const e of data) {
-            if (item.id !== e.id && item.item_id === e.item_id) {
-              count = count + 1;
+    <>
+      <div className={styles.main}>
+        {data.map((item: any) => {
+          if (check.includes(item.item_id)) {
+            return;
+          } else {
+            let count = 1;
+            for (const e of data) {
+              if (item.id !== e.id && item.item_id === e.item_id) {
+                count = count + 1;
+              }
             }
-          }
-          check.push(item.item_id);
-          return (
-            <>
-              {/* 下記から商品情報 */}
-              <div key={item.iten_id} className={styles.itemBox}>
-                <form>
-                  <div className={styles.flex}>
-                    <div>
-                      <Image
-                        src="/categoryImages/かぼちゃ.jpg"
-                        width={200}
-                        height={200}
-                        className={styles.image}
-                        alt={"野菜画像"}
-                      />
-                    </div>
-                    <div>
+            check.push(item.item_id);
+            return (
+              <>
+                {/* 下記から商品情報 */}
+                <div key={item.iten_id} className={styles.itemBox}>
+                  <form>
+                    <div className={styles.flex}>
                       <div>
-                        <p>商品名:{item.items.name}</p>
+                        <Image
+                          src="/categoryImages/かぼちゃ.jpg"
+                          width={200}
+                          height={200}
+                          className={styles.image}
+                          alt={"野菜画像"}
+                        />
                       </div>
                       <div>
-                        <p>価格:{item.items.price}</p>
-                      </div>
+                        <div>
+                          <p>商品名:{item.items.name}</p>
+                        </div>
+                        <div>
+                          <p>価格:{item.items.price}</p>
+                        </div>
 
-                      <div>
-                        <label htmlFor={item.id}>
-                          数量変更：
-                          <select
-                            id={item.id}
-                            defaultValue={count}
-                            onChange={(event) =>
-                              changeItemQuantity(event, item.item_id)
-                            }
-                            className={styles.selectBox}
+                        <div>
+                          <label htmlFor={item.id}>
+                            数量変更：
+                            <select
+                              id={item.id}
+                              defaultValue={count}
+                              onChange={(event) =>
+                                changeItemQuantity(event, item.item_id)
+                              }
+                              className={styles.selectBox}
+                            >
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div>
+                          <button
+                            className={styles.deleteButton}
+                            onClick={() => deleteCartItem(item.item_id)}
                           >
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
-                        </label>
-                      </div>
-                      <div>
-                        <button
-                          className={styles.deleteButton}
-                          onClick={() => deleteCartItem(item.item_id)}
-                        >
-                          削除
-                        </button>
+                            削除
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
-              </div>
-            </>
-          );
-        }
-      })}
-      {/* 下記から小計表示と購入手続きボタン */}
-      <div className={styles.subTotalBox}>
-        <div>
-          <p>合計金額:&nbsp;{totalPrice}円</p>
-        </div>
-        <div>
-          <button className={styles.purchase} onClick={() => checkLogin()}>
-            購入手続きへ
-          </button>
+                  </form>
+                </div>
+              </>
+            );
+          }
+        })}
+        {/* 下記から小計表示と購入手続きボタン */}
+        <div className={styles.subTotalBox}>
+          <div>
+            <p>合計金額:&nbsp;{totalPrice}円</p>
+          </div>
+          <div>
+            <button className={styles.purchase} onClick={() => checkLogin()}>
+              購入手続きへ
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

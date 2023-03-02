@@ -2,7 +2,7 @@
 --@block
 -- フィールド追加
 -- ALTER TABLE api.users ADD zipcode integer NOT NULL;
-ALTER TABLE api.farmer_data ADD comment TEXT;
+ALTER TABLE api.items ADD items_search TEXT;
 
 --@block
 -- データ型変更
