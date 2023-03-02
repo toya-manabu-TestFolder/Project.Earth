@@ -1,9 +1,56 @@
-/* .section{
+.main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 5%;
+    justify-items: center;
+    align-items: center;
+    margin-top: 5%;
+}
+.itemBox{
     position: relative;
     border: 1px solid;
-    height: 10rem;
-    width: 90vw;
-    margin: 1rem auto;
+    height: 100%;
+    width: 45vw;
+    font-size: 1.5rem;
 }
+.flex{
+    display: flex;
+    align-items: center;
+    margin: 0.5rem auto;
+    justify-content: space-evenly;
+}
+.selectBox{
+    width: 20%;
+    height: 1.4em;
+    font-size: 1.6rem;
+}
+.deleteButton{
+    width: 40%;
+    height: 2em;
+}
+.image{
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 
-.section */
+}
+/* 小計*/
+.subTotalBox{
+    display: flex;
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid;
+    font-size: 2rem;
+    width: 40%;
+    height: 10%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;}
+.purchase{
+    font-size: 1.5rem;
+    width: 13rem;
+    height: 3rem;
+}

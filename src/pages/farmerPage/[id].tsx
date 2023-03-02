@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import IntoCart from "@/components/intoCart";
+import { cookieType } from "@/typedata/typescript";
 import Image from "next/image";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "../../styles/itemList.module.css";
@@ -39,7 +40,7 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 //  --------------------------↓getStaticPropsで作ったprops: {item}
 export default function page(props: any) {
   // 持っているcookieによって商品一覧変更。
-  let cookie = {
+  let cookie: cookieType = {
     category_id: 2,
     user_id: 1,
   };
@@ -96,11 +97,11 @@ export default function page(props: any) {
       item_id: Number(e.id),
       quantity: Number(event.target.value),
     });
-    setselectNum(event.target.value);
+    setselectNum(Number(event.target.value));
   };
 
   function cartInport(
-    e,
+    e: any,
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
     event.preventDefault();
