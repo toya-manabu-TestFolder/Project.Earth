@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { SyntheticEvent, useState } from "react";
+import styles from "../styles/header.module.css";
 
 export default function Search() {
   const [search, setSearch] = useState("");
@@ -15,13 +16,16 @@ export default function Search() {
       <form onSubmit={(event) => handleSubmit(event)}>
         <label htmlFor="search">商品名から生産者を探す</label>
         <input
+          className={styles.searchForm}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
           id="search"
           name="search"
           value={search}
         />
-        <button type="submit">検索</button>
+        <button className={styles.searchButton} type="submit">
+          検索
+        </button>
       </form>
     </div>
   );
