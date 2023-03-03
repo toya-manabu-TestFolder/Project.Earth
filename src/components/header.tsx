@@ -4,10 +4,10 @@ import Logout from "./logout";
 import Search from "./search";
 
 export default function Header() {
-  const [cookie, setCookie] = useState(false);
+  const [cookie, setCookie] = useState<boolean>(false);
 
   useEffect(() => {
-    let cookie = document.cookie;
+    let cookie: any = document.cookie;
     setCookie(cookie);
   });
   return (
@@ -19,7 +19,7 @@ export default function Header() {
           </span>
           <Search />
           <span>
-            <Link href="/cart">カート</Link>
+            <Link href="/loginuserCartPage">カート</Link>
           </span>
           <span>
             {cookie && <Logout />}
