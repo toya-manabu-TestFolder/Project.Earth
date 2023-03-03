@@ -22,3 +22,6 @@ export default function useUserId() {
   //↓カスタムホックで追加した部分
   return userId;
 }
+
+//使う時↓
+const cookie = useUserId();

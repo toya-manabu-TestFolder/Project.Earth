@@ -5,7 +5,12 @@ import Logout from "./logout";
 import Search from "./search";
 
 export default function Header() {
-  const cookie = useUserId();
+  const [cookie, setCookie] = useState(false);
+
+  useEffect(() => {
+    let cookie = document.cookie;
+    setCookie(cookie);
+  }, []);
 
   return (
     <>
