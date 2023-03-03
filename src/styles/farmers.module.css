@@ -1,0 +1,39 @@
+.blankMessage {
+  justify-content: center;
+  display: flex;
+  padding: 7%;
+}
+
+.result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.image {
+}
+
+.audio {
+  display: none;
+}
+.playVoice {
+  clip-path: circle(50% at 50% 50%);
+}
+
+.comment {
+  width: 264px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.resultBlock {
+  padding: 1%;
+}
+
+.farmerName {
+  text-align: center;
+}
+
+.voice {
+  text-align: center;
+}
