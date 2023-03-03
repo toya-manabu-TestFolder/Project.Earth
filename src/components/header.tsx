@@ -19,23 +19,21 @@ export default function Header() {
             <Link href="/">産チョク</Link>
           </span>
           <Search />
-          <ul className={styles.buttons}>
-            <li className={styles.cart}>
-              <span>
+          <nav>
+            <ul className={styles.buttons}>
+              <li className={styles.cart}>
                 <Link href="/loginuserCartPage">カート</Link>
-              </span>
-            </li>
-            <li className={styles.logButton}>
-              <span>
+              </li>
+              <li className={styles.logButton}>
                 {cookie && <Logout />}
                 {!cookie && (
                   <button>
                     <Link href="/login">ログイン</Link>
                   </button>
                 )}
-              </span>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </nav>
         </header>
       </main>
     </>
