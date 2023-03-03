@@ -22,8 +22,6 @@ const loginuser_cartPage = () => {
   //   data.push(keys[i] + ": " + localStorage.getItem(keys[i]));
   // }
 
-  console.log(localStorage.getItem("5"));
-
   let check: number[] = [];
   // 削除用ファンクション
   const deleteCartItem = async (id: number) => {

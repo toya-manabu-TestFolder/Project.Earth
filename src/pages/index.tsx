@@ -11,7 +11,7 @@ export default function Home() {
   const [cookie, setCookie] = useState(false);
 
   useEffect(() => {
-    let cookie = document.cookie;
+    let cookie: any = document.cookie;
     setCookie(cookie);
   }, []);
 

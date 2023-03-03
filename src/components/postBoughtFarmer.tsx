@@ -1,6 +1,5 @@
 import Farmer from "./farmer";
 import Photo from "./Photo";
-import IntoCart from "./intoCart";
 import PhotoName from "./photoName";
 
 export default function PostBoughtFarmer() {
@@ -9,7 +8,6 @@ export default function PostBoughtFarmer() {
       <Farmer />
       <Photo />
       <PhotoName />
-      <IntoCart />
     </>
   );
 }

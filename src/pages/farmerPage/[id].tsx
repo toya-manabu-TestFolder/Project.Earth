@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import IntoCart from "@/components/intoCart";
-import { cookieType } from "@/typedata/typescript";
+import { cookieType, storageType } from "@/typedata/typescript";
 import Image from "next/image";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
@@ -44,15 +44,17 @@ export default function page(props: any) {
     category_id: 2,
     user_id: 0,
   };
-  // 商品一覧の表示切替用useState
+  // ローカルストレージ用
+  let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
+  let [storage, setstorage] = useState<any>([]);
+  // 商品一覧の表示切替用
   const [itemSelect, setitemSelect] = useState(cookie.category_id);
-  // カート情報送信用のuseState
+  // ログインユーザーのカート情報送信用
   const [cartData, setcartData] = useState({
     user_id: Number(cookie.user_id),
     item_id: 0,
     quantity: 0,
   });
-
   //   id◎
   const id = Number(props.params.id);
   // 対象農家情報取得◎
@@ -61,10 +63,12 @@ export default function page(props: any) {
   let items = props.items.filter((item: any) => {
     return item.farmer_id === id;
   });
+
   // 重複カテゴリーidの商品削除◎
   const categoryItem = Array.from(
     new Map(items.map((item: any) => [item.category_id, item])).values()
   );
+
   // 対象カテゴリー名取得◎
   const categoryArr = categoryItem.map((e: any) => {
     for (const el of props.category) {
@@ -73,6 +77,7 @@ export default function page(props: any) {
       }
     }
   });
+
   // 対象カテゴリーの商品取得
   const itemfunction = () => {
     items = items.filter((e: any) => {
@@ -80,16 +85,23 @@ export default function page(props: any) {
     });
   };
   itemfunction();
+
   //  その他関連商品クリックでの表示切り替え関数。
   const changeItem = (id: any) => {
     setitemSelect(id);
     itemfunction();
   };
 
+  // Select選択後
   const itemQuantityChange = (
     e: { id: any },
     event: ChangeEvent<HTMLSelectElement>
   ) => {
+    setoneTimeStorage({
+      item: e,
+      quantity: Number(event.target.value),
+    });
+
     setcartData({
       ...cartData,
       item_id: Number(e.id),
@@ -97,13 +109,10 @@ export default function page(props: any) {
     });
   };
 
-  function cartInport(
-    e: any,
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
-    event.preventDefault();
+  // カートへボタン押下後
+  useEffect(() => {
     if (cookie.user_id === 0) {
-      localStorage.setItem(`${cartData.item_id}`, JSON.stringify(cartData));
+      localStorage.setItem("cartData", JSON.stringify(storage));
     } else {
       for (let i = 1; i <= cartData.quantity; i++) {
         fetch("http://localhost:3000/api/cartInport", {
@@ -115,9 +124,13 @@ export default function page(props: any) {
         });
       }
     }
-    console.log(localStorage.getItem(`${cartData.item_id}`));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storage]);
+
+  function cartInport(e: any, event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setstorage([...storage, oneTimeStorage]);
   }
-  let data = localStorage.getItem(`5`);
   // 下記JSX
   return (
     <div
@@ -152,7 +165,7 @@ export default function page(props: any) {
           {items.map((e: any) => {
             return (
               <div className={styles.sec2_itemSelect} key={e.id}>
-                <form method="POST">
+                <form onSubmit={(event) => cartInport(e, event)}>
                   <Image
                     src={e.image}
                     width={250}
@@ -182,9 +195,7 @@ export default function page(props: any) {
                       </select>
                     </label>
                   </div>
-                  <button onClick={(event) => cartInport(e, event)}>
-                    カートに入れる
-                  </button>
+                  <button type="submit">カートに入れる</button>
                 </form>
               </div>
             );
