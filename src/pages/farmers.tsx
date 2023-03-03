@@ -1,6 +1,5 @@
 import React from "react";
 import useSWR from "swr";
-import Header from "@/components/header";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,9 +21,6 @@ export default function Farmers() {
       <Head>
         <title>検索結果</title>
       </Head>
-      <header>
-        <Header />
-      </header>
       <main>
         <span>生産者検索結果:</span>
         <div>
