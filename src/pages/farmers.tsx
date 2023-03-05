@@ -40,6 +40,7 @@ export default function Farmers() {
           )}
           <div className={styles.result}>
             {data.map((farmer: any) => {
+              // {useSound(farmer.voiceurl)}
               return (
                 <div className={styles.resultBlock}>
                   <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
@@ -58,7 +59,7 @@ export default function Farmers() {
 
                   <figure className={styles.voice}>
                     <p>↓生産者の声を聞く↓</p>
-                    <Voice />
+                    <Voice src={farmer.voiceurl} />
                     {/* <audio
                       className={styles.Playvoice}
                       src={farmer.voiceurl}
