@@ -21,7 +21,6 @@ export default function Record() {
   return (
     <>
       <div>
-        <p>前回購入された商品と農家さん</p>
         <p>{`農家名：${data[0].farmer_data.farm_name}`}</p>
         <Image
           src={data[0].farmer_data.icon_imageurl}

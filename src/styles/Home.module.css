@@ -1,12 +1,36 @@
-.main {
+/* 
+.top-cover{
+  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  height: 500px;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+} */
+.cover_image {
+  /* position: absolute; */
+    /* left: 20%; */
+    width: auto;
+    height: 500px;
+    background-size: cover;
+    background-position: center;   
+} 
+
+.top_category{
+  display: flex;
 }
 
+.top_newFace{
+  display: flex;
+}
+
+.top_title{
+  margin-right: 2rem;
+  font-size: 2.5rem;
+}
+
+
+
+
+/* 
 .description {
   display: inherit;
   justify-content: inherit;
@@ -275,4 +299,4 @@
   to {
     transform: rotate(0deg);
   }
-}
+} 
