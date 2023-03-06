@@ -6,6 +6,7 @@ import Record from "@/components/top-record";
 import Category from "@/components/category";
 import Logout from "@/components/logout";
 import { useEffect, useState } from "react";
+import NewFace from "@/components/newface";
 
 export default function Home() {
   const [cookie, setCookie] = useState(false);
@@ -36,7 +37,9 @@ export default function Home() {
           <p>生産者を探す</p>
           <Category />
         </div>
-        <div className="top_recommend"></div>
+        <div className="top_newFace">
+          <NewFace />
+        </div>
       </main>
     </>
   );

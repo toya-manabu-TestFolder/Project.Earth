@@ -1,10 +1,11 @@
 import React from "react";
 import useSWR from "swr";
-import Header from "@/components/header";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "../styles/farmers.module.css";
+import { Voice } from "@/components/voice";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 export default function Farmers() {
@@ -22,35 +23,43 @@ export default function Farmers() {
       <Head>
         <title>検索結果</title>
       </Head>
-      <header>
-        <Header />
-      </header>
       <main>
-        <span>生産者検索結果:</span>
+        <h1>生産者検索結果:</h1>
         <div>
-          <div>
-            {data.length === 0 && <p>検索結果はありません</p>}
+          {data.length === 0 && (
+            <section className={styles.blankMessage}>
+              <p>
+                <h2>検索結果がありませんでした。</h2>
+                <br />
+                入力内容をお確かめの上、もう一度検索をお願いします。
+                <br />
+                （検索例）キャベツ、にんじん、なす、かぼちゃ...
+              </p>
+            </section>
+          )}
+          <div className={styles.result}>
             {data.map((farmer: any) => {
               return (
-                <>
+                <div className={styles.resultBlock}>
                   <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
                     <Image
+                      className={styles.image}
                       src={farmer.icon_imageurl}
                       alt={"画像"}
-                      width={100}
-                      height={100}
+                      width={264}
+                      height={264}
                     />
                   </Link>
                   <div key={farmer.id}>
-                    <p>{farmer.farm_name}</p>
-                    <p>{farmer.comment}</p>
+                    <p className={styles.farmerName}>{farmer.farm_name}</p>
+                    <p className={styles.comment}>{farmer.comment}</p>
                   </div>
-                  <figure>
-                    <button type="button">
-                      <audio controls src={farmer.voiceurl}></audio>
-                    </button>
+
+                  <figure className={styles.voice}>
+                    <p>↓生産者の声を聞く↓</p>
+                    <Voice src={farmer.voiceurl} />
                   </figure>
-                </>
+                </div>
               );
             })}
           </div>
