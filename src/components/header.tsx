@@ -14,26 +14,44 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={styles.header}>
-      <span className={styles.logo}>
-        <Link href="/">産チョク</Link>
-      </span>
-      <Search />
-      <nav>
-        <ul className={styles.buttons}>
-          <li className={styles.cart}>
-            <Link href="/loginuserCartPage">カート</Link>
-          </li>
-          <li className={styles.logButton}>
-            {cookie && <Logout />}
-            {!cookie && (
-              <button>
-                <Link href="/login">ログイン</Link>
-              </button>
-            )}
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <>
+      <main>
+        <header className={styles.header}>
+          <Link href="/">
+            <img
+              className={styles.logo}
+              src="/site-image/site-logo.jpg"
+              alt="ロゴ画像"
+              width={80}
+              height={80}
+            />
+          </Link>
+          <div className={styles.headerSearchForm}>
+            <Search />
+          </div>
+          <nav>
+            <ul className={styles.navButtons}>
+              <li className={styles.cartButton}>
+                <button>
+                  <Link href="/loginuserCartPage">
+                    <span>カート</span>
+                  </Link>
+                </button>
+              </li>
+              <li className={styles.logButton}>
+                {cookie && <Logout />}
+                {!cookie && (
+                  <button>
+                    <Link href="/login">
+                      <span>ログイン</span>
+                    </Link>
+                  </button>
+                )}
+              </li>
+            </ul>
+          </nav>
+        </header>
+      </main>
+    </>
   );
 }

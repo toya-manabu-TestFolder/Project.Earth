@@ -14,7 +14,9 @@ export default function Search() {
   return (
     <div>
       <form onSubmit={(event) => handleSubmit(event)}>
-        <label htmlFor="search">商品名から生産者を探す</label>
+        <label htmlFor="search" className={styles.searchDescription}>
+          <span>商品名から生産者を探す</span>
+        </label>
         <input
           className={styles.searchForm}
           onChange={(e) => setSearch(e.target.value)}
@@ -24,7 +26,7 @@ export default function Search() {
           value={search}
         />
         <button className={styles.searchButton} type="submit">
-          検索
+          <span className={styles.searchButtonText}>検索</span>
         </button>
       </form>
     </div>
