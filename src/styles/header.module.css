@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  background-color: rgb(119, 86, 86);
+  justify-content: space-between;
+}
+
+.log {
+}
+
+.searchForm {
+  border-radius: 10px;
+  width: 200px;
+}
+
+.buttons {
+  padding-left: 0;
+  display: flex;
+}
+
+.cart {
+  list-style: none;
+}
+
+.logButton {
+  list-style: none;
+}
+
+.searchButton {
+  border-radius: 10px;
+}

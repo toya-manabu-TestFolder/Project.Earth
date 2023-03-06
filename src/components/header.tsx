@@ -3,34 +3,39 @@ import { useEffect, useState } from "react";
 import useUserId from "./checkCookie";
 import Logout from "./logout";
 import Search from "./search";
+import styles from "../styles/header.module.css";
 
 export default function Header() {
-  const [cookie, setCookie] = useState(false);
+  const [cookie, setCookie] = useState<boolean>(false);
 
   useEffect(() => {
-    let cookie = document.cookie;
+    let cookie: any = document.cookie;
     setCookie(cookie);
   }, []);
 
   return (
     <>
       <main>
-        <header>
-          <span>
+        <header className={styles.header}>
+          <span className={styles.logo}>
             <Link href="/">産チョク</Link>
           </span>
           <Search />
-          <span>
-            <Link href="/cart">カート</Link>
-          </span>
-          <span>
-            {cookie && <Logout />}
-            {!cookie && (
-              <button>
-                <Link href="/login">ログイン</Link>
-              </button>
-            )}
-          </span>
+          <nav>
+            <ul className={styles.buttons}>
+              <li className={styles.cart}>
+                <Link href="/loginuserCartPage">カート</Link>
+              </li>
+              <li className={styles.logButton}>
+                {cookie && <Logout />}
+                {!cookie && (
+                  <button>
+                    <Link href="/login">ログイン</Link>
+                  </button>
+                )}
+              </li>
+            </ul>
+          </nav>
         </header>
       </main>
     </>

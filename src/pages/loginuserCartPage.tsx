@@ -19,7 +19,7 @@ const loginuser_cartPage = () => {
     category_id: 2,
     user_id: 1,
   };
-
+  console.log(localStorage.getItem("cartData"));
   let check: number[] = [];
   // 削除用ファンクション
   const deleteCartItem = async (id: number) => {
@@ -46,21 +46,36 @@ const loginuser_cartPage = () => {
     event: ChangeEvent<HTMLSelectElement>,
     id: number
   ) => {
-    deleteCartItem(id);
     let cartInport = {
       user_id: cookie.user_id,
       item_id: id,
       quantity: 0,
     };
 
-    for (let i = 1; i <= Number(event.target.value); i++) {
-      fetch("http://localhost:3000/api/cartinport", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cartInport),
-      });
+    fetch("http://localhost:3000/api/cartDelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //↓全部のデータを取り扱いたい時
+        Prefer: "return=representation",
+        //↓更新したいならTOKEN設定
+        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
+      },
+      body: JSON.stringify(id),
+    })
+    .then((res)=>{
+      if(res.status===200){
+        for (let i = 1; i <= Number(event.target.value); i++) {
+          fetch("http://localhost:3000/api/cartinport", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(cartInport),
+          })
+      }
+    }
+    )
     }
   };
 
