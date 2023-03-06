@@ -6,3 +6,8 @@
     width: 70%;
     margin: auto;
 }
+.half{
+    width: 50%;
+    border: dotted;
+    border-radius: 7.5rem;
+}

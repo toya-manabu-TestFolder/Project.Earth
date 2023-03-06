@@ -48,27 +48,31 @@ export default function Record() {
   return (
     <>
       <div className={styles.container}>
-        <div>
+        <div className={styles.half}>
           <div>
             <Image
               src={data[0].farmer_data.icon_imageurl}
               alt={"画像"}
               width={300}
               height={200}
+              className="m-auto"
             />
           </div>
-          <p>{`農家名：${data[0].farmer_data.farm_name}`}</p>
+          <p className="text-center">{`${data[0].farmer_data.farm_name}`}</p>
         </div>
-        <div>
+        <div className={styles.half}>
           <form onSubmit={(event) => handleSubmit(event)}>
             <Image
               src={data[0].items.image}
               alt={"画像"}
               width={250}
               height={250}
+              className="m-auto"
             />
-            <p>{`商品名：${data[0].items.name}`}</p>
-            <button type="submit"> カートに入れる </button>
+            <p className="text-center">{`${data[0].items.name}`}</p>
+            <div className="flex justify-center">
+              <button type="submit">カートに入れる</button>
+            </div>
           </form>
         </div>
       </div>
