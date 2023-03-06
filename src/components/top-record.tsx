@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { useState } from "react";
 import Image from "next/image";
+import styles from "../styles/record.module.css";
 
 //SWRを使う　indexの中でこのコンポーネントのみCSRをするイメージ
 
@@ -20,25 +21,31 @@ export default function Record() {
 
   return (
     <>
-      <div>
-        <p>前回購入された商品と農家さん</p>
-        <p>{`農家名：${data[0].farmer_data.farm_name}`}</p>
-        <Image
-          src={data[0].farmer_data.icon_imageurl}
-          alt={"画像"}
-          width={100}
-          height={100}
-        />
+      <div className={styles.container}>
+        <div>
+          <div>
+            <Image
+              src={data[0].farmer_data.icon_imageurl}
+              alt={"画像"}
+              width={300}
+              height={200}
+            />
+          </div>
+          <p>{`農家名：${data[0].farmer_data.farm_name}`}</p>
+        </div>
+        <div>
+          <div>
+            <Image
+              src={data[0].items.image}
+              alt={"画像"}
+              width={250}
+              height={250}
+            />
+          </div>
+          <p>{`商品名：${data[0].items.name}`}</p>
+        </div>
       </div>
-      <div>
-        <p>{`農家名：${data[0].items.name}`}</p>
-        {/* <Image
-          src={data[0].items.image}
-          alt={"画像"}
-          width={100}
-          height={100}
-        /> */}
-      </div>
+      <button>ボタン</button>
     </>
   );
 }

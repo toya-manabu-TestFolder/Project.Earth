@@ -1,7 +1,7 @@
 import Image from "next/image";
 import useSWR from "swr";
 import { useState } from "react";
-import styles from "../../styles/itemList.module.css";
+import styles from "../styles/category.module.css";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -14,22 +14,27 @@ export default function Category({ onClick }: any) {
 
   return (
     <>
-      <div className="list">
-        {data.map((category: CategoryData) => (
-          <div className="category" key={category.id}>
-            <button id={category.id} onClick={onClick}>
-              <Image
-                src={category.image}
-                id={category.id}
-                alt="カテゴリー画像"
-                width={30}
-                height={30}
-              />
-              <p id={category.id}>{category.name}</p>
-            </button>
-          </div>
-        ))}
-      </div>
+      <section className={styles.bg_color}>
+        <h2 className={styles.title}>その他関連商品</h2>
+        <div className={styles.picture}>
+          {data.map((category: CategoryData) => (
+            <div className="category" key={category.id}>
+              <button id={category.id} onClick={onClick}>
+                <div className={styles.shape}>
+                  <Image
+                    src={category.image}
+                    id={category.id}
+                    alt="カテゴリー画像"
+                    width={250}
+                    height={250}
+                  />
+                </div>
+                <p id={category.id}>{category.name}</p>
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
