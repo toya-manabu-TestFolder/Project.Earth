@@ -1,0 +1,8 @@
+.shape{
+    clip-path: circle(50% at 50% 50%);
+}
+.container{
+    display: flex;
+    width: 70%;
+    margin: auto;
+}

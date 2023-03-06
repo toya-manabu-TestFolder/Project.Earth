@@ -1,0 +1,15 @@
+.bg_color{
+    background-color: beige;
+}
+.title{
+    text-align: center;
+}
+.picture{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: auto;
+}
+.shape{
+    clip-path: circle(40% at 50% 50%);
+}
