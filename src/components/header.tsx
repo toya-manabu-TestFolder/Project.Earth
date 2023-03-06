@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import useUserId from "./checkCookie";
 import Logout from "./logout";
 import Search from "./search";
 import styles from "../styles/header.module.css";
@@ -10,7 +11,8 @@ export default function Header() {
   useEffect(() => {
     let cookie: any = document.cookie;
     setCookie(cookie);
-  });
+  }, []);
+
   return (
     <header className={styles.header}>
       <span className={styles.logo}>
