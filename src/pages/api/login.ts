@@ -22,4 +22,5 @@ export default async function handler(
     .setHeader("Set-Cookie", [`id=${data[0].id};path=/`])
     .status(200)
     .json(data);
+  console.log(res);
 }
