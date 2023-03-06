@@ -11,29 +11,44 @@
 }
 
 .image {
-}
-
-.audio {
-  display: none;
-}
-.playVoice {
   clip-path: circle(50% at 50% 50%);
 }
 
+.voice {
+  padding: 18px;
+  border: solid;
+  /* 外枠の色 */
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  background-color: blue;
+}
+
+.buttonText{
+  color: white;
+}
+
+
 .comment {
-  width: 264px;
   word-wrap: break-word;
   text-align: center;
+  /* width: 264px; */
 }
 
 .resultBlock {
   padding: 1%;
+  position: relative;
+  padding-bottom: 3%;
 }
 
 .farmerName {
   text-align: center;
+  font-weight: bold;
 }
 
-.voice {
-  text-align: center;
+.resultMessage {
+  padding: 2%;
 }

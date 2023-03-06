@@ -24,23 +24,23 @@ export default function Farmers() {
         <title>検索結果</title>
       </Head>
       <main>
-        <h1>生産者検索結果:</h1>
+        <h1 className={styles.resultMessage}>生産者検索結果:</h1>
         <div>
           {data.length === 0 && (
             <section className={styles.blankMessage}>
-              <p>
+              <div>
                 <h2>検索結果がありませんでした。</h2>
                 <br />
                 入力内容をお確かめの上、もう一度検索をお願いします。
                 <br />
                 （検索例）キャベツ、にんじん、なす、かぼちゃ...
-              </p>
+              </div>
             </section>
           )}
           <div className={styles.result}>
             {data.map((farmer: any) => {
               return (
-                <div className={styles.resultBlock}>
+                <div className={styles.resultBlock} key={farmer.id}>
                   <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
                     <Image
                       className={styles.image}
@@ -50,15 +50,14 @@ export default function Farmers() {
                       height={264}
                     />
                   </Link>
-                  <div key={farmer.id}>
-                    <p className={styles.farmerName}>{farmer.farm_name}</p>
+                  <div>
+                    <h2 className={styles.farmerName}>{farmer.farm_name}</h2>
                     <p className={styles.comment}>{farmer.comment}</p>
                   </div>
 
-                  <figure className={styles.voice}>
-                    <p>↓生産者の声を聞く↓</p>
+                  <div>
                     <Voice src={farmer.voiceurl} />
-                  </figure>
+                  </div>
                 </div>
               );
             })}
