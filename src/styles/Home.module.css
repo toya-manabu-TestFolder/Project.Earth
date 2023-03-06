@@ -15,7 +15,8 @@
 } 
 
 .top_category{
-  display: flex;
+  width: 70%;
+  margin: auto;
 }
 
 .top_newFace{
@@ -25,7 +26,10 @@
 .top_title{
   margin-right: 2rem;
   font-size: 2.5rem;
+  text-align: center;
 }
+
+
 
 
 

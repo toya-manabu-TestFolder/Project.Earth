@@ -1,25 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: solid;
+  /* border: solid; */
 }
-img {
-  max-width: 100%;
-  vertical-align: bottom;
-}
-html {
-  font-size: 62.5%;
+.main{
+  min-width: 1,280px;
 }
 
-body {
-  font-family: "Noto Sans JP", "Roboto Condensed", sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.75;
-  color: #222222;
-  background-color: #ffffff;
-}
 
 /* :root {
   --max-width: 1100px;

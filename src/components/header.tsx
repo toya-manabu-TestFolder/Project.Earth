@@ -12,30 +12,26 @@ export default function Header() {
     setCookie(cookie);
   });
   return (
-    <>
-      <main>
-        <header className={styles.header}>
-          <span className={styles.logo}>
-            <Link href="/">産チョク</Link>
-          </span>
-          <Search />
-          <nav>
-            <ul className={styles.buttons}>
-              <li className={styles.cart}>
-                <Link href="/loginuserCartPage">カート</Link>
-              </li>
-              <li className={styles.logButton}>
-                {cookie && <Logout />}
-                {!cookie && (
-                  <button>
-                    <Link href="/login">ログイン</Link>
-                  </button>
-                )}
-              </li>
-            </ul>
-          </nav>
-        </header>
-      </main>
-    </>
+    <header className={styles.header}>
+      <span className={styles.logo}>
+        <Link href="/">産チョク</Link>
+      </span>
+      <Search />
+      <nav>
+        <ul className={styles.buttons}>
+          <li className={styles.cart}>
+            <Link href="/loginuserCartPage">カート</Link>
+          </li>
+          <li className={styles.logButton}>
+            {cookie && <Logout />}
+            {!cookie && (
+              <button>
+                <Link href="/login">ログイン</Link>
+              </button>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }

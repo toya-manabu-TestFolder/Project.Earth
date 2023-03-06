@@ -1,16 +1,10 @@
 import styles from "../styles/Home.module.css";
-import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import Search from "@/components/search";
 import Record from "@/components/top-record";
 import Category from "@/components/category";
-import Logout from "@/components/logout";
 import { useEffect, useState } from "react";
 import NewFace from "@/components/newface";
-import background from "../../public/coverImages/cover1.jpg";
-
-import { FaGithub } from "react-icons/fa";
 
 export default function Home() {
   const [cookie, setCookie] = useState(false);
@@ -22,12 +16,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>農チョク</title>
-        <meta name="description" content="農家さんのファンを作るECサイト" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
       <main>
         <section>
           <div className={styles.top_cover}>
@@ -62,7 +50,6 @@ export default function Home() {
         <section className="top_newFace">
           <div className={styles.top_title}>新規のおすすめ農家さん</div>
           <NewFace />
-          GitHub <FaGithub />
         </section>
       </main>
     </>
