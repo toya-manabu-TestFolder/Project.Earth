@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import IntoCart from "@/components/intoCart";
-import { cookieType, storageType } from "@/typedata/typescript";
 import Image from "next/image";
 import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
@@ -189,7 +188,7 @@ export default function page(props: any) {
             代表&nbsp;&nbsp;{farmerData.representative_name}
           </p>
           <p className={styles.farmYears}>
-            農家歴&nbsp;&nbsp;{farmerData.years}年
+            農家歴&nbsp;&nbsp;{farmerData.year}年
           </p>
         </section>
       </div>
@@ -204,39 +203,43 @@ export default function page(props: any) {
           {items.map((e: any) => {
             return (
               <div className={styles.sec2_itemSelect} key={e.id}>
-                <form>
-                  <Image
-                    src="/categoryImages/かぼちゃ.jpg"
-                    width={250}
-                    height={250}
-                    className={styles.sec2_ImageBox}
-                    alt={"野菜画像"}
-                  />
-                  <div>
+                <form className={styles.formBox}>
+                  <div className={styles.itemName}>
+                    <Image
+                      src="/categoryImages/かぼちゃ.jpg"
+                      width={250}
+                      height={250}
+                      className={styles.sec2_ImageBox}
+                      alt={"野菜画像"}
+                    />
                     <p>{e.name}</p>
                   </div>
-                  <div>
-                    <p>価格:&nbsp;{e.price}円</p>
+                  <div className={styles.itemSelect}>
+                    <div>
+                      <p>価格:&nbsp;{e.price}円</p>
+                    </div>
+                    <div>
+                      <label htmlFor={e.id}>
+                        数量:&nbsp;
+                        <select
+                          id={e.id}
+                          onChange={(event) => itemQuantityChange(e, event)}
+                        >
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </label>
+                    </div>
+                    <div>
+                      <button onClick={(event) => cartInport(e, event)}>
+                        カートに入れる
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor={e.id}>
-                      数量:&nbsp;
-                      <select
-                        id={e.id}
-                        onChange={(event) => itemQuantityChange(e, event)}
-                      >
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                      </select>
-                    </label>
-                  </div>
-                  <button onClick={(event) => cartInport(e, event)}>
-                    カートに入れる
-                  </button>
                 </form>
               </div>
             );
