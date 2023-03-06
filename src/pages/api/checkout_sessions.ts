@@ -1,6 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req: any, res: any) {
+  console.log("a");
   if (req.method === "POST") {
     let items = req.body;
     if (!items || !Array.isArray(req.body)) {
