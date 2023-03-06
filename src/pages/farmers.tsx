@@ -24,7 +24,7 @@ export default function Farmers() {
         <title>検索結果</title>
       </Head>
       <main>
-        <h1>生産者検索結果:</h1>
+        <h1 className={styles.resultMessage}>生産者検索結果:</h1>
         <div>
           {data.length === 0 && (
             <section className={styles.blankMessage}>
@@ -51,14 +51,13 @@ export default function Farmers() {
                     />
                   </Link>
                   <div key={farmer.id}>
-                    <p className={styles.farmerName}>{farmer.farm_name}</p>
+                    <h2 className={styles.farmerName}>{farmer.farm_name}</h2>
                     <p className={styles.comment}>{farmer.comment}</p>
                   </div>
 
-                  <figure className={styles.voice}>
-                    <p>↓生産者の声を聞く↓</p>
+                  <div>
                     <Voice src={farmer.voiceurl} />
-                  </figure>
+                  </div>
                 </div>
               );
             })}

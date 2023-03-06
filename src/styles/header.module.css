@@ -1,10 +1,13 @@
 .header {
   display: flex;
-  background-color: rgb(119, 86, 86);
-  justify-content: space-between;
+  background-color: rgb(197, 202, 142);
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
 }
 
-.log {
+.logo {
+  border-radius: 50px;
 }
 
 .searchForm {
@@ -12,12 +15,25 @@
   width: 200px;
 }
 
-.buttons {
-  padding-left: 0;
+/* 検索ボタンの詳細 */
+.searchButton {
+  background-color: cadetblue;
+  border-radius: 10px;
+}
+/* 商品名から生産者を探す　の色 */
+.searchDescription {
+  color: beige;
+}
+/* 検索の文字色 */
+.searchButtonText {
+  color: beige;
+}
+
+.navButtons {
   display: flex;
 }
 
-.cart {
+.cartButton {
   list-style: none;
 }
 
@@ -25,6 +41,8 @@
   list-style: none;
 }
 
-.searchButton {
-  border-radius: 10px;
+
+.headerSearchForm {
+  padding-left: 1%;
+  padding-right: 1%;
 }
