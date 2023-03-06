@@ -14,10 +14,8 @@ export default function Search() {
   return (
     <div>
       <form onSubmit={(event) => handleSubmit(event)}>
-        <label htmlFor="search">
-          <span className={styles.searchDescription}>
-            商品名から生産者を探す
-          </span>
+        <label htmlFor="search" className={styles.searchDescription}>
+          <span>商品名から生産者を探す</span>
         </label>
         <input
           className={styles.searchForm}

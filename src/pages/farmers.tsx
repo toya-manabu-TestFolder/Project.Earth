@@ -28,13 +28,13 @@ export default function Farmers() {
         <div>
           {data.length === 0 && (
             <section className={styles.blankMessage}>
-              <p>
+              <div>
                 <h2>検索結果がありませんでした。</h2>
                 <br />
                 入力内容をお確かめの上、もう一度検索をお願いします。
                 <br />
                 （検索例）キャベツ、にんじん、なす、かぼちゃ...
-              </p>
+              </div>
             </section>
           )}
           <div className={styles.result}>
