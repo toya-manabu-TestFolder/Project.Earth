@@ -40,7 +40,7 @@ export default function Farmers() {
           <div className={styles.result}>
             {data.map((farmer: any) => {
               return (
-                <div className={styles.resultBlock}>
+                <div className={styles.resultBlock} key={farmer.id}>
                   <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
                     <Image
                       className={styles.image}
@@ -50,7 +50,7 @@ export default function Farmers() {
                       height={264}
                     />
                   </Link>
-                  <div key={farmer.id}>
+                  <div>
                     <h2 className={styles.farmerName}>{farmer.farm_name}</h2>
                     <p className={styles.comment}>{farmer.comment}</p>
                   </div>

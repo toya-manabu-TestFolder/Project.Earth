@@ -26,9 +26,9 @@ export default function Header() {
               height={80}
             />
           </Link>
-          <form className={styles.headerSearchForm}>
+          <div className={styles.headerSearchForm}>
             <Search />
-          </form>
+          </div>
           <nav>
             <ul className={styles.navButtons}>
               <li className={styles.cartButton}>
