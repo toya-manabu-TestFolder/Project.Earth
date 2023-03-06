@@ -45,6 +45,7 @@ export default function Record() {
           <p>{`商品名：${data[0].items.name}`}</p>
         </div>
       </div>
+      <button>ボタン</button>
     </>
   );
 }
