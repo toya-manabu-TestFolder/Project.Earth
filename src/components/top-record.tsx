@@ -21,20 +21,20 @@ export default function Record() {
 
   return (
     <>
-      <div>
+      <div className={styles.container}>
         <div>
-          <div className={styles.shape}>
+          <div>
             <Image
               src={data[0].farmer_data.icon_imageurl}
               alt={"画像"}
               width={300}
-              height={300}
+              height={200}
             />
           </div>
-          <div>{`農家名：${data[0].farmer_data.farm_name}`}</div>
+          <p>{`農家名：${data[0].farmer_data.farm_name}`}</p>
         </div>
         <div>
-          <div className={styles.shape}>
+          <div>
             <Image
               src={data[0].items.image}
               alt={"画像"}
@@ -42,7 +42,7 @@ export default function Record() {
               height={250}
             />
           </div>
-          <div>{`商品名：${data[0].items.name}`}</div>
+          <p>{`商品名：${data[0].items.name}`}</p>
         </div>
       </div>
     </>
