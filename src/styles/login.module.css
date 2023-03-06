@@ -1,8 +1,44 @@
+.blank{
+  margin:10rem
+}
+.container{
+  display: flex;
+  width: 50%;
+  margin: auto;
+}
 
+.width{
+  width: 100%;
+}
+
+.title{
+  background-color: beige;
+  margin-bottom: 4rem;
+  padding: 1rem;
+}
+
+.line{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.input{
+  width: 70%;
+}
+
+.button{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* 
 /*------------------------------------
 - COLOR primary
 ------------------------------------*/
-
+/* 
 $primary_t1: #7cb637;
 $primary_t2: #618e2b;
 $primary_t3: #c8e4a6;
@@ -155,4 +191,4 @@ button.bg-primary:focus {
 
 a.text-primary:hover, a.text-primary:focus {
   color: $primary_t2 !important;
-}
+}  */

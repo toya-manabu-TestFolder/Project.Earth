@@ -5,6 +5,7 @@ import Record from "@/components/top-record";
 import Category from "@/components/category";
 import { useEffect, useState } from "react";
 import NewFace from "@/components/newface";
+import { Slider } from "@/components/slider";
 
 export default function Home() {
   const [cookie, setCookie] = useState(false);
@@ -17,19 +18,16 @@ export default function Home() {
   return (
     <>
       <main>
-        <section>
-          <div className={styles.top_cover}>
-            <div
-              className={styles.cover_image}
-              style={{
-                backgroundImage: "url(/coverImages/cover1.jpg)",
-              }}
-            ></div>
+        <section className={styles.top_cover}>
+          <div>
+            <div className={styles.cover_image}>
+              <Slider />
+            </div>
           </div>
-          <div className="cover-text">
-            農家さんの顔見て、
+          <div className={styles.cover_text}>
+            農家さんの顔見て
             <br />
-            欲しいものを選べるECサイトです
+            欲しいものを選べるECサイト
           </div>
         </section>
 

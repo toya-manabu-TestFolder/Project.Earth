@@ -36,7 +36,56 @@ export default function Login() {
   };
   return (
     <>
-      <div className="container text-center">
+      <div className={styles.blank}>
+        <div className={styles.container}>
+          <div className={styles.width}>
+            <div className={styles.title}>会員の方はこちら</div>
+            <form className="" onSubmit={(event) => handleSubmit(event)}>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="" className="">
+                    メールアドレス
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      id=""
+                      placeholder="@example.com"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.line}>
+                <label htmlFor="" className="form-label">
+                  パスワード
+                </label>
+                <div className={styles.input}>
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    id=""
+                    placeholder="パスワード"
+                  />
+                </div>
+              </div>
+              <div className={styles.button}>
+                <button type="submit">ログイン</button>
+              </div>
+            </form>
+
+            <div className={styles.title}>新規会員登録はこちら</div>
+            <Link href={"http://localhost:3000/user_register/"}>
+              <div className={styles.button}>
+                <button type="submit">会員登録</button>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <div className="container text-center">
         <div className="row justify-content-center">
           <div className="mt-5 mb-3">会員の方はこちら</div>
           <form
@@ -48,7 +97,9 @@ export default function Login() {
                 <label
                   htmlFor="exampleFormControlInput1"
                   className="form-label"
-                ></label>
+                >
+                  メールアドレス
+                </label>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
@@ -83,7 +134,7 @@ export default function Login() {
             </button>
           </Link>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
