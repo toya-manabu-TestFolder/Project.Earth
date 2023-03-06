@@ -39,22 +39,40 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 };
 //  --------------------------↓getStaticPropsで作ったprops: {item}
 export default function page(props: any) {
-  // 持っているcookieによって商品一覧変更。
-  let cookie: cookieType = {
-    category_id: 2,
-    user_id: 0,
-  };
-  // ローカルストレージ用
-  let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
-  let [storage, setstorage] = useState<any>([]);
-  // 商品一覧の表示切替用
-  const [itemSelect, setitemSelect] = useState(cookie.category_id);
   // ログインユーザーのカート情報送信用
   const [cartData, setcartData] = useState({
-    user_id: Number(cookie.user_id),
+    user_id: 0,
     item_id: 0,
     quantity: 0,
   });
+
+  // 持っているcookieによって商品一覧変更。
+  const [cookie, setcookie] = useState({
+    category_id: 2,
+    user_id: 0,
+  });
+  useEffect(() => {
+    if (document.cookie !== null) {
+      let id = document.cookie.substring(3);
+      setcookie({
+        ...cookie,
+        user_id: Number(id),
+      });
+      setcartData({
+        ...cartData,
+        user_id: Number(id),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ローカルストレージ用
+  let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
+  let [storage, setstorage] = useState<any>([]);
+
+  // 商品一覧の表示切替用
+  const [itemSelect, setitemSelect] = useState(cookie.category_id);
+
   //   id◎
   const id = Number(props.params.id);
   // 対象農家情報取得◎
@@ -94,26 +112,28 @@ export default function page(props: any) {
 
   // Select選択後
   const itemQuantityChange = (
-    e: { id: any },
+    e: any,
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setoneTimeStorage({
-      item: e,
-      quantity: Number(event.target.value),
-    });
-
-    setcartData({
-      ...cartData,
-      item_id: Number(e.id),
-      quantity: Number(event.target.value),
-    });
+    event.preventDefault();
+    if (cookie.user_id === 0) {
+      setoneTimeStorage({
+        id: e.id,
+        item: e,
+        quantity: Number(event.target.value),
+      });
+    } else {
+      setcartData({
+        ...cartData,
+        item_id: Number(e.id),
+        quantity: Number(event.target.value),
+      });
+    }
   };
 
   // カートへボタン押下後
   useEffect(() => {
-    if (cookie.user_id === 0) {
-      localStorage.setItem("cartData", JSON.stringify(storage));
-    } else {
+    if (cookie.user_id !== 0) {
       for (let i = 1; i <= cartData.quantity; i++) {
         fetch("http://localhost:3000/api/cartInport", {
           method: "POST",
@@ -123,14 +143,33 @@ export default function page(props: any) {
           body: JSON.stringify(cartData),
         });
       }
+    } else {
+      if (localStorage.getItem(`${oneTimeStorage.id}`) !== null) {
+        let test: any = localStorage.getItem(`${oneTimeStorage.id}`);
+        test = JSON.parse(test);
+        test[0].quantity = test[0].quantity + oneTimeStorage.quantity;
+        test = JSON.stringify(test);
+        localStorage.setItem(`${oneTimeStorage.id}`, test);
+      } else if (storage.length > 0) {
+        let item = storage;
+        item = JSON.stringify(item);
+        localStorage.setItem(`${oneTimeStorage.id}`, item);
+        console.log("a");
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storage]);
 
-  function cartInport(e: any, event: FormEvent<HTMLFormElement>) {
+  function cartInport(
+    e: any,
+    event: /* eslint-disable react-hooks/rules-of-hooks */
+    // import IntoCart from "@/components/intoCart";
+    MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
     event.preventDefault();
-    setstorage([...storage, oneTimeStorage]);
+    setstorage([oneTimeStorage]);
   }
+
   // 下記JSX
   return (
     <div
@@ -165,9 +204,9 @@ export default function page(props: any) {
           {items.map((e: any) => {
             return (
               <div className={styles.sec2_itemSelect} key={e.id}>
-                <form onSubmit={(event) => cartInport(e, event)}>
+                <form>
                   <Image
-                    src={e.image}
+                    src="/categoryImages/かぼちゃ.jpg"
                     width={250}
                     height={250}
                     className={styles.sec2_ImageBox}
@@ -195,7 +234,9 @@ export default function page(props: any) {
                       </select>
                     </label>
                   </div>
-                  <button type="submit">カートに入れる</button>
+                  <button onClick={(event) => cartInport(e, event)}>
+                    カートに入れる
+                  </button>
                 </form>
               </div>
             );

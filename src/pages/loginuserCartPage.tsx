@@ -1,25 +1,53 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import React from "react";
+import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styles from "../styles/cartpage.module.css";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { cookieType } from "@/typedata/typescript";
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 // ------------------------------------------
 const loginuser_cartPage = () => {
   const router = useRouter();
+  const [cookie, setcookie] = useState({
+    category_id: 2,
+    user_id: 0,
+  });
+  useEffect(() => {
+    if (document.cookie !== null) {
+      let id = document.cookie.substring(3);
+      setcookie({
+        ...cookie,
+        user_id: Number(id),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("success")) {
+      console.log("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      console.log(
+        "Order canceled -- continue to shop around and checkout when you’re ready."
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error } = useSWR("/api/cartDataCatch", fetcher);
   if (error) return "An error has occurred.";
   if (!data) return "Loading...";
 
   // クッキー情報格納予定
-  let cookie: cookieType = {
-    category_id: 2,
-    user_id: 1,
-  };
-  console.log(localStorage.getItem("cartData"));
   let check: number[] = [];
   // 削除用ファンクション
   const deleteCartItem = async (id: number) => {
@@ -61,22 +89,20 @@ const loginuser_cartPage = () => {
         //↓更新したいならTOKEN設定
         Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
-      body: JSON.stringify(id),
-    })
-    .then((res)=>{
-      if(res.status===200){
+      body: JSON.stringify(cartInport),
+    }).then((res) => {
+      if (res.status === 200) {
         for (let i = 1; i <= Number(event.target.value); i++) {
-          fetch("http://localhost:3000/api/cartinport", {
+          fetch("http://localhost:3000/api/cartInport", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(cartInport),
-          })
+          });
+        }
       }
-    }
-    )
-    }
+    });
   };
 
   // 小計変数
@@ -87,12 +113,6 @@ const loginuser_cartPage = () => {
     0
   );
 
-  const checkLogin = () => {
-    if (cookie.user_id === undefined) {
-      // ログインページへ。
-    }
-    router.push("http://localhost:3000/purchaseConfirmed");
-  };
   // 下記JSX
   return (
     <>
@@ -111,7 +131,7 @@ const loginuser_cartPage = () => {
             return (
               <>
                 {/* 下記から商品情報 */}
-                <div key={item.iten_id} className={styles.itemBox}>
+                <div key={item.item_id} className={styles.itemBox}>
                   <form>
                     <div className={styles.flex}>
                       <div>
@@ -173,16 +193,18 @@ const loginuser_cartPage = () => {
           }
         })}
         {/* 下記から小計表示と購入手続きボタン */}
-        <div className={styles.subTotalBox}>
-          <div>
-            <p>合計金額:&nbsp;{totalPrice}円</p>
+        <form action="/api/checkout_sessions" method="POST">
+          <div className={styles.subTotalBox}>
+            <div>
+              <p>合計金額:&nbsp;{totalPrice}円</p>
+            </div>
+            <div>
+              <button type="submit" role="link" className={styles.purchase}>
+                購入手続きへ
+              </button>
+            </div>
           </div>
-          <div>
-            <button className={styles.purchase} onClick={() => checkLogin()}>
-              購入手続きへ
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </>
   );

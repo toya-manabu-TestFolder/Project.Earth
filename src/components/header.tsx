@@ -19,7 +19,9 @@ export default function Header() {
           </span>
           <Search />
           <span>
-            <Link href="/loginuserCartPage">カート</Link>
+            <Link href={cookie ? "/loginuserCartPage" : "/nologinuserCartPage"}>
+              カート
+            </Link>
           </span>
           <span>
             {cookie && <Logout />}
