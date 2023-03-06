@@ -59,12 +59,12 @@ export default function Record() {
       <div>
         <form onSubmit={(event) => handleSubmit(event)}>
           <p>{`商品名：${data[0].items.name}`}</p>
-          {/* <Image
-          src={data[0].items.image}
-          alt={"画像"}
-          width={100}
-          height={100}
-        /> */}
+          <Image
+            src={data[0].items.image}
+            alt={"画像"}
+            width={100}
+            height={100}
+          />
           <button type="submit"> カートに入れる </button>
         </form>
       </div>
