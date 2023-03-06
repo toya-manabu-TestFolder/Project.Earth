@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../styles/farmers.module.css";
-import useSound from "use-sound";
 import { Voice } from "@/components/voice";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
@@ -40,7 +39,6 @@ export default function Farmers() {
           )}
           <div className={styles.result}>
             {data.map((farmer: any) => {
-              // {useSound(farmer.voiceurl)}
               return (
                 <div className={styles.resultBlock}>
                   <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
@@ -60,11 +58,6 @@ export default function Farmers() {
                   <figure className={styles.voice}>
                     <p>↓生産者の声を聞く↓</p>
                     <Voice src={farmer.voiceurl} />
-                    {/* <audio
-                      className={styles.Playvoice}
-                      src={farmer.voiceurl}
-                      controls
-                    ></audio> */}
                   </figure>
                 </div>
               );
