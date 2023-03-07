@@ -67,7 +67,7 @@ export default function page(props: any) {
       });
     }
     setitemSelect(Number(category));
-
+    document.cookie = "category=; max-age=0";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
