@@ -33,7 +33,11 @@ export default function Header() {
             <ul className={styles.navButtons}>
               <li className={styles.cartButton}>
                 <button>
-                  <Link href="/loginuserCartPage">
+                  <Link
+                    href={
+                      cookie ? "/loginuserCartPage" : "/nologinuserCartPage"
+                    }
+                  >
                     <span>カート</span>
                   </Link>
                 </button>

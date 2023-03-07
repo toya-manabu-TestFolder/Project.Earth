@@ -3,13 +3,9 @@
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   const url = `http://127.0.0.1:8000/cartitems`;
   const options = {
