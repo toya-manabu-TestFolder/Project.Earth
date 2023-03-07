@@ -1,18 +1,23 @@
-/* 
-.top-cover{
-  position: relative;
-  display: flex;
-  height: 500px;
-  align-items: center;
-} */
+
 .cover_image {
   /* position: absolute; */
     /* left: 20%; */
     width: auto;
-    height: 500px;
     background-size: cover;
     background-position: center;   
 } 
+
+.top_cover{
+  position:relative;
+}
+.cover_text{
+  position: absolute;
+  top: 60%;
+  left: 15%;
+  font-size: 2rem;
+  color:white;
+  text-shadow: black 1px 0 10px;
+}
 
 .top_category{
   width: 70%;
