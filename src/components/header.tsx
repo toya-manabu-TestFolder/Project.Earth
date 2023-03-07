@@ -14,7 +14,7 @@ export default function Header() {
     let cookie: string = document.cookie;
     setCookie(cookie.includes("id="));
   }, [router.asPath]);
-  //karadatoriro-dojinomi、ルーターでパスを取る
+  //空[]だとリロード時のみ更新される、routerでパスを取ってきてパスが変わるごとに更新にする
 
   return (
     <>

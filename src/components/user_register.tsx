@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
-import Head from "next/head";
 import { useRouter } from "next/router";
+import styles from "../styles/login.module.css";
 
 export default function User_register() {
   const router = useRouter();
@@ -43,174 +43,164 @@ export default function User_register() {
 
   return (
     <>
-      <Head>
-        <title>ユーザー登録画面</title>
-      </Head>
-      <main className="mt-40 mx-20">
-        <div className="flex justify-center mt-32 mx-10 mb-10">
-          <form
-            onSubmit={(event) => handleSubmit(event)}
-            className="w-full max-w-2xl"
-          >
-            <h1 className="text-2xl text-black font-bold text-center mb-5">
-              会員登録
-            </h1>
+      <div className={styles.blank}>
+        <div className={styles.container}>
+          <div className={styles.width}>
+            <div className={styles.title}>新規会員登録</div>
+            <form onSubmit={(event) => handleSubmit(event)} className="">
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="name" className="">
+                    名前
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setName(e.target.value)}
+                      type="text"
+                      id="name"
+                      name="name"
+                      className={styles.input_form}
+                      placeholder="ラクス　太郎"
+                    ></input>
+                  </div>
+                </div>
+              </div>
 
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="name"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  名前
-                </label>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="email" className="">
+                    メールアドレス
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setName(e.target.value)}
+                      type="text"
+                      id="email"
+                      name="email"
+                      className={styles.input_form}
+                      placeholder="@example.com"
+                    ></input>
+                  </div>
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setName(e.target.value)}
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
-              </div>
-            </div>
 
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="email"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  メールアドレス
-                </label>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="name" className="">
+                    名前
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      id="name"
+                      name="name"
+                      className={styles.input_form}
+                      placeholder="@example.com"
+                    ></input>
+                  </div>
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="text"
-                  id="email"
-                  name="email"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
-              </div>
-            </div>
 
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="password"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  パスワード
-                </label>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="password" className="">
+                    パスワード
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setPassword(e.target.value)}
+                      type="text"
+                      id="password"
+                      name="password"
+                      className={styles.input_form}
+                      placeholder="password"
+                    ></input>
+                  </div>
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="text"
-                  id="password"
-                  name="password"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
-              </div>
-            </div>
 
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="zipcode"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  郵便番号
-                </label>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="zipcode" className="">
+                    郵便番号
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setZipcode(e.target.value)}
+                      type="text"
+                      id="zipcode"
+                      name="zipcode"
+                      className={styles.input_form}
+                      placeholder="111-2222"
+                    ></input>
+                  </div>
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setZipcode(e.target.value)}
-                  type="text"
-                  id="zipcode"
-                  name="zipcode"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
-              </div>
-            </div>
 
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="prefecture"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  都道府県
-                </label>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="prefecture" className="">
+                    都道府県
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setPrefecture(e.target.value)}
+                      type="text"
+                      id="prefecture"
+                      name="prefecture"
+                      className={styles.input_form}
+                      placeholder="東京都"
+                    ></input>
+                  </div>
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setPrefecture(e.target.value)}
-                  type="text"
-                  id="prefecture"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
-              </div>
-            </div>
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="city"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  市町村
-                </label>
-              </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setCity(e.target.value)}
-                  type="text"
-                  id="city"
-                  name="city"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
-              </div>
-            </div>
 
-            <div className="md:flex md:items-center mb-6">
-              <div className="md:w-1/3">
-                <label
-                  htmlFor="address"
-                  className=" block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
-                >
-                  番地以降
-                </label>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="city" className="">
+                    市町村
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setCity(e.target.value)}
+                      type="text"
+                      id="city"
+                      name="city"
+                      className={styles.input_form}
+                      placeholder="市町村"
+                    ></input>
+                  </div>
+                </div>
               </div>
-              <div className="md:w-2/3">
-                <input
-                  onChange={(e) => setAddress(e.target.value)}
-                  type="text"
-                  id="address"
-                  name="address"
-                  className="bg-gray-200 appearance-none border-2 border-gray-400 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                  placeholder="you@site.com"
-                ></input>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="address" className="">
+                    マンション名・番地等
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setAddress(e.target.value)}
+                      type="text"
+                      id="address"
+                      name="address"
+                      className={styles.input_form}
+                      placeholder="11-22 ○○マンション 101"
+                    ></input>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="py-3 lg:py-3 px-14 lg:px-14 text-white-500 font-bold rounded-3xl bg-blue-400 hover:shadow-teal-md transition-all outline-none text-white"
-              >
-                登録
-              </button>
-            </div>
-          </form>
+
+              <div className={styles.button}>
+                <button type="submit" className={styles.inner_button}>
+                  登録
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }

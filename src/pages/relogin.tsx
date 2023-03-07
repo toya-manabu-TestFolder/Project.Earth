@@ -1,6 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Edu_VIC_WA_NT_Beginner } from "@next/font/google";
+import styles from "../styles/login.module.css";
 
 export default function Login() {
   const router = useRouter();
@@ -79,27 +80,50 @@ export default function Login() {
   };
   return (
     <>
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <div>
-          <label htmlFor="email">メールアドレス</label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-            id="email"
-            name="email"
-          ></input>
+      <div className={styles.blank}>
+        <div className={styles.container}>
+          <div className={styles.width}>
+            <div className={styles.title}>会員の方はこちら</div>
+            <form className="" onSubmit={(event) => handleSubmit(event)}>
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="email" className="">
+                    メールアドレス
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      className={styles.input_form}
+                      id=""
+                      placeholder="@example.com"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.line}>
+                <label htmlFor="" className="form-label">
+                  パスワード
+                </label>
+                <div className={styles.input}>
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    className={styles.input_form}
+                    id=""
+                    placeholder="パスワード"
+                  />
+                </div>
+              </div>
+              <div className={styles.button}>
+                <button type="submit" className={styles.inner_button}>
+                  ログイン
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">パスワード</label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            type="text"
-            id="password"
-            name="password"
-          ></input>
-        </div>
-        <button type="submit">ログイン</button>
-      </form>
+      </div>
     </>
   );
 }
