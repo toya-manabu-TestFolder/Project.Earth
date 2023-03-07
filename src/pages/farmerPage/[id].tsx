@@ -47,15 +47,18 @@ export default function page(props: any) {
 
   // 持っているcookieによって商品一覧変更。
   const [cookie, setcookie] = useState({
-    category_id: 2,
+    category_id: 0,
     user_id: 0,
   });
+  // 商品一覧の表示切替用
+  const [itemSelect, setitemSelect] = useState<number>();
+
   useEffect(() => {
+    let category = document.cookie.substring(15);
     if (document.cookie !== null) {
       let id = document.cookie.substring(3);
-      let category = document.cookie.substring(15);
       setcookie({
-        category_id: Number(category),
+        ...cookie,
         user_id: Number(id),
       });
       setcartData({
@@ -63,15 +66,16 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
+    setitemSelect(Number(category));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(itemSelect);
 
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
   let [storage, setstorage] = useState<any>([]);
-
-  // 商品一覧の表示切替用
-  const [itemSelect, setitemSelect] = useState(cookie.category_id);
 
   //   id◎
   const id = Number(props.params.id);
