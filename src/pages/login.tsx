@@ -71,14 +71,24 @@ export default function Login() {
                 </div>
               </div>
               <div className={styles.button}>
-                <button type="submit">ログイン</button>
+                <button
+                  type="submit"
+                  className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                >
+                  ログイン
+                </button>
               </div>
             </form>
 
             <div className={styles.title}>新規会員登録はこちら</div>
             <Link href={"http://localhost:3000/user_register/"}>
               <div className={styles.button}>
-                <button type="submit">会員登録</button>
+                <button
+                  type="submit"
+                  className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                >
+                  新規会員登録をする
+                </button>
               </div>
             </Link>
           </div>
