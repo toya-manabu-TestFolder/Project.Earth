@@ -1,7 +1,7 @@
 .section{
     padding: 10rem 0; 
     text-align: center;
-    background-color: white;
+    background-color: #e9e9e9;
 }
 .title{
     display: inline-block;
@@ -27,11 +27,11 @@
 .title::after {
     right: 0;
 }
-.picture{
-    display: flex;
-    flex-wrap: wrap;
-    width: 70%;
-    margin: auto;
+
+.flex{
+    margin: 1rem;
+    display:flex;
+    justify-content: center;
 }
 .shape{
     clip-path: circle(40% at 50% 50%);

@@ -14,12 +14,12 @@ export default function Category({ onClick }: any) {
 
   return (
     <>
-      <section className={styles.bg_color}>
-        <h2 className={styles.title}>その他関連商品</h2>
+      <section className={styles.section}>
+        <h2 className={styles.title}>商品カテゴリー</h2>
         <div className={styles.picture}>
           {data.map((category: CategoryData) => (
             <div className="category" key={category.id}>
-              <button id={category.id} onClick={onClick}>
+              <div id={category.id} onClick={onClick}>
                 <div className={styles.shape}>
                   <Image
                     src={category.image}
@@ -29,8 +29,10 @@ export default function Category({ onClick }: any) {
                     height={250}
                   />
                 </div>
-                <p id={category.id}>{category.name}</p>
-              </button>
+                <p id={category.id} className={styles.text}>
+                  {category.name}
+                </p>
+              </div>
             </div>
           ))}
         </div>

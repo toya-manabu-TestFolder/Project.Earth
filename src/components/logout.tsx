@@ -1,5 +1,6 @@
 import { SyntheticEvent } from "react";
 import { useRouter } from "next/router";
+import styles from "../styles/header.module.css";
 
 export default function Logout() {
   const router = useRouter();
@@ -12,6 +13,10 @@ export default function Logout() {
     }
   };
 
-  return <button onClick={handleSubmit}>ログアウト</button>;
+  return (
+    <button onClick={handleSubmit} className={styles.button}>
+      ログアウト
+    </button>
+  );
 }
 //ログアウトしたらページの更新かける
