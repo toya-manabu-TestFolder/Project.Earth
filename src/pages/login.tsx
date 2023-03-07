@@ -1,6 +1,5 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/router";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import styles from "../styles/login.module.css";
 
@@ -85,56 +84,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      {/* <div className="container text-center">
-        <div className="row justify-content-center">
-          <div className="mt-5 mb-3">会員の方はこちら</div>
-          <form
-            className="border rounded bg-white col-md-4 p-3"
-            onSubmit={(event) => handleSubmit(event)}
-          >
-            <div>
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
-                  メールアドレス
-                </label>
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  className="form-control rounded-pill w-75 m-auto"
-                  id="exampleFormControlInput1"
-                  placeholder="メールアドレス"
-                />
-              </div>
-            </div>
-            <div className="mb-3">
-              <label
-                htmlFor="exampleFormControlInput1"
-                className="form-label"
-              ></label>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                className="form-control rounded-pill w-75 m-auto"
-                id="exampleFormControlInput1"
-                placeholder="パスワード"
-              />
-            </div>
-            <button type="submit" className="btn btn-secondary my-4 px-5">
-              ログイン
-            </button>
-          </form>
-
-          <div className="mt-5 mb-3">新規会員登録はこちら</div>
-          <Link href={"http://localhost:3000/user_register/"}>
-            <button type="submit" className="btn btn-secondary w-25 my-4 px-5">
-              会員登録
-            </button>
-          </Link>
-        </div>
-      </div> */}
     </>
   );
 }
