@@ -32,17 +32,16 @@ export default function Home() {
 
         <section className="top_record">{cookie && <Record />}</section>
 
-        <section className="top_search">
+        {/* <section className="top_search">
           <div className={styles.top_title}>商品名から生産者を探す</div>
           <Search />
-        </section>
+        </section> */}
 
         <section>
           <Category />
         </section>
 
-        <section className="top_newFace">
-          <div className={styles.top_title}>新規のおすすめ農家さん</div>
+        <section>
           <NewFace />
         </section>
       </main>
