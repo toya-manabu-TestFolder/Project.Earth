@@ -7,16 +7,14 @@ export default function useUserId() {
   useEffect(() => {
     let idFoundCookie = document.cookie
       .split(/; */)
-      .filter((ele) => ele.match(/id=.*/));
+      .filter((ele) => ele.match(/id=[^;]*/));
     //document.cookie.split(/; */).filter((ele) => ele.match(/id=.*/))[0].split('=')[1] if id=1が1桁だったらsplit
-    let useId;
+    let useId: string | undefined;
     if (idFoundCookie.length === 1) {
       useId = idFoundCookie[0].split("=")[1];
-    } else {
-      useId = false;
     }
     if (useId) {
-      setUserId(userId);
+      setUserId(useId);
     }
   }, []);
   //↓カスタムホックで追加した部分
@@ -24,4 +22,4 @@ export default function useUserId() {
 }
 
 //使う時↓
-const cookie = useUserId();
+// const cookie = useUserId();

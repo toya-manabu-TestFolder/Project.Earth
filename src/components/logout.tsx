@@ -5,7 +5,11 @@ export default function Logout() {
   const router = useRouter();
   const handleSubmit = async () => {
     document.cookie = `id=; max-age=0`;
-    router.push("/");
+    if (router.asPath === "/") {
+      router.reload();
+    } else {
+      router.push("/");
+    }
   };
 
   return <button onClick={handleSubmit}>ログアウト</button>;
