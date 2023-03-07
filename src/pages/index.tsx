@@ -11,6 +11,7 @@ export default function Home() {
   const [cookie, setCookie] = useState(false);
 
   useEffect(() => {
+    document.cookie = "category=; max-age=0";
     let cookie: any = document.cookie;
     setCookie(cookie);
   }, []);
