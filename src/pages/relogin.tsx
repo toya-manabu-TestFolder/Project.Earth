@@ -15,7 +15,7 @@ export default function Login() {
     let storage: any = [];
     for (let i = 0; i < localStorage.length; i++) {
       let num = localStorage.key(i);
-      if (num !== "ally-supports-cache") {
+      if (num !== "ally-supports-cache" && num !== "category") {
         let test: any = localStorage.getItem(`${num}`);
         test = JSON.parse(test);
         storage.push({
