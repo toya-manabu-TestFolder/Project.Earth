@@ -20,8 +20,11 @@ const loginuser_cartPage = () => {
     user_id: 0,
   });
   useEffect(() => {
+    let cookie: any = document.cookie;
+
     if (document.cookie !== null) {
-      let id = document.cookie.substring(3);
+      let id = cookie.match("id=[0-9]")[0];
+      id = id.substring(3);
       setcookie({
         ...cookie,
         user_id: Number(id),

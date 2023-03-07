@@ -38,6 +38,26 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 };
 //  --------------------------↓getStaticPropsで作ったprops: {item}
 export default function page(props: any) {
+  useEffect(() => {
+    let cookie: any = document.cookie;
+    let category = cookie.match("category=[0-9]")[0];
+    category = category.substring(9);
+    if (document.cookie !== null) {
+      let id = cookie.match("id=[0-9]")[0];
+      id = id.substring(3);
+      setcookie({
+        ...cookie,
+        user_id: Number(id),
+      });
+      setcartData({
+        ...cartData,
+        user_id: Number(id),
+      });
+    }
+    setitemSelect(Number(category));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // ログインユーザーのカート情報送信用
   const [cartData, setcartData] = useState({
     user_id: 0,
@@ -53,28 +73,6 @@ export default function page(props: any) {
   // 商品一覧の表示切替用
   const [itemSelect, setitemSelect] = useState<number>();
 
-  useEffect(() => {
-    let cookie: any = document.cookie;
-    let category = cookie.match("category=[0-9]")[0];
-    category = category.substring(9);
-    if (document.cookie !== null) {
-      let id = document.cookie.substring(3);
-      setcookie({
-        ...cookie,
-        user_id: Number(id),
-      });
-      setcartData({
-        ...cartData,
-        user_id: Number(id),
-      });
-    }
-    setitemSelect(Number(category));
-    // document.cookie = "category=; max-age=0";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  if (itemSelect !== undefined) {
-    document.cookie = "category=; max-age=0";
-  }
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
   let [storage, setstorage] = useState<any>([]);
@@ -220,7 +218,9 @@ export default function page(props: any) {
                         alt={"野菜画像"}
                       />
                     </div>
-                    <p>{e.name}</p>
+                    <div className={styles.ImageName}>
+                      <p>{e.name}</p>
+                    </div>
                   </div>
                   <div className={styles.itemSelect}>
                     <div>
