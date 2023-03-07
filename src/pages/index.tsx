@@ -31,10 +31,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="top_record">
-          <div className={styles.top_title}>前回購入された商品と農家さん</div>
-          {cookie && <Record />}
-        </section>
+        <section className="top_record">{cookie && <Record />}</section>
 
         <section className="top_search">
           <div className={styles.top_title}>商品名から生産者を探す</div>
