@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
-import Head from "next/head";
+import { useRouter } from "next/router";
+import styles from "../styles/login.module.css";
 
 export default function User_register() {
   const router = useRouter();
@@ -42,32 +43,164 @@ export default function User_register() {
 
   return (
     <>
-      <div className={styles.title}>会員の方はこちら</div>
-      <form onSubmit={(event) => handleSubmit(event)} className="">
-        <div>
-          <div className={styles.line}>
-            <label htmlFor="name" className=" ">
-              名前
-            </label>
-            <div className={styles.input}>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                id="name"
-                name="name"
-                className=""
-                placeholder="you@site.com"
-              ></input>
-            </div>
+      <div className={styles.blank}>
+        <div className={styles.container}>
+          <div className={styles.width}>
+            <div className={styles.title}>新規会員登録</div>
+            <form onSubmit={(event) => handleSubmit(event)} className="">
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="name" className="">
+                    名前
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setName(e.target.value)}
+                      type="text"
+                      id="name"
+                      name="name"
+                      className={styles.input_form}
+                      placeholder="ラクス　太郎"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="email" className="">
+                    メールアドレス
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setName(e.target.value)}
+                      type="text"
+                      id="email"
+                      name="email"
+                      className={styles.input_form}
+                      placeholder="@example.com"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="name" className="">
+                    名前
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      id="name"
+                      name="name"
+                      className={styles.input_form}
+                      placeholder="@example.com"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="password" className="">
+                    パスワード
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setPassword(e.target.value)}
+                      type="text"
+                      id="password"
+                      name="password"
+                      className={styles.input_form}
+                      placeholder="password"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="zipcode" className="">
+                    郵便番号
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setZipcode(e.target.value)}
+                      type="text"
+                      id="zipcode"
+                      name="zipcode"
+                      className={styles.input_form}
+                      placeholder="111-2222"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="prefecture" className="">
+                    都道府県
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setPrefecture(e.target.value)}
+                      type="text"
+                      id="prefecture"
+                      name="prefecture"
+                      className={styles.input_form}
+                      placeholder="東京都"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="city" className="">
+                    市町村
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setCity(e.target.value)}
+                      type="text"
+                      id="city"
+                      name="city"
+                      className={styles.input_form}
+                      placeholder="市町村"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className={styles.line}>
+                  <label htmlFor="address" className="">
+                    マンション名・番地等
+                  </label>
+                  <div className={styles.input}>
+                    <input
+                      onChange={(e) => setAddress(e.target.value)}
+                      type="text"
+                      id="address"
+                      name="address"
+                      className={styles.input_form}
+                      placeholder="11-22 ○○マンション 101"
+                    ></input>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.button}>
+                <button type="submit" className={styles.inner_button}>
+                  登録
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
-        <div className="">
-          <button type="submit" className="">
-            登録
-          </button>
-        </div>
-      </form>
+      </div>
     </>
   );
 }

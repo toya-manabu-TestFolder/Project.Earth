@@ -42,14 +42,14 @@ export default function Login() {
             <form className="" onSubmit={(event) => handleSubmit(event)}>
               <div>
                 <div className={styles.line}>
-                  <label htmlFor="" className="">
+                  <label htmlFor="email" className="">
                     メールアドレス
                   </label>
                   <div className={styles.input}>
                     <input
                       onChange={(e) => setEmail(e.target.value)}
                       type="email"
-                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className={styles.input_form}
                       id=""
                       placeholder="@example.com"
                     />
@@ -64,17 +64,14 @@ export default function Login() {
                   <input
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
-                    className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className={styles.input_form}
                     id=""
                     placeholder="パスワード"
                   />
                 </div>
               </div>
               <div className={styles.button}>
-                <button
-                  type="submit"
-                  className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                >
+                <button type="submit" className={styles.inner_button}>
                   ログイン
                 </button>
               </div>
@@ -83,10 +80,7 @@ export default function Login() {
             <div className={styles.title}>新規会員登録はこちら</div>
             <Link href={"http://localhost:3000/user_register/"}>
               <div className={styles.button}>
-                <button
-                  type="submit"
-                  className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                >
+                <button type="submit" className={styles.inner_button}>
                   新規会員登録をする
                 </button>
               </div>
