@@ -10,11 +10,16 @@ import styles from "../styles/record.module.css";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Record() {
+  const [cookie, setCookie] = useState<boolean>();
+  useEffect(() => {
+    let cookie: any = document.cookie;
+    setCookie(cookie);
+  }, []);
+
   const { data, error } = useSWR(
     `http://localhost:3000/api/top-record`,
     fetcher
   );
-
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
   console.log("履歴", data);
