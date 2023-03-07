@@ -1,6 +1,5 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/router";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import styles from "../styles/login.module.css";
 
