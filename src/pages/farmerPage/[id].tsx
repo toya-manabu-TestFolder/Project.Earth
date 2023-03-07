@@ -54,7 +54,9 @@ export default function page(props: any) {
   const [itemSelect, setitemSelect] = useState<number>();
 
   useEffect(() => {
-    let category = document.cookie.substring(15);
+    let cookie: any = document.cookie;
+    let category = cookie.match("category=[0-9]")[0];
+    category = category.substring(9);
     if (document.cookie !== null) {
       let id = document.cookie.substring(3);
       setcookie({
@@ -67,10 +69,12 @@ export default function page(props: any) {
       });
     }
     setitemSelect(Number(category));
-    document.cookie = "category=; max-age=0";
+    // document.cookie = "category=; max-age=0";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  if (itemSelect !== undefined) {
+    document.cookie = "category=; max-age=0";
+  }
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
   let [storage, setstorage] = useState<any>([]);
