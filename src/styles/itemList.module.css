@@ -134,31 +134,16 @@
     display: flex;
     flex-direction: column; 
    }
+
+   /* 画像部分 */
   .itemName{
-    height: 60%;   
+    height: 60%;  
+    position: relative; 
    }
-    .itemSelect{
-      margin: 0;
-    display: flex;
-    height: 40%;
-    flex-direction: column;
-    justify-content: space-evenly;   
+   .itemName p{
+    position: relative;
    }
-  .sec2_ImageBox {
-    position: relative;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    margin: 0 auto;
-  }
-  .sec2_itemSelect div {
-    position: relative;  
-  }
-  .sec2_itemSelect p,
-  .sec2_itemSelect label {
-    position: relative;
-  }
-  .sec2_itemSelect div::before {
+   .itemName p::before {
     content: '';
     background-color: black;
     opacity: 0;
@@ -169,10 +154,41 @@
     bottom: 0;
     transition: all 0.7s ease-out;
   }
-  .sec2_itemSelect:hover div::before {
+  .itemName:hover p::before{
     content: '';
-    opacity: 0.8;
+    opacity: 0.5;
   }
+
+/* 価格・数量・カートボタン部分 */
+  .itemSelect{
+      margin: 0;
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+    justify-content: space-evenly;   
+   }
+   
+  .sec2_ImageBox {
+    position: relative;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto;
+  }
+  .sec2_itemSelect div {
+    position: relative;  
+  }
+
+
+
+  .sec2_itemSelect p,
+  .sec2_itemSelect label {
+    position: relative;
+  }
+  .sec2_selectBox{
+    color: black;
+    width: 2em;
+      }
   .sec2_itemSelect button {
     position: relative;
     width: 100%;
