@@ -6,7 +6,7 @@ import Search from "./search";
 import styles from "../styles/header.module.css";
 
 export default function Header() {
-  const [cookie, setCookie] = useState<boolean>();
+  const [cookie, setCookie] = useState<boolean>(false);
 
   useEffect(() => {
     let cookie: any = document.cookie;
