@@ -1,6 +1,6 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 
 * {
@@ -8,9 +8,6 @@
   padding: 0;
   box-sizing: border-box;
   /* border: solid; */
-}
-.main{
-  min-width: 1,280px;
 }
 
 

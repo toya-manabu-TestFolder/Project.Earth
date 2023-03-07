@@ -8,11 +8,10 @@ import NewFace from "@/components/newface";
 import { Slider } from "@/components/slider";
 
 export default function Home() {
-  const [cookie, setCookie] = useState(false);
-
+  const [cookie, setCookie] = useState<boolean>();
   useEffect(() => {
-    let cookie: any = document.cookie;
-    setCookie(cookie);
+    let cookie: string = document.cookie;
+    setCookie(cookie.includes("id="));
   }, []);
 
   return (

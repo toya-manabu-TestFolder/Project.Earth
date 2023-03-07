@@ -41,7 +41,7 @@ export default function Record() {
     console.log(data);
 
     const cartData = {
-      user_id: 1,
+      user_id: cookie,
       item_id: data[0].items.id,
       quantity: 1,
     };
