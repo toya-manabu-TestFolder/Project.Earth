@@ -63,6 +63,10 @@
     margin-bottom: 0.5rem;
     cursor: pointer;
     text-transform: none;
+    transition: background-color .3s;
+}
+.inner_button:hover{
+  background-color: rgb(116, 115, 105);
 }
 
 /* 
