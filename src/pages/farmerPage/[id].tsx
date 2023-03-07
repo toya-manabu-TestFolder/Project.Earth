@@ -53,8 +53,9 @@ export default function page(props: any) {
   useEffect(() => {
     if (document.cookie !== null) {
       let id = document.cookie.substring(3);
+      let category = document.cookie.substring(15);
       setcookie({
-        ...cookie,
+        category_id: Number(category),
         user_id: Number(id),
       });
       setcartData({

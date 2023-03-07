@@ -12,9 +12,6 @@ const loginuser_cartPage = () => {
   const [cartData, setcartData] = useState<any>([]);
 
   useEffect(() => {
-    if (localStorage.getItem("cartPage") !== null) {
-      localStorage.removeItem("cartPage");
-    }
     let storage: any = [];
     for (let i = 0; i < localStorage.length; i++) {
       let num = localStorage.key(i);

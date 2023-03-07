@@ -18,6 +18,7 @@ export default function Farmers() {
   if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
 
+  console.log(data);
   return (
     <div>
       <Head>
