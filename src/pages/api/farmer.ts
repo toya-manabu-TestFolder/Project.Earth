@@ -16,5 +16,10 @@ export default async function handler(
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  res.status(200).json(data);
+  res
+    .setHeader("Set-Cookie", [
+      `category=${data[0].items[0].category_id};path=/`,
+    ])
+    .status(200)
+    .json(data);
 }
