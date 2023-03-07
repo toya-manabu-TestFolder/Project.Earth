@@ -38,6 +38,14 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 };
 //  --------------------------↓getStaticPropsで作ったprops: {item}
 export default function page(props: any) {
+  // 持っているcookieによって商品一覧変更。
+  const [cookie, setcookie] = useState({
+    category_id: 0,
+    user_id: 0,
+  });
+  // 商品一覧の表示切替用
+  const [itemSelect, setitemSelect] = useState<number>();
+
   useEffect(() => {
     let cookie: any = document.cookie;
     let category = localStorage.getItem("category");
@@ -54,24 +62,18 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
+    console.log(category);
     setitemSelect(Number(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(itemSelect);
   // ログインユーザーのカート情報送信用
   const [cartData, setcartData] = useState({
     user_id: 0,
     item_id: 0,
     quantity: 0,
   });
-
-  // 持っているcookieによって商品一覧変更。
-  const [cookie, setcookie] = useState({
-    category_id: 0,
-    user_id: 0,
-  });
-  // 商品一覧の表示切替用
-  const [itemSelect, setitemSelect] = useState<number>();
 
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
