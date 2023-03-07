@@ -47,15 +47,20 @@ export default function page(props: any) {
 
   // 持っているcookieによって商品一覧変更。
   const [cookie, setcookie] = useState({
-    category_id: 2,
+    category_id: 0,
     user_id: 0,
   });
+  // 商品一覧の表示切替用
+  const [itemSelect, setitemSelect] = useState<number>();
+
   useEffect(() => {
+    let cookie: any = document.cookie;
+    let category = cookie.match("category=[0-9]")[0];
+    category = category.substring(9);
     if (document.cookie !== null) {
       let id = document.cookie.substring(3);
-      let category = document.cookie.substring(15);
       setcookie({
-        category_id: Number(category),
+        ...cookie,
         user_id: Number(id),
       });
       setcartData({
@@ -63,15 +68,16 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
+    setitemSelect(Number(category));
+    // document.cookie = "category=; max-age=0";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  if (itemSelect !== undefined) {
+    document.cookie = "category=; max-age=0";
+  }
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
   let [storage, setstorage] = useState<any>([]);
-
-  // 商品一覧の表示切替用
-  const [itemSelect, setitemSelect] = useState(cookie.category_id);
 
   //   id◎
   const id = Number(props.params.id);
@@ -154,7 +160,6 @@ export default function page(props: any) {
         let item = storage;
         item = JSON.stringify(item);
         localStorage.setItem(`${oneTimeStorage.id}`, item);
-        console.log("a");
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -206,13 +211,15 @@ export default function page(props: any) {
               <div className={styles.sec2_itemSelect} key={e.id}>
                 <form className={styles.formBox}>
                   <div className={styles.itemName}>
-                    <Image
-                      src="/categoryImages/かぼちゃ.jpg"
-                      width={250}
-                      height={250}
-                      className={styles.sec2_ImageBox}
-                      alt={"野菜画像"}
-                    />
+                    <div>
+                      <Image
+                        src="/categoryImages/かぼちゃ.jpg"
+                        width={250}
+                        height={250}
+                        className={styles.sec2_ImageBox}
+                        alt={"野菜画像"}
+                      />
+                    </div>
                     <p>{e.name}</p>
                   </div>
                   <div className={styles.itemSelect}>
@@ -223,6 +230,7 @@ export default function page(props: any) {
                       <label htmlFor={e.id}>
                         数量:&nbsp;
                         <select
+                          className={styles.sec2_selectBox}
                           id={e.id}
                           onChange={(event) => itemQuantityChange(e, event)}
                         >
@@ -232,6 +240,11 @@ export default function page(props: any) {
                           <option value="3">3</option>
                           <option value="4">4</option>
                           <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
                         </select>
                       </label>
                     </div>

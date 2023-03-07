@@ -1,8 +1,8 @@
 import { FormEvent, useState } from "react";
 import Head from "next/head";
-import styles from "../styles/login.module.css";
 
 export default function User_register() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +34,10 @@ export default function User_register() {
     console.log(response);
     const result = await response.json();
     console.log(result);
+
+    if (response.ok === true) {
+      router.replace("/login");
+    }
   };
 
   return (

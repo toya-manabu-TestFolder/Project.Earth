@@ -7,16 +7,28 @@ import styles from "../styles/record.module.css";
 
 //SWRを使う　indexの中でこのコンポーネントのみCSRをするイメージ
 
+type Farmer = {
+  farmer_data: {
+    farm_name: string;
+    icon_imageurl: string;
+  };
+  items: {
+    id: number;
+    name: string;
+    image: string;
+  };
+};
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Record() {
   const [cookie, setCookie] = useState<boolean>();
   useEffect(() => {
-    let cookie: any = document.cookie;
-    setCookie(cookie);
+    let cookie: string = document.cookie;
+    setCookie(cookie.includes("id="));
   }, []);
 
-  const { data, error } = useSWR(
+  const { data, error } = useSWR<Farmer[]>(
     `http://localhost:3000/api/top-record`,
     fetcher
   );
@@ -52,7 +64,7 @@ export default function Record() {
 
   return (
     <>
-      {data && data[0].farmer_data && data[0].items && (
+      {data.length === 1 && data[0].farmer_data && data[0].items && (
         <div className={styles.container}>
           <div className={styles.half_one}>
             <div className={styles.height}>
