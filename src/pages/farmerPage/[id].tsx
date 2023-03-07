@@ -67,11 +67,9 @@ export default function page(props: any) {
       });
     }
     setitemSelect(Number(category));
-
+    document.cookie = "category=; max-age=0";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(itemSelect);
 
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
@@ -158,7 +156,6 @@ export default function page(props: any) {
         let item = storage;
         item = JSON.stringify(item);
         localStorage.setItem(`${oneTimeStorage.id}`, item);
-        console.log("a");
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -210,13 +207,15 @@ export default function page(props: any) {
               <div className={styles.sec2_itemSelect} key={e.id}>
                 <form className={styles.formBox}>
                   <div className={styles.itemName}>
-                    <Image
-                      src="/categoryImages/かぼちゃ.jpg"
-                      width={250}
-                      height={250}
-                      className={styles.sec2_ImageBox}
-                      alt={"野菜画像"}
-                    />
+                    <div>
+                      <Image
+                        src="/categoryImages/かぼちゃ.jpg"
+                        width={250}
+                        height={250}
+                        className={styles.sec2_ImageBox}
+                        alt={"野菜画像"}
+                      />
+                    </div>
                     <p>{e.name}</p>
                   </div>
                   <div className={styles.itemSelect}>
@@ -227,6 +226,7 @@ export default function page(props: any) {
                       <label htmlFor={e.id}>
                         数量:&nbsp;
                         <select
+                          className={styles.sec2_selectBox}
                           id={e.id}
                           onChange={(event) => itemQuantityChange(e, event)}
                         >
@@ -236,6 +236,11 @@ export default function page(props: any) {
                           <option value="3">3</option>
                           <option value="4">4</option>
                           <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
                         </select>
                       </label>
                     </div>
