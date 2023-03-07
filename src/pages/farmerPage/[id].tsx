@@ -209,54 +209,48 @@ export default function page(props: any) {
           {items.map((e: any) => {
             return (
               <div className={styles.sec2_itemSelect} key={e.id}>
-                <form className={styles.formBox}>
-                  <div className={styles.itemName}>
-                    <div>
-                      <Image
-                        src="/categoryImages/かぼちゃ.jpg"
-                        width={250}
-                        height={250}
-                        className={styles.sec2_ImageBox}
-                        alt={"野菜画像"}
-                      />
-                    </div>
-                    <div className={styles.ImageName}>
-                      <p>{e.name}</p>
-                    </div>
-                  </div>
-                  <div className={styles.itemSelect}>
-                    <div>
-                      <p>価格:&nbsp;{e.price}円</p>
-                    </div>
-                    <div>
-                      <label htmlFor={e.id}>
-                        数量:&nbsp;
-                        <select
-                          className={styles.sec2_selectBox}
-                          id={e.id}
-                          onChange={(event) => itemQuantityChange(e, event)}
-                        >
-                          <option value="0">0</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                      </label>
-                    </div>
-                    <div>
-                      <button onClick={(event) => cartInport(e, event)}>
-                        カートに入れる
-                      </button>
-                    </div>
-                  </div>
-                </form>
+                <div className={styles.imageBox}>
+                  <Image
+                    src="/categoryImages/かぼちゃ.jpg"
+                    width={250}
+                    height={250}
+                    className={styles.sec2_Image}
+                    alt={"野菜画像"}
+                  />
+                </div>
+                <div className={styles.nameBox}>
+                  <p>{e.name}</p>
+                </div>
+                <div className={styles.priceBox}>
+                  <p>価格:&nbsp;{e.price}円</p>
+                </div>
+                <div className={styles.selectBox}>
+                  <label htmlFor={e.id}>
+                    数量:&nbsp;&nbsp;
+                    <select
+                      className={styles.select}
+                      id={e.id}
+                      onChange={(event) => itemQuantityChange(e, event)}
+                    >
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </label>
+                </div>
+                <div className={styles.buttonBox}>
+                  <button onClick={(event) => cartInport(e, event)}>
+                    <span className={styles.buttonString}>カートに入れる</span>
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -273,6 +267,10 @@ export default function page(props: any) {
                   key={e.id}
                   onClick={() => changeItem(e.category_id)}
                 >
+                  <div>
+                    <p>{categoryArr[index].name}の商品一覧</p>
+                  </div>
+
                   <Image
                     src={categoryArr[index].image}
                     width={250}
@@ -280,9 +278,6 @@ export default function page(props: any) {
                     className={styles.sec3_ImageBox}
                     alt={"野菜画像"}
                   />
-                  <div>
-                    <p>{categoryArr[index].name}の商品一覧</p>
-                  </div>
                 </div>
               );
             }

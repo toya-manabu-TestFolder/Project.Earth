@@ -1,55 +1,200 @@
 .main{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 2% 0 10% 0;
+    position: relative;
+    height: 100%;
+    margin: 2% 0 2% 0;
+    padding: 2%;
+    justify-content: space-around;
+}
+/* 商品一覧 */
+.itemList{
+    display: flex;
+    color: black;
+    width: 80%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .itemBox{
-    position: relative;
-    border: 1px solid;
-    height: 100%;
-    width: 45vw;
+    height: 15rem;
+    width: 70%;
     font-size: 1.5rem;
-    margin-top: 1%;
+    position: relative;
+    margin-bottom: 2rem;
 }
 .flex{
     display: flex;
+    padding: 1rem;
+    position: relative;
+    border-bottom: solid 2.5px #afafaf;
+    border-top: solid 2.5px #afafaf;
+    transition: all 0.2s ease-out;
+}
+.imageBox{
+    display: flex;
+    position: relative;
+    justify-content: center;
     align-items: center;
-    margin: 0.5rem auto;
-    justify-content: space-evenly;
-    /* margin: 0 auto 2% auto; */
-}
-.selectBox{
-    width: 20%;
-    height: 1.4em;
-    font-size: 1.6rem;
-}
-.deleteButton{
-    width: 40%;
-    height: 2em;
+    width: 42%;
+    height: 100%;
 }
 .image{
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
-
 }
+.discriptionBox{
+    display: flex;
+    width: 58%;
+    height: 100%;
+    flex-direction: column;
+    position: relative;
+}
+.discriptionBox div{
+    margin-bottom: 0.5rem;
+}
+.nameBox{
+    position: relative;
+    height: 40%;
+    width: 100%;
+}
+.nameBox p{
+    position: relative;
+}
+.priceBox{
+    height: 20%;
+    width: 100%;
+}
+.selectBox{
+    height: 20%;
+    width: 100%;
+}
+.select{
+    width: 4rem;
+    height: 2rem;
+    font-size: 1.5rem;  
+}
+.buttonBox{
+    height: 20%;
+    width: 100%;
+}
+.deleteButton{
+    font-size: 1.3rem;
+    width: 18rem;
+    height: 80%;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 0;
+    background: #000;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.deleteButton:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    content: '';
+    -webkit-transition: all .3s;
+    transition: all .5s ease-in;
+    background: #fff;
+  }
+  .deleteButton:hover {
+    color: #000;
+    background: #fff;
+  }
+  
+  .deleteButton:hover:before {
+    background: #000;
+  }
+  /* ホバーで背景変更 */
+  .flex::before{
+    content: '';
+    background-color: black;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.2s ease-out;
+}
+.flex:hover::before{
+    opacity: 0.2;
+}
+
 /* 小計*/
+.fixedBox{
+    font-size: 2rem;
+    width: 20%;
+    height: 70vh;
+}
 .subTotalBox{
     display: flex;
     position: fixed;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid;
-    font-size: 2rem;
-    width: 40%;
-    height: 10%;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;}
-.purchase{
+    border-bottom: solid 2.5px #afafaf;
+    border-top: solid 2.5px #afafaf;
     font-size: 1.5rem;
-    width: 13rem;
-    height: 3rem;
+    padding: 1%;
+    height: 55vh;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
 }
+.subTotalBox::before{
+    content: '';
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.2s ease-out;
+}
+.subTotalBox:hover::before{
+    background-color: black;
+    opacity: 0.2;
+}
+.totalBox{
+    position: relative;
+}
+.submitBox button{
+    position: relative;
+}
+.purchase{
+    font-size: 1.3rem;
+    width: 18rem;
+    height: 4rem;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 0;
+    background: #000;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.purchase:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    content: '';
+    -webkit-transition: all .3s;
+    transition: all .5s ease-in;
+    background: #fff;
+  }
+  .purchase:hover {
+    color: #000;
+    background: #fff;
+  }
+  .purchase:hover:before {
+    background: #000;
+  }
+
+  .infomation{
+
+  }
+  .infomation li{
+    list-style:   none;
+  }
