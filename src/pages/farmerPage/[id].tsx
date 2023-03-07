@@ -40,9 +40,9 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 export default function page(props: any) {
   useEffect(() => {
     let cookie: any = document.cookie;
-    let category = cookie.match("category=[0-9]")[0];
-    category = category.substring(9);
-    if (document.cookie !== null) {
+    let category = localStorage.getItem("category");
+    console.log(cookie);
+    if (document.cookie !== "") {
       let id = cookie.match("id=[0-9]")[0];
       id = id.substring(3);
       setcookie({
