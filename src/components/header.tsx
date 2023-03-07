@@ -4,14 +4,17 @@ import useUserId from "./checkCookie";
 import Logout from "./logout";
 import Search from "./search";
 import styles from "../styles/header.module.css";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const [cookie, setCookie] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
-    let cookie: any = document.cookie;
-    setCookie(cookie);
-  }, []);
+    let cookie: string = document.cookie;
+    setCookie(cookie.includes("id="));
+  }, [router.asPath]);
+  //karadatoriro-dojinomi、ルーターでパスを取る
 
   return (
     <>
@@ -44,7 +47,7 @@ export default function Header() {
               </li>
               <li className={styles.logButton}>
                 {cookie && <Logout />}
-                {!cookie && (
+                {!cookie && router.asPath !== "/login" && (
                   <button>
                     <Link href="/login">
                       <span>ログイン</span>

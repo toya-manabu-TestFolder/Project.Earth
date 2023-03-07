@@ -28,9 +28,9 @@ export default function Login() {
     console.log(result);
 
     if (response.ok !== true || result === "") {
-      router.replace("/login");
+      router.push("/login");
     } else {
-      router.replace("/");
+      router.push("/");
     }
   };
   return (
