@@ -38,13 +38,6 @@ export const getStaticProps = async ({ params }: { params: any }) => {
 };
 //  --------------------------↓getStaticPropsで作ったprops: {item}
 export default function page(props: any) {
-  // ログインユーザーのカート情報送信用
-  const [cartData, setcartData] = useState({
-    user_id: 0,
-    item_id: 0,
-    quantity: 0,
-  });
-
   // 持っているcookieによって商品一覧変更。
   const [cookie, setcookie] = useState({
     category_id: 0,
@@ -55,10 +48,11 @@ export default function page(props: any) {
 
   useEffect(() => {
     let cookie: any = document.cookie;
-    let category = cookie.match("category=[0-9]")[0];
-    category = category.substring(9);
-    if (document.cookie !== null) {
-      let id = document.cookie.substring(3);
+    let category = localStorage.getItem("category");
+    console.log(cookie);
+    if (document.cookie !== "") {
+      let id = cookie.match("id=[0-9]")[0];
+      id = id.substring(3);
       setcookie({
         ...cookie,
         user_id: Number(id),
@@ -68,13 +62,19 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
+    console.log(category);
     setitemSelect(Number(category));
-    // document.cookie = "category=; max-age=0";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (itemSelect !== undefined) {
-    document.cookie = "category=; max-age=0";
-  }
+
+  console.log(itemSelect);
+  // ログインユーザーのカート情報送信用
+  const [cartData, setcartData] = useState({
+    user_id: 0,
+    item_id: 0,
+    quantity: 0,
+  });
+
   // ローカルストレージ用
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
   let [storage, setstorage] = useState<any>([]);
@@ -220,7 +220,9 @@ export default function page(props: any) {
                         alt={"野菜画像"}
                       />
                     </div>
-                    <p>{e.name}</p>
+                    <div className={styles.ImageName}>
+                      <p>{e.name}</p>
+                    </div>
                   </div>
                   <div className={styles.itemSelect}>
                     <div>

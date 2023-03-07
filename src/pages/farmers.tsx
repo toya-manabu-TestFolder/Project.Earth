@@ -18,7 +18,10 @@ export default function Farmers() {
   if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
 
-  console.log(data);
+  if (data.length !== 0) {
+    localStorage.setItem("category", `${data[0].items[0].category_id}`);
+  }
+
   return (
     <div>
       <Head>
