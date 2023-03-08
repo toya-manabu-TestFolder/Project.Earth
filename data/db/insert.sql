@@ -46,14 +46,14 @@ INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carr
 --@block
 -- items情報追加
 INSERT INTO api.items (id,category_id,farmer_id,name, price,image,comment,expaire,items_search) VALUES 
-(	1	,	1	,	1	,	'男前小玉キャベツ'	,	150	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	2	,	1	,	1	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	3	,	1	,	1	,	'男前紫キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	4	,	1	,	1	,	'男前キャベツのピクルス（100g）'	,	50	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	5	,	2	,	1	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	6	,	2	,	1	,	'みよばぁの不揃い人参'	,	120	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	7	,	2	,	1	,	'みよばぁの金時人参'	,	300	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	8	,	2	,	1	,	'みよばぁのにんじんしりしり（100g）'	,	200	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'  )	,
+(	1	,	1	,	1	,	'男前小玉キャベツ'	,	150	,	'/cabbage/cabbage-mini.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	2	,	1	,	1	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	3	,	1	,	1	,	'男前紫キャベツ'	,	100	,	'/cabbage/cabbage-purple.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	4	,	1	,	1	,	'男前キャベツのピクルス（100g）'	,	50	,	'/cabbage/cabbage-pickles.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	5	,	2	,	1	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	6	,	2	,	1	,	'みよばぁの不揃い人参'	,	120	,	'/carrot/carrot-irregular.jpg'	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	7	,	2	,	1	,	'みよばぁの金時人参'	,	300	,	'/carrot/carrot-kintoki.jpg'	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	8	,	2	,	1	,	'みよばぁのにんじんしりしり（100g）'	,	200	,	'/carrot/shirishiri.jpg'	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'  )	,
 (	9	,	3	,	1	,	'男前トマト'	,	240	,	''	,	''	,	'5日以内'	,	'とまと, トマト, tomato'	)	,
 (	10	,	3	,	1	,	'男前フルーツトマト'	,	240	,	''	,	''	,	'5日以内'	,	'とまと, トマト, tomato'	)	,
 (	11	,	3	,	1	,	'男前トマト（不揃い）'	,	180	,	''	,	''	,	'5日以内'	,	'とまと, トマト, tomato'	)	,
@@ -86,30 +86,31 @@ INSERT INTO api.items (id,category_id,farmer_id,name, price,image,comment,expair
 (	38	,	2	,	2	,	'GOD金時人参'	,	150	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
 (	39	,	2	,	2	,	'GOD人参（不揃い）'	,	70	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
 (	40	,	2	,	2	,	'GOD人参ピクルス（100g）'	,	300	,	''	,	''	,	'5日以内'	,	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	41	,	1	,	3	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	42	,	1	,	4	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	43	,	1	,	5	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	44	,	1	,	6	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	45	,	1	,	7	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	46	,	1	,	8	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	47	,	1	,	9	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	48	,	1	,	10	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	49	,	1	,	11	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	50	,	1	,	12	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	51	,	1	,	13	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	52	,	1	,	14	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	53	,	1	,	15	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	54	,	1	,	16	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	55	,	1	,	17	,	'男前キャベツ'	,	100	,	''	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
-(	56	,	2	,	18	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',  	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	57	,	2	,	19	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	58	,	2	,	20	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	59	,	2	,	21	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	60	,	2	,	22	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	61	,	2	,	23	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	62	,	2	,	24	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	63	,	2	,	25	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
-(	64	,	2	,	26	,	'みよばぁの人参'	,	180	,	''	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	
+(	41	,	1	,	3	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	42	,	1	,	4	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	43	,	1	,	5	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	44	,	1	,	6	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	45	,	1	,	7	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	46	,	1	,	8	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	47	,	1	,	9	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	48	,	1	,	10	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	49	,	1	,	11	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	50	,	1	,	12	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	51	,	1	,	13	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	52	,	1	,	14	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	53	,	1	,	15	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	54	,	1	,	16	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	55	,	1	,	17	,	'男前キャベツ'	,	100	,	'/cabbage/cabbage-one.jpg'	,	''	,	'5日以内'	,	'きゃべつ, キャベツ, cabbage, kyabetu, kyabetsu'	)	,
+(	56	,	2	,	18	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',  	'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	57	,	2	,	19	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	58	,	2	,	20	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	59	,	2	,	21	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	60	,	2	,	22	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	61	,	2	,	23	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	62	,	2	,	24	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	63	,	2	,	25	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
+(	64	,	2	,	26	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	
+
 --@block
 INSERT INTO api.category (id,name,image) VALUES
 (	1	,	'キャベツ'	,	'/categoryImages/キャベツ.jpg'),
@@ -147,4 +148,5 @@ INSERT INTO api.sales (id,user_id,item_id,farmer_id,quantity) VALUES
 (2,1,2,2,1)
 
 --@block
-UPDATE api.items SET image = '/cabbage/cabbage1:2.jpg' Where id=2;
+-- テスト用のためinsert不要
+-- UPDATE api.items SET image = '/cabbage/cabbage1:2.jpg' Where id=2;
