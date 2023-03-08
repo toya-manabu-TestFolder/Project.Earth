@@ -29,6 +29,7 @@ export default function NewFace() {
                     alt={"農家画像"}
                     width={300}
                     height={250}
+                    className={styles.img}
                   />
                 </div>
                 <p className={styles.text}>{farmer.farm_name}</p>

@@ -78,7 +78,10 @@ export default function Login() {
             </form>
 
             <div className={styles.title}>新規会員登録はこちら</div>
-            <Link href={"http://localhost:3000/user_register/"}>
+            <Link
+              href={"http://localhost:3000/user_register/"}
+              className={styles.link}
+            >
               <div className={styles.button}>
                 <button type="submit" className={styles.inner_button}>
                   新規会員登録をする

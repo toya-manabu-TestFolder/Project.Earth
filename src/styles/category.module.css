@@ -1,7 +1,22 @@
 .section{
     padding: 10rem 0; 
     text-align: center;
-    background-color: white;
+    z-index: 0;
+    position: relative;
+}
+.section:before{
+    background-image: url("/coverImages/top_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(3px);
+    z-index: -1;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
 }
 .title{
     display: inline-block;
@@ -38,4 +53,7 @@
 }
 .text{
     text-align: center;
+}
+.img:hover{
+    opacity: 0.5;
 }

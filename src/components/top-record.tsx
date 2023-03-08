@@ -64,47 +64,53 @@ export default function Record() {
 
   return (
     <>
-      <div className={styles.section}>
-        <h2 className={styles.title}>前回購入された商品と農家さん</h2>
-        {data.length === 1 && data[0].farmer_data && data[0].items && (
-          <div className={styles.container}>
-            <div className={styles.half_one}>
-              <div className={styles.height}>
-                <Image
-                  src={data[0].farmer_data.icon_imageurl}
-                  alt={"画像"}
-                  width={300}
-                  height={200}
-                  className={styles.img}
-                />
-              </div>
-              <p
-                className={styles.text_center}
-              >{`${data[0].farmer_data.farm_name}`}</p>
-            </div>
-            <div className={styles.half_two}>
-              <form
-                onSubmit={(event) => handleSubmit(event)}
-                className={styles.center}
-              >
-                <Image
-                  src={data[0].items.image}
-                  alt={"画像"}
-                  width={250}
-                  height={250}
-                  className={styles.img_2}
-                />
-                <p className={styles.text_center}>{`${data[0].items.name}`}</p>
-                <div className={styles.button}>
-                  <button type="submit" className={styles.inner_button}>
-                    カートに入れる
-                  </button>
+      {data.length === 1 && data[0].farmer_data && data[0].items && (
+        <>
+          <div className={styles.section}>
+            <div className={styles.border}>
+              <h2 className={styles.title}>前回購入された商品と農家さん</h2>
+              <div className={styles.container}>
+                <div className={styles.half_one}>
+                  <div className={styles.height}>
+                    <Image
+                      src={data[0].farmer_data.icon_imageurl}
+                      alt={"画像"}
+                      width={300}
+                      height={200}
+                      className={styles.img}
+                    />
+                    <p
+                      className={styles.text_center}
+                    >{`${data[0].farmer_data.farm_name}`}</p>
+                  </div>
                 </div>
-              </form>
+                <div className={styles.half_two}>
+                  <form
+                    onSubmit={(event) => handleSubmit(event)}
+                    className={styles.center}
+                  >
+                    <Image
+                      src={data[0].items.image}
+                      alt={"画像"}
+                      width={250}
+                      height={250}
+                      className={styles.img_2}
+                    />
+                    <p
+                      className={styles.text_center}
+                    >{`${data[0].items.name}`}</p>
+                    <div className={styles.button}>
+                      <button type="submit" className={styles.inner_button}>
+                        カートに入れる
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </>
+      )}
     </>
   );
 }

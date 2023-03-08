@@ -48,6 +48,7 @@ export default function Header() {
                     href={
                       cookie ? "/loginuserCartPage" : "/nologinuserCartPage"
                     }
+                    className={styles.a_button}
                   >
                     <FaShoppingCart />
                   </Link>

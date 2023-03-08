@@ -47,28 +47,34 @@
   display: flex;
   justify-content: center;
   margin-bottom: 3rem;
+  
 }
 .inner_button{
-  color: rgb(17 24 39);
-  font-weight: 500;
   font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding-top: 0.625rem;
+    line-height: 1.25rem;
+    padding-top: 0.625rem;
     padding-bottom: 0.625rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-    border-width: 1px;
-    border-radius: 9999px;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    text-decoration: none;
+    margin: auto;
+    padding: 1rem 4rem rem;
+    font-weight: bold;
+    border: 2px solid #e9e9e9;
+    color: #8f8f8f;
+    border-radius: 100vh;
+    transition: 0.5s;
     cursor: pointer;
     text-transform: none;
-    transition: background-color .3s;
+    
 }
 .inner_button:hover{
-  background-color: rgb(116, 115, 105);
+  color: #fff;
+	background: #8f8f8f;
 }
-
+.link{
+  text-decoration: none;
+}
 /* 
 /*------------------------------------
 - COLOR primary

@@ -73,28 +73,10 @@ export default function User_register() {
                   </label>
                   <div className={styles.input}>
                     <input
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                       type="text"
                       id="email"
                       name="email"
-                      className={styles.input_form}
-                      placeholder="@example.com"
-                    ></input>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div className={styles.line}>
-                  <label htmlFor="name" className="">
-                    名前
-                  </label>
-                  <div className={styles.input}>
-                    <input
-                      onChange={(e) => setEmail(e.target.value)}
-                      type="text"
-                      id="name"
-                      name="name"
                       className={styles.input_form}
                       placeholder="@example.com"
                     ></input>
@@ -150,7 +132,7 @@ export default function User_register() {
                       id="prefecture"
                       name="prefecture"
                       className={styles.input_form}
-                      placeholder="東京都"
+                      placeholder="○○県"
                     ></input>
                   </div>
                 </div>
@@ -168,7 +150,7 @@ export default function User_register() {
                       id="city"
                       name="city"
                       className={styles.input_form}
-                      placeholder="市町村"
+                      placeholder="○○市"
                     ></input>
                   </div>
                 </div>
