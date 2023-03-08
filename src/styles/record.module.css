@@ -46,6 +46,10 @@
     border-width: 5px;
     border-radius: 30px;
     background-color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 .img{
     object-fit: cover;

@@ -58,7 +58,9 @@ export default function Header() {
                 {cookie && <Logout />}
                 {!cookie && router.asPath !== "/login" && (
                   <button className={styles.button}>
-                    <Link href="/login">ログイン</Link>
+                    <Link href="/login" className={styles.link}>
+                      ログイン
+                    </Link>
                   </button>
                 )}
               </li>

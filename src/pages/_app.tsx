@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>農チョク</title>
-        <meta name="description" content="農家さんのファンを作るECサイト" />
+        <meta name="description" content="農家さんの顔が見えるECサイト" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Header />
