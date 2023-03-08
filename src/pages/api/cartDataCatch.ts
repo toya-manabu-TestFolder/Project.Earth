@@ -8,7 +8,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const url = `http://127.0.0.1:8000/cartitems?select=*,items(*)`;
+  const url = `http://127.0.0.1:8000/cartitems?select=*,items(*),users(*)`;
   const options = {
     method: "GET",
   };
