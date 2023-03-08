@@ -1,4 +1,28 @@
+.completeMain{
+    display: flex;
+    height: 75vh;
+    flex-direction: column;
+    align-items: center;
+}
 .message{
     padding: 7%;
     text-align: center;
 }
+.topLinkButton{
+display: block;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    padding: 1rem 4rem;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border: 2px solid #e9e9e9;
+    color: #8f8f8f;
+    border-radius: 100vh;
+    transition: 0.5s;
+    cursor: pointer;
+}
+  .topLinkButton:hover {
+	color: #fff;
+	background: #8f8f8f;
+  }

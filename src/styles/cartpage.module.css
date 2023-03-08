@@ -42,6 +42,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    border: 1px solid #afafaf;
 }
 .discriptionBox{
     display: flex;
@@ -112,7 +113,7 @@
     opacity: 0.2;
 }
 
-/* 小計*/
+/* 金額・お届け先情報 */
 .fixedBox{
     font-size: 2rem;
     width: 20%;
@@ -144,11 +145,32 @@
     background-color: black;
     opacity: 0.2;
 }
-.totalBox{
-    position: relative;
+
+.infomation{
+  height: 60%;
 }
-.submitBox button{
+.infomation h3{
+}
+.infomation ul{
+    font-size: 1.3rem;
+    margin-top: 1rem;
+}
+.infomation li{
+  list-style:   none;
+}
+.totalBox{
+  position: relative;
+  height: 20%;
+  margin-top: 1rem;
+}
+.total{
+    color: red;
+    font-size: 1.8rem;
+}
+.submitBox{
     position: relative;
+    height: 20%;
+    margin-top: 1rem;
 }
 .purchase{
     display: block;
@@ -167,11 +189,4 @@
   .purchase:hover {
 	color: #fff;
 	background: #8f8f8f;
-  }
-
-  .infomation{
-
-  }
-  .infomation li{
-    list-style:   none;
   }

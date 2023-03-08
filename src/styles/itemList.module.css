@@ -134,6 +134,7 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+  border: 1px solid #afafaf;
 }
 .imageBox{
   height: 55%;
@@ -168,7 +169,7 @@
   font-size: 1.5rem;
 }
 .buttonBox{
-  height: 10%;
+  height: 15%;
   width: 100%;
   position: relative;
   display: flex;
@@ -197,7 +198,8 @@
 /* ホバーで背景黒 */
 .sec2_itemSelect:hover .nameBox::before,
 .sec2_itemSelect:hover .priceBox::before,
-.sec2_itemSelect:hover .selectBox::before
+.sec2_itemSelect:hover .selectBox::before,
+.sec2_itemSelect:hover .buttonBox::before
 {
   content: '';
   background-color: black;
@@ -211,7 +213,8 @@
 
 .nameBox p,
 .priceBox p,
-.selectBox label
+.selectBox label,
+.buttonBox button
 {
   position: relative;
 }

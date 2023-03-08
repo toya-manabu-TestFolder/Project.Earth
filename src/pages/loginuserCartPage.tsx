@@ -49,7 +49,7 @@ const loginuser_cartPage = () => {
   if (error) return "An error has occurred.";
   if (!data) return "Loading...";
 
-  console.log(data[0].users);
+  console.log(data);
 
   // クッキー情報格納予定
   let check: number[] = [];
@@ -196,7 +196,7 @@ const loginuser_cartPage = () => {
                       <div className={styles.flex}>
                         <div className={styles.imageBox}>
                           <Image
-                            src="/categoryImages/かぼちゃ.jpg"
+                            src={item.items.image}
                             width={200}
                             height={200}
                             className={styles.image}
@@ -272,20 +272,23 @@ const loginuser_cartPage = () => {
               method="POST"
             >
               <div>
+                <h3>お届け先情報</h3>
                 <div className={styles.infomation}>
-                  <p>お届け先情報</p>
                   <ul>
-                    <li>郵便番号 {data[0].users.zipcode}</li>
+                    <li>{data[0].users.name}&nbsp;様</li>
+                    <li>&#12306;&nbsp;{data[0].users.zipcode}</li>
                     <li>
-                      {data[0].users.prefecture}
+                      {data[0].users.prefecture}&nbsp;&nbsp;
                       {data[0].users.city}
                     </li>
-                    <li>マンション名</li>
-                    <li>{data[0].users.name}様</li>
+                    <li>{data[0].users.address}</li>
                   </ul>
                 </div>
                 <div className={styles.totalBox}>
-                  <p>合計金額:&nbsp;{totalPrice}円</p>
+                  <p>
+                    合計金額&nbsp;&nbsp;
+                    <span className={styles.total}>{totalPrice}</span>円
+                  </p>
                 </div>
                 <div className={styles.submitBox}>
                   <button type="submit" role="link" className={styles.purchase}>
