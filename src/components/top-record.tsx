@@ -22,6 +22,7 @@ type Farmer = {
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Record() {
+  ///画面に表示用の情報取得
   const [cookie, setCookie] = useState<boolean>();
   useEffect(() => {
     let cookie: string = document.cookie;
@@ -35,7 +36,7 @@ export default function Record() {
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
   console.log("履歴", data);
-
+  ////カートに入れる用
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(data);
