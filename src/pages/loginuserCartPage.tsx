@@ -49,6 +49,8 @@ const loginuser_cartPage = () => {
   if (error) return "An error has occurred.";
   if (!data) return "Loading...";
 
+  console.log(data[0].users);
+
   // クッキー情報格納予定
   let check: number[] = [];
   // 削除用ファンクション
@@ -273,11 +275,13 @@ const loginuser_cartPage = () => {
                 <div className={styles.infomation}>
                   <p>お届け先情報</p>
                   <ul>
-                    <li>郵便番号</li>
-                    <li>~県~市</li>
-                    <li>~町</li>
+                    <li>郵便番号 {data[0].users.zipcode}</li>
+                    <li>
+                      {data[0].users.prefecture}
+                      {data[0].users.city}
+                    </li>
                     <li>マンション名</li>
-                    <li>~様</li>
+                    <li>{data[0].users.name}様</li>
                   </ul>
                 </div>
                 <div className={styles.totalBox}>
