@@ -7,6 +7,48 @@
     background-position: center;   
 } 
 
+.kiwi{
+  position:absolute;
+  z-index: 3;
+  top: 209%;
+    left: 8%;
+    width: 9rem;
+    height: 9rem;
+}
+.berry{
+  position:absolute;
+  z-index: 3;
+  right: 11%;
+  top: 109%;
+  width: 13rem;
+  height: 10rem;
+}
+.okra{
+  position:absolute;
+  z-index: 3;
+  right: 10%;
+  top: 250%;
+  width: 13rem;
+  height: 10rem;
+}
+.avocado{
+  position:absolute;
+  z-index: 3;
+  top: 455%;
+  left: 4%;
+  width: 10rem;
+  height: 10rem;
+}
+.plant{
+  position:absolute;
+  z-index: 3;
+  top: 600%;
+  right: 10%;
+  width: 10rem;
+  height: 10rem;
+}
+
+
 .top_cover{
   position:relative;
 }

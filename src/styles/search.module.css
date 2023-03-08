@@ -12,6 +12,7 @@
     border-radius: 25px;
 }
 
+
 .search_form input {
     width: 250px;
     height: 45px;
@@ -35,6 +36,9 @@
     border: none;
     background-color: #8f8f8f;
     cursor: pointer;
+}
+.search_form button:hover{
+    opacity: 0.7;
 }
 
 .search_form button::after {

@@ -27,6 +27,7 @@ export default function Category({ onClick }: any) {
                     alt="カテゴリー画像"
                     width={250}
                     height={250}
+                    className={styles.img}
                   />
                 </div>
                 <p id={category.id} className={styles.text}>

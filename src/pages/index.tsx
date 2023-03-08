@@ -18,6 +18,41 @@ export default function Home() {
     <>
       <main>
         <section className={styles.top_cover}>
+          <Image
+            src="/coverImages/plant.png"
+            width={100}
+            height={100}
+            className={styles.kiwi}
+            alt={""}
+          />
+          <Image
+            src="/coverImages/berry.png"
+            width={100}
+            height={100}
+            className={styles.berry}
+            alt={""}
+          />
+          <Image
+            src="/coverImages/okra.png"
+            width={100}
+            height={100}
+            className={styles.okra}
+            alt={""}
+          />
+          <Image
+            src="/coverImages/avocado.png"
+            width={100}
+            height={100}
+            className={styles.avocado}
+            alt={""}
+          />
+          <Image
+            src="/coverImages/plant.png"
+            width={100}
+            height={100}
+            className={styles.plant}
+            alt={""}
+          />
           <div>
             <div className={styles.cover_image}>
               <Slider />

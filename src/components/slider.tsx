@@ -9,6 +9,7 @@ export const Slider = () => {
         options={{
           autoplay: true, // 自動再生を有効
           interval: 3000, // 自動再生の間隔を3秒に設定
+          type: "loop",
         }}
       >
         <SplideSlide>
