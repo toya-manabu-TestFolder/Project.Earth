@@ -1,7 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Edu_VIC_WA_NT_Beginner } from "@next/font/google";
 import styles from "../styles/login.module.css";
+import Link from "next/link";
 
 export default function Login() {
   const router = useRouter();
@@ -121,6 +121,14 @@ export default function Login() {
                 </button>
               </div>
             </form>
+            <div className={styles.title}>新規会員登録はこちら</div>
+            <Link href={"http://localhost:3000/user_register/"}>
+              <div className={styles.button}>
+                <button type="submit" className={styles.inner_button}>
+                  新規会員登録をする
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

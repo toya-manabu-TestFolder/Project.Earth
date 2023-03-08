@@ -42,6 +42,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    border: 1px solid #afafaf;
 }
 .discriptionBox{
     display: flex;
@@ -79,36 +80,24 @@
     width: 100%;
 }
 .deleteButton{
-    font-size: 1.3rem;
-    width: 18rem;
-    height: 80%;
-    color: #fff;
-    border: 2px solid #000;
-    border-radius: 0;
-    background: #000;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-}
-.deleteButton:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    content: '';
-    -webkit-transition: all .3s;
-    transition: all .5s ease-in;
-    background: #fff;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    margin: auto;
+    padding: 1rem 4rem;
+    font-weight: bold;
+    border: 2px solid #e9e9e9;
+    color: #8f8f8f;
+    border-radius: 100vh;
+    transition: 0.5s;
+    cursor: pointer;
   }
   .deleteButton:hover {
-    color: #000;
-    background: #fff;
+	color: #fff;
+	background: #8f8f8f;
   }
-  
-  .deleteButton:hover:before {
-    background: #000;
-  }
-  /* ホバーで背景変更 */
+    /* ホバーで背景変更 */
   .flex::before{
     content: '';
     background-color: black;
@@ -124,7 +113,7 @@
     opacity: 0.2;
 }
 
-/* 小計*/
+/* 金額・お届け先情報 */
 .fixedBox{
     font-size: 2rem;
     width: 20%;
@@ -156,45 +145,48 @@
     background-color: black;
     opacity: 0.2;
 }
-.totalBox{
-    position: relative;
+
+.infomation{
+  height: 60%;
 }
-.submitBox button{
+.infomation h3{
+}
+.infomation ul{
+    font-size: 1.3rem;
+    margin-top: 1rem;
+}
+.infomation li{
+  list-style:   none;
+}
+.totalBox{
+  position: relative;
+  height: 20%;
+  margin-top: 1rem;
+}
+.total{
+    color: red;
+    font-size: 1.8rem;
+}
+.submitBox{
     position: relative;
+    height: 20%;
+    margin-top: 1rem;
 }
 .purchase{
-    font-size: 1.3rem;
-    width: 18rem;
-    height: 4rem;
-    color: #fff;
-    border: 2px solid #000;
-    border-radius: 0;
-    background: #000;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    margin: auto;
+    padding: 1rem 4rem;
+    font-weight: bold;
+    border: 2px solid #e9e9e9;
+    color: #8f8f8f;
+    border-radius: 100vh;
+    transition: 0.5s;
+    cursor: pointer;
 }
-.purchase:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    content: '';
-    -webkit-transition: all .3s;
-    transition: all .5s ease-in;
-    background: #fff;
-  }
   .purchase:hover {
-    color: #000;
-    background: #fff;
-  }
-  .purchase:hover:before {
-    background: #000;
-  }
-
-  .infomation{
-
-  }
-  .infomation li{
-    list-style:   none;
+	color: #fff;
+	background: #8f8f8f;
   }

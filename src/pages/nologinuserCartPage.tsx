@@ -94,7 +94,7 @@ const loginuser_cartPage = () => {
                     <div className={styles.flex}>
                       <div className={styles.imageBox}>
                         <Image
-                          src="/categoryImages/かぼちゃ.jpg"
+                          src={item.item.image}
                           width={200}
                           height={200}
                           className={styles.image}
@@ -118,7 +118,7 @@ const loginuser_cartPage = () => {
                               onChange={(event) =>
                                 changeItemQuantity(event, item)
                               }
-                              className={styles.selectBox}
+                              className={styles.select}
                             >
                               <option value="0">0</option>
                               <option value="1">1</option>
@@ -165,10 +165,13 @@ const loginuser_cartPage = () => {
       <div className={styles.fixedBox}>
         <div className={styles.subTotalBox}>
           <div>
-            <div>
-              <p>合計金額:&nbsp;{totalPrice}円</p>
+            <div className={styles.totalBox}>
+              <p>
+                合計金額&nbsp;&nbsp;
+                <span className={styles.total}>{totalPrice}</span>円
+              </p>
             </div>
-            <div>
+            <div className={styles.submitBox}>
               <button className={styles.purchase} onClick={() => checkLogin()}>
                 購入手続きへ
               </button>

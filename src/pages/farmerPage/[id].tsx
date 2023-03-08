@@ -67,7 +67,6 @@ export default function page(props: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(itemSelect);
   // ログインユーザーのカート情報送信用
   const [cartData, setcartData] = useState({
     user_id: 0,
@@ -174,7 +173,7 @@ export default function page(props: any) {
     event.preventDefault();
     setstorage([oneTimeStorage]);
   }
-
+  console.log(items);
   // 下記JSX
   return (
     <div
@@ -211,7 +210,7 @@ export default function page(props: any) {
               <div className={styles.sec2_itemSelect} key={e.id}>
                 <div className={styles.imageBox}>
                   <Image
-                    src="/categoryImages/かぼちゃ.jpg"
+                    src={e.image}
                     width={250}
                     height={250}
                     className={styles.sec2_Image}
@@ -222,11 +221,11 @@ export default function page(props: any) {
                   <p>{e.name}</p>
                 </div>
                 <div className={styles.priceBox}>
-                  <p>価格:&nbsp;{e.price}円</p>
+                  <p>価格&nbsp;&nbsp;{e.price}円</p>
                 </div>
                 <div className={styles.selectBox}>
                   <label htmlFor={e.id}>
-                    数量:&nbsp;&nbsp;
+                    数量&nbsp;&nbsp;
                     <select
                       className={styles.select}
                       id={e.id}
