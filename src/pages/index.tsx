@@ -8,11 +8,10 @@ import NewFace from "@/components/newface";
 import { Slider } from "@/components/slider";
 
 export default function Home() {
-  const [cookie, setCookie] = useState(false);
-
+  const [cookie, setCookie] = useState<boolean>();
   useEffect(() => {
-    let cookie: any = document.cookie;
-    setCookie(cookie);
+    let cookie: string = document.cookie;
+    setCookie(cookie.includes("id="));
   }, []);
 
   return (
@@ -33,17 +32,16 @@ export default function Home() {
 
         <section className="top_record">{cookie && <Record />}</section>
 
-        <section className="top_search">
+        {/* <section className="top_search">
           <div className={styles.top_title}>商品名から生産者を探す</div>
           <Search />
-        </section>
+        </section> */}
 
         <section>
           <Category />
         </section>
 
-        <section className="top_newFace">
-          <div className={styles.top_title}>新規のおすすめ農家さん</div>
+        <section>
           <NewFace />
         </section>
       </main>

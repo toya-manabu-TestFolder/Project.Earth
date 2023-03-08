@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useUserId from "./checkCookie";
 import Logout from "./logout";
 import Search from "./search";
 import styles from "../styles/header.module.css";
 import { useRouter } from "next/router";
+
+import { FaShoppingCart } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 export default function Header() {
   const [cookie, setCookie] = useState<boolean>(false);
@@ -14,12 +16,12 @@ export default function Header() {
     let cookie: string = document.cookie;
     setCookie(cookie.includes("id="));
   }, [router.asPath]);
-  //karadatoriro-dojinomi、ルーターでパスを取る
+  //空[]だとリロード時のみ更新される、routerでパスを取ってきてパスが変わるごとに更新にする
 
   return (
     <>
-      <main>
-        <header className={styles.header}>
+      <header className={styles.header}>
+        <div>
           <Link href="/">
             <img
               className={styles.logo}
@@ -29,36 +31,40 @@ export default function Header() {
               height={80}
             />
           </Link>
-          <div className={styles.headerSearchForm}>
+          {/* <div className={styles.headerSearchForm}> */}
+        </div>
+
+        <div className={styles.flex}>
+          <div>
             <Search />
           </div>
           <nav>
             <ul className={styles.navButtons}>
               <li className={styles.cartButton}>
-                <button>
+                <IconContext.Provider
+                  value={{ color: "#8f8f8f", size: "2.5rem" }}
+                >
                   <Link
                     href={
                       cookie ? "/loginuserCartPage" : "/nologinuserCartPage"
                     }
                   >
-                    <span>カート</span>
+                    <FaShoppingCart />
                   </Link>
-                </button>
+                </IconContext.Provider>
               </li>
               <li className={styles.logButton}>
                 {cookie && <Logout />}
                 {!cookie && router.asPath !== "/login" && (
-                  <button>
-                    <Link href="/login">
-                      <span>ログイン</span>
-                    </Link>
+                  <button className={styles.button}>
+                    <Link href="/login">ログイン</Link>
                   </button>
                 )}
               </li>
             </ul>
           </nav>
-        </header>
-      </main>
+        </div>
+      </header>
     </>
   );
 }
