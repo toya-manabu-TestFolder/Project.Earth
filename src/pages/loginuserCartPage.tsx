@@ -55,7 +55,12 @@ const loginuser_cartPage = (props: any) => {
 
   // -----------------------------------------------------------------------------------------
   // 削除用ファンクション
-  const deleteCartItem = async (item_id: number) => {
+  const deleteCartItem = async (
+    e: /* eslint-disable react-hooks/rules-of-hooks */
+    React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    item_id: number
+  ) => {
+    e.preventDefault();
     let deleteParam = {
       user_id: id,
       item_id: item_id,
@@ -71,6 +76,10 @@ const loginuser_cartPage = (props: any) => {
         Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(deleteParam),
+    }).then((res) => {
+      if (res.status === 200) {
+        router.push("http://localhost:3000/loginuserCartPage");
+      }
     });
   };
   // -----------------------------------------------------------------------------------------
@@ -106,6 +115,7 @@ const loginuser_cartPage = (props: any) => {
             body: JSON.stringify(cartInport),
           });
         }
+        router.push("http://localhost:3000/loginuserCartPage");
       }
     });
   };
@@ -256,7 +266,7 @@ const loginuser_cartPage = (props: any) => {
                           <div className={styles.buttonBox}>
                             <button
                               className={styles.deleteButton}
-                              onClick={() => deleteCartItem(item.item_id)}
+                              onClick={(e) => deleteCartItem(e, item.item_id)}
                             >
                               カートから削除
                             </button>
