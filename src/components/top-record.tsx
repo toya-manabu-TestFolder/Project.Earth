@@ -22,10 +22,12 @@ type Farmer = {
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Record() {
-  const [cookie, setCookie] = useState<boolean>();
+  const [cookie, setCookie] = useState<number>();
   useEffect(() => {
     let cookie: string = document.cookie;
-    setCookie(cookie.includes("id="));
+    let id: string | number = cookie.match("id=[0-9]")[0];
+    id = Number(id.substring(3));
+    setCookie(id);
   }, []);
 
   const { data, error } = useSWR<Farmer[]>(
@@ -35,10 +37,8 @@ export default function Record() {
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
   console.log("履歴", data);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(data);
 
     const cartData = {
       user_id: cookie,

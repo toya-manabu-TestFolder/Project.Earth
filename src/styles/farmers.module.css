@@ -15,20 +15,27 @@
 }
 
 .voice {
-  padding: 18px;
-  border: solid;
-  /* 外枠の色 */
-  color: white;
-  border-radius: 50%;
+  display: block;
   text-align: center;
-  position: absolute;
-  top: 200px;
-  left: 200px;
-  background-color: blue;
+  vertical-align: middle;
+  text-decoration: none;
+  margin: auto;
+  padding: 1rem 4rem;
+  font-weight: bold;
+  border: 2px solid #e9e9e9;
+  color: #8f8f8f;
+  border-radius: 100vh;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.voice:hover {
+	color: #fff;
+	background: #8f8f8f;
 }
 
+
 .buttonText{
-  color: white;
+  color: black;
 }
 
 

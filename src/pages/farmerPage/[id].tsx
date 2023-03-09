@@ -173,7 +173,25 @@ export default function page(props: any) {
     event.preventDefault();
     setstorage([oneTimeStorage]);
   }
-  console.log(items);
+
+  // --------------------------------------------------------
+  function Modal({ show, setShow }: { show: boolean; setShow: any }) {
+    const closeModal = () => {
+      setShow(false);
+    };
+    if (show) {
+      return (
+        <div className={styles.overlay} onClick={closeModal}>
+          <div className={styles.content}>
+            <p>カートに追加しました。</p>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+  const [show, setShow] = useState(false);
   // 下記JSX
   return (
     <div
@@ -246,7 +264,11 @@ export default function page(props: any) {
                   </label>
                 </div>
                 <div className={styles.buttonBox}>
-                  <button onClick={(event) => cartInport(e, event)}>
+                  <button
+                    onClick={(event) => {
+                      cartInport(e, event), setShow(true);
+                    }}
+                  >
                     <span className={styles.buttonString}>カートに入れる</span>
                   </button>
                 </div>
@@ -283,6 +305,7 @@ export default function page(props: any) {
           })}
         </div>
       </section>
+      <Modal show={show} setShow={setShow} />
     </div>
   );
 }

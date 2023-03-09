@@ -81,7 +81,7 @@
 }
 .farmer_career pre {
   position: relative;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 3rem;
 }
 
@@ -289,3 +289,35 @@
   content: '';
   opacity: 0.8;
 }
+
+
+/* ------------------------------- */
+.overlay{
+  /*　画面全体を覆う設定　*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+  
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+
+  .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    z-index:2;
+    color: #000;
+    opacity: 0.7;
+    width:40vw;
+    height: 40vh;
+    padding: 1em;
+    background:#fff;
+  }
