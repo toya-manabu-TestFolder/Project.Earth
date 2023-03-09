@@ -13,7 +13,7 @@ export default async function handler(req: any, res: any) {
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
         line_items: items,
-        customer: "cus_NTsgBxAtnBNJMC",
+        customer: "cus_NRwUeNGeFVmjiH",
         success_url: "http://localhost:3000/complete",
         cancel_url: "http://localhost:3000/loginuserCartPage",
       });

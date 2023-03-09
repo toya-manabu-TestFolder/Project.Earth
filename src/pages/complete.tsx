@@ -1,8 +1,29 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect } from "react";
 import styles from "../styles/complete.module.css";
 
 export default function Complete() {
+  useEffect(() => {
+    let cookie: any = document.cookie;
+
+    let id = cookie.match("id=[0-9]")[0];
+    id = id.substring(3);
+    let deleteParam = {
+      user_id: Number(id),
+    };
+    fetch("http://localhost:3000/api/completeCartDelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //↓全部のデータを取り扱いたい時
+        Prefer: "return=representation",
+        //↓更新したいならTOKEN設定
+        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
+      },
+      body: JSON.stringify(deleteParam),
+    });
+  }, []);
   return (
     <>
       <Head>

@@ -10,26 +10,35 @@ import { ChangeEvent, useEffect, useState } from "react";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
+
+export async function getServerSideProps(context: {
+  req: { cookies: { id: any } };
+}) {
+  const res = await fetch("http://127.0.0.1:8000/cartitems?select=*,items(*)");
+  const data = await res.json();
+  const res2 = await fetch(
+    `http://127.0.0.1:8000/users?id=eq.${context.req.cookies.id}`
+  );
+  const user = await res2.json();
+  // console.log(context.req.cookies.id);
+  return {
+    props: {
+      data,
+      user,
+    },
+  };
+}
 // ------------------------------------------
-const loginuser_cartPage = () => {
-  const router = useRouter();
-  const [cookie, setcookie] = useState({
-    category_id: 2,
-    user_id: 0,
+const loginuser_cartPage = (props: any) => {
+  let data = props.data;
+  const user = props.user[0];
+  const id = props.user[0].id;
+  data = data.filter((e: { user_id: any }) => {
+    return e.user_id === id;
   });
+
+  const router = useRouter();
   useEffect(() => {
-    let cookie: any = document.cookie;
-
-    if (document.cookie !== null) {
-      let id = cookie.match("id=[0-9]")[0];
-      id = id.substring(3);
-      setcookie({
-        ...cookie,
-        user_id: Number(id),
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get("success")) {
@@ -44,20 +53,17 @@ const loginuser_cartPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR("/api/cartDataCatch", fetcher);
-  if (error) return "An error has occurred.";
-  if (!data) return "Loading...";
-
-  console.log(data);
-
-  // クッキー情報格納予定
-  let check: number[] = [];
+  // -----------------------------------------------------------------------------------------
   // 削除用ファンクション
-  const deleteCartItem = async (id: number) => {
+  const deleteCartItem = async (
+    e: /* eslint-disable react-hooks/rules-of-hooks */
+    React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    item_id: number
+  ) => {
+    e.preventDefault();
     let deleteParam = {
-      user_id: Number(cookie.user_id),
-      item_id: id,
+      user_id: id,
+      item_id: item_id,
       quantity: 0,
     };
     fetch("http://localhost:3000/api/cartDelete", {
@@ -70,17 +76,21 @@ const loginuser_cartPage = () => {
         Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(deleteParam),
+    }).then((res) => {
+      if (res.status === 200) {
+        router.push("http://localhost:3000/loginuserCartPage");
+      }
     });
   };
-
+  // -----------------------------------------------------------------------------------------
   // 数量変更ファンクション
   const changeItemQuantity = (
     event: ChangeEvent<HTMLSelectElement>,
-    id: number
+    item_id: number
   ) => {
     let cartInport = {
-      user_id: cookie.user_id,
-      item_id: id,
+      user_id: id,
+      item_id: item_id,
       quantity: 0,
     };
 
@@ -105,9 +115,11 @@ const loginuser_cartPage = () => {
             body: JSON.stringify(cartInport),
           });
         }
+        router.push("http://localhost:3000/loginuserCartPage");
       }
     });
   };
+  // -----------------------------------------------------------------------------------------
 
   // 小計変数
   const totalPrice = data.reduce(
@@ -116,6 +128,7 @@ const loginuser_cartPage = () => {
     },
     0
   );
+  // -----------------------------------------------------------------------------------------
 
   let objcheck: number[] = [];
 
@@ -148,8 +161,9 @@ const loginuser_cartPage = () => {
   checkoutData = checkoutData.filter((e: undefined) => {
     return e !== undefined;
   });
+  // -----------------------------------------------------------------------------------------
 
-  // 決済画面へのデータ送信
+  // 決済画面へのデータ送信;
   const checkoutItems = (e: SyntheticEvent) => {
     e.preventDefault();
 
@@ -172,6 +186,9 @@ const loginuser_cartPage = () => {
       })
       .catch((err) => console.error("Failed to fetch", err));
   };
+  // -----------------------------------------------------------------------------------------
+  let check: number[] = [];
+
   // 下記JSX
   return (
     <>
@@ -191,7 +208,7 @@ const loginuser_cartPage = () => {
               return (
                 <>
                   {/* 下記から商品情報 */}
-                  <div key={item.item_id} className={styles.itemBox}>
+                  <div key={item.id} className={styles.itemBox}>
                     <form>
                       <div className={styles.flex}>
                         <div className={styles.imageBox}>
@@ -249,7 +266,7 @@ const loginuser_cartPage = () => {
                           <div className={styles.buttonBox}>
                             <button
                               className={styles.deleteButton}
-                              onClick={() => deleteCartItem(item.item_id)}
+                              onClick={(e) => deleteCartItem(e, item.item_id)}
                             >
                               カートから削除
                             </button>
@@ -275,13 +292,13 @@ const loginuser_cartPage = () => {
                 <h3>お届け先情報</h3>
                 <div className={styles.infomation}>
                   <ul>
-                    <li>{data[0].users.name}&nbsp;様</li>
-                    <li>&#12306;&nbsp;{data[0].users.zipcode}</li>
+                    <li>{user.name}&nbsp;様</li>
+                    <li>&#12306;&nbsp;{user.zipcode}</li>
                     <li>
-                      {data[0].users.prefecture}&nbsp;&nbsp;
-                      {data[0].users.city}
+                      {user.prefecture}&nbsp;&nbsp;
+                      {user.city}
                     </li>
-                    <li>{data[0].users.address}</li>
+                    <li>{user.address}</li>
                   </ul>
                 </div>
                 <div className={styles.totalBox}>

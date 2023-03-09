@@ -1,3 +1,24 @@
+--@block
+-- 農家一覧テーブル◎
+DROP TABLE IF EXISTS api.farmer_data;
+
+CREATE TABLE api.farmer_data (
+    id serial PRIMARY KEY,
+    farm_name text NOT NULL,
+    representative_name text NOT NULL,
+    year integer NOT NULL,
+    carryr text NOT NULL,
+    prefecture text NOT NULL,
+    icon_imageurl text NOT NULL,
+    cover_imageurl text NOT NULL,
+    voiceurl text NOT NULL,
+    comment text NOT NULL
+);
+
+GRANT SELECT ON api.farmer_data TO web_anon;
+GRANT ALL ON api.farmer_data to api_user;
+GRANT usage on sequence api.farmer_data_id_seq to api_user;
+
 --@block farmer_data情報追加
 -- コメントは16文字以内
 INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carryr	,	prefecture	,	icon_imageurl	,	cover_imageurl	,	voiceurl, comment) VALUES
@@ -43,6 +64,25 @@ INSERT INTO api.farmer_data (id	,	farm_name	,	representative_name	,	year 	,	carr
 (	24	,	'能村農場'	,	'能村 隆史'	,	34	,	'キャリア'	,	'秋田県'	,	'/farmerImages/farmer4.jpg'	,	'/farmerImages/farmerCover2.jpg'	,	'/voice/voice-example.mp3'	,	'田舎に戻った長男が作ってます！'	),
 (	25	,	'あだち農場'	,	'足立 雄二'	,	12	,	'キャリア'	,	'栃木県'	,	'/farmerImages/farmer5.jpg'	,	'/farmerImages/farmerCover2.jpg'	,	'/voice/voice-example.mp3'	,	'栃木から新鮮野菜をお届け！！'	),
 (	26	,	'村岡商店'	,	'村岡 康'	,	14	,	'キャリア'	,	'埼玉県'	,	'/farmerImages/farmer6.jpg'	,	'/farmerImages/farmerCover2.jpg'	,	'/voice/voice-example.mp3'	,	'埼玉の名産品、作ってます'	)
+
+-- @block
+-- 商品一覧テーブル
+DROP TABLE IF EXISTS api.items;
+CREATE TABLE api.items (
+    id SERIAL PRIMARY KEY,
+    category_id INTEGER NOT NULL,
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
+    name TEXT NOT NULL,
+    price INTEGER NOT NULL,
+    image TEXT,
+    comment TEXT,
+    expaire TEXT,
+    items_search TEXT
+);
+GRANT SELECT ON api.items TO web_anon;
+GRANT ALL ON api.items to api_user;
+GRANT usage on sequence api.items_id_seq to api_user;
+
 --@block
 -- items情報追加
 INSERT INTO api.items (id,category_id,farmer_id,name, price,image,comment,expaire,items_search) VALUES 
@@ -111,6 +151,18 @@ INSERT INTO api.items (id,category_id,farmer_id,name, price,image,comment,expair
 (	63	,	2	,	25	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	,
 (	64	,	2	,	26	,	'みよばぁの人参'	,	180	,	'/carrot/carrot1.jpg'	,	''	,	'5日以内',		'人参, にんじん, ニンジン, carrot, ninzin, ninjin, ninnzinn, ninnjinn'	)	
 
+-- @block
+-- 商品カテゴリーテーブル
+DROP TABLE IF EXISTS api.category;
+CREATE TABLE api.category (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    image TEXT NOT NULL
+);
+GRANT SELECT ON api.category TO web_anon;
+GRANT ALL ON api.category to api_user;
+GRANT usage on sequence api.category_id_seq to api_user;
+
 --@block
 INSERT INTO api.category (id,name,image) VALUES
 (	1	,	'キャベツ'	,	'/categoryImages/キャベツ.jpg'),
@@ -123,27 +175,62 @@ INSERT INTO api.category (id,name,image) VALUES
 (	8	,	'じゃがいも'	,	'/categoryImages/じゃがいも.jpg')
 
 --@block
+-- ユーザー情報テーブル◎
+DROP TABLE IF EXISTS api.users;
+CREATE TABLE api.users (
+    id serial PRIMARY KEY,
+    name text NOT NULL,
+    email text NOT NULL,
+    password text NOT NULL,
+    prefecture text NOT NULL,
+    city text NOT NULL,
+    address text NOT NULL,
+    zipcode text NOT NULL
+);
+
+GRANT SELECT ON api.users TO web_anon;
+GRANT ALL ON api.users to api_user;
+GRANT usage on sequence api.users_id_seq to api_user;
+
+--@block
 -- users情報追加
 INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) VALUES 
 (1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','日石町2番1号','945-8511')
 
+--@block
+-- カート履歴テーブル◎
+DROP TABLE IF EXISTS api.cartitems;
+
+CREATE TABLE api.cartitems (
+    id SERIAL PRIMARY KEY,
+    user_id integer NOT NULL REFERENCES api.users(id),
+    item_id integer NOT NULL REFERENCES api.items(id),
+    quantity integer NOT NULL
+);
+
+GRANT SELECT ON api.cartitems TO web_anon;
+GRANT ALL ON api.cartitems to api_user;
+GRANT usage on sequence api.cartitems_id_seq to api_user;
 
 --@block
 INSERT INTO api.cartitems (id,user_id,item_id,quantity) VALUES
-(1,1,2,1),
-(2,1,5,1)
+(1,1,2,1)
 
--- --@block
--- -- cart情報追加
--- 一旦中止
--- INSERT INTO api.cart (id,user_id) VALUES
--- (	1	,	1)
+-- @block
+-- 購入履歴テーブル
+DROP TABLE IF EXISTS api.sales;
+CREATE TABLE api.sales (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES api.users(id),
+    item_id INTEGER NOT NULL REFERENCES api.items(id),
+    farmer_id INTEGER NOT NULL REFERENCES api.farmer_data(id),
+    quantity INTEGER NOT NULL
+    -- name,price
+);
+GRANT SELECT ON api.sales TO web_anon;
+GRANT ALL ON api.sales to api_user;
+GRANT usage on sequence api.sales_id_seq to api_user;
 
 --@block
 INSERT INTO api.sales (id,user_id,item_id,farmer_id,quantity) VALUES
-(1,1,2,1,1),
-(2,1,5,1,1)
-
---@block
--- テスト用のためinsert不要
--- UPDATE api.items SET image = '/cabbage/cabbage1:2.jpg' Where id=2;
+(1,1,2,1,1)
