@@ -7,16 +7,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const url = `${process.env["NEXT_PUBLIC_URL"]}/users`;
+  const url = `${process.env["DB_URL"]}/users`;
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //↓全部のデータを取り扱いたい時
+      //↓POSTの時はこれ
       Prefer: "return=representation",
       //↓更新したいならTOKEN設定
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
     },
     //JSONをJS変換
     body: JSON.stringify(req.body),

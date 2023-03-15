@@ -10,13 +10,13 @@ export default async function handler(
 ) {
   const { id } = req.cookies;
   console.log("cookie", id);
-  const url = `${process.env["NEXT_PUBLIC_URL"]}/sales?user_id=eq.${id}&select=farmer_data(farm_name,icon_imageurl),items(id,name,image)&order=id.desc&limit=1`;
+  const url = `${process.env["DB_URL"]}/sales?user_id=eq.${id}&select=farmer_data(farm_name,icon_imageurl),items(id,name,image)&order=id.desc&limit=1`;
   const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
     },
   };
   const response = await fetch(url, options);
