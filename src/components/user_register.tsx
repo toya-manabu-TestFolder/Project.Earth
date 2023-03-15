@@ -14,6 +14,8 @@ export default function User_register() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    //以下fetch
+    //fetchのoptionで使うdata
     const data = {
       name: name,
       email: email,
@@ -23,6 +25,7 @@ export default function User_register() {
       city: city,
       address: address,
     };
+    //fetcherのoption
     const options = {
       method: "POST",
       headers: {
@@ -30,11 +33,13 @@ export default function User_register() {
       },
       body: JSON.stringify(data),
     };
-    //users.tsファイルを指定してる
+
     const response = await fetch("http://localhost:3000/api/users?", options);
     console.log(response);
     const result = await response.json();
     console.log(result);
+
+    //responseを外部に出せるかな？
 
     if (response.ok === true) {
       router.replace("/login");

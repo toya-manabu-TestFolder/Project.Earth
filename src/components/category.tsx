@@ -6,7 +6,7 @@ import styles from "../styles/category.module.css";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Category({ onClick }: any) {
-  const { data, error } = useSWR("http://127.0.0.1:8000/category", fetcher);
+  const { data, error } = useSWR(`http://127.0.0.1:8000/category`, fetcher);
 
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;

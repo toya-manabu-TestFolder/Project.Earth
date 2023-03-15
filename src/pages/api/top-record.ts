@@ -10,11 +10,13 @@ export default async function handler(
 ) {
   const { id } = req.cookies;
   console.log("cookie", id);
-  const url = `http://127.0.0.1:8000/sales?user_id=eq.${id}&select=farmer_data(farm_name,icon_imageurl),items(id,name,image)&order=id.desc&limit=1`;
+  const url = `${process.env["DB_URL"]}/sales?user_id=eq.${id}&select=farmer_data(farm_name,icon_imageurl),items(id,name,image)&order=id.desc&limit=1`;
   const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env["API_KEY"]}`,
+      apikey: `${process.env["API_KEY"]}`,
     },
   };
   const response = await fetch(url, options);
