@@ -25,7 +25,7 @@ export default function Login() {
     const response = await fetch("http://localhost:3000/api/login", options);
     console.log(response);
     const result = await response.json();
-    console.log(result);
+    console.log(result.status);
 
     if (response.ok !== true || result === "") {
       router.push("/login");

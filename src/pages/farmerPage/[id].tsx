@@ -1,11 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import IntoCart from "@/components/intoCart";
 import Image from "next/image";
-import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/farmer_data`);
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+    },
+  };
+  const res = await fetch(
+    `${process.env["NEXT_PUBLIC_URL"]}/farmer_data`,
+    options
+  );
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -21,12 +31,27 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const req1 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/farmer_data`);
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+    },
+  };
+
+  const req1 = await fetch(
+    `${process.env["NEXT_PUBLIC_URL"]}/farmer_data`,
+    options
+  );
   const farmerdata = await req1.json();
-  const req2 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/items`);
+  const req2 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/items`, options);
   const items = await req2.json();
-  const req3 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/category`);
+  const req3 = await fetch(
+    `${process.env["NEXT_PUBLIC_URL"]}/category`,
+    options
+  );
   const category = await req3.json();
+  console.log(req1);
   return {
     props: {
       params,
@@ -140,7 +165,7 @@ export default function page(props: any) {
   useEffect(() => {
     if (cookie.user_id !== 0) {
       for (let i = 1; i <= cartData.quantity; i++) {
-        fetch("./api/cartInport", {
+        fetch("/api/cartInport", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
