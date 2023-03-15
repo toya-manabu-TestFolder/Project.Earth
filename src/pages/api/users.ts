@@ -12,11 +12,11 @@ export default async function handler(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //↓全部のデータを取り扱いたい時
+      //↓POSTの時はこれ
       Prefer: "return=representation",
       //↓更新したいならTOKEN設定
-      Authorization: `Bearer ${process.env["API_KEY"]}`,
-      apikey: `${process.env["API_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
     },
     //JSONをJS変換
     body: JSON.stringify(req.body),

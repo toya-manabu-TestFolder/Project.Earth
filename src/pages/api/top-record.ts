@@ -15,8 +15,8 @@ export default async function handler(
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env["API_KEY"]}`,
-      apikey: `${process.env["API_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
     },
   };
   const response = await fetch(url, options);

@@ -30,8 +30,6 @@ export default function User_register() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        apikey: `${process.env["DB_KEY"]}`,
-        Authorization: `Bearer ${process.env["DB_KEY"]}`,
       },
       body: JSON.stringify(data),
     };
