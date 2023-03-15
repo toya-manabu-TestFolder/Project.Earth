@@ -16,18 +16,18 @@ export async function getServerSideProps(context: {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
 
   const res = await fetch(
-    `${process.env["NEXT_PUBLIC_URL"]}/cartitems?select=*,items(*)`,
+    `${process.env["DB_URL"]}/cartitems?select=*,items(*)`,
     options
   );
   const data = await res.json();
   const res2 = await fetch(
-    `${process.env["NEXT_PUBLIC_URL"]}/users?id=eq.${context.req.cookies.id}`,
+    `${process.env["DB_URL"]}/users?id=eq.${context.req.cookies.id}`,
     options
   );
   const user = await res2.json();
@@ -81,8 +81,8 @@ const loginuser_cartPage = (props: any) => {
       headers: {
         "Content-Type": "application/json",
         Prefer: "return=representation",
-        apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-        Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+        apikey: `${process.env["DB_KEY"]}`,
+        Authorization: `Bearer ${process.env["DB_KEY"]}`,
       },
       body: JSON.stringify(deleteParam),
     }).then((res) => {

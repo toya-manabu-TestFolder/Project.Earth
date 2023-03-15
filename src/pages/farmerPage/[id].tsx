@@ -8,14 +8,11 @@ export const getStaticPaths = async () => {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
-  const res = await fetch(
-    `${process.env["NEXT_PUBLIC_URL"]}/farmer_data`,
-    options
-  );
+  const res = await fetch(`${process.env["DB_URL"]}/farmer_data`, options);
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -34,22 +31,16 @@ export const getStaticProps = async ({ params }: { params: any }) => {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
 
-  const req1 = await fetch(
-    `${process.env["NEXT_PUBLIC_URL"]}/farmer_data`,
-    options
-  );
+  const req1 = await fetch(`${process.env["DB_URL"]}/farmer_data`, options);
   const farmerdata = await req1.json();
-  const req2 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/items`, options);
+  const req2 = await fetch(`${process.env["DB_URL"]}/items`, options);
   const items = await req2.json();
-  const req3 = await fetch(
-    `${process.env["NEXT_PUBLIC_URL"]}/category`,
-    options
-  );
+  const req3 = await fetch(`${process.env["DB_URL"]}/category`, options);
   const category = await req3.json();
   console.log(req1);
   return {
