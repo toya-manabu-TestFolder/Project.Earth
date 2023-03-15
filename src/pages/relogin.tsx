@@ -56,7 +56,7 @@ export default function Login() {
       },
       body: JSON.stringify(data),
     };
-    const response = await fetch("http://localhost:3000/api/relogin", options);
+    const response = await fetch("/api/relogin", options);
     console.log(response);
     const result = await response.json();
     console.log(result[0].id);

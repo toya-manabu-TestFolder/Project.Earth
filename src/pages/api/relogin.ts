@@ -9,11 +9,12 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const { email, password } = req.body;
-  const url = `http://127.0.0.1:8000/users?email=eq.${email}&password=eq.${password}`;
+  const url = `${process.env["NEXT_PUBLIC_URL"]}/users?email=eq.${email}&password=eq.${password}`;
   const options = {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
   const response = await fetch(url, options);
