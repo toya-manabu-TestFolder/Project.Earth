@@ -45,7 +45,7 @@ export default function Farmers() {
             {data.map((farmer: any) => {
               return (
                 <div className={styles.resultBlock} key={farmer.id}>
-                  <Link href={`http://localhost:3000/farmerPage/${farmer.id}`}>
+                  <Link href={`/farmerPage/${farmer.id}`}>
                     <Image
                       className={styles.image}
                       src={farmer.icon_imageurl}
