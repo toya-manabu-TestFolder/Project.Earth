@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/login.module.css";
-import FetchOfPost from "@/components/fetch_of_post";
+import FetchOfPost from "@/lib/fetch_of_post";
 
 export default function User_register() {
   const router = useRouter();

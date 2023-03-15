@@ -1,4 +1,14 @@
-export default async function FetchOfPost(data: {}) {
+type User = {
+  name: string;
+  email: string;
+  password: string;
+  zipcode: string;
+  prefecture: string;
+  city: string;
+  address: string;
+};
+
+export default async function FetchOfPost(data: User) {
   const options = {
     method: "POST",
     headers: {
