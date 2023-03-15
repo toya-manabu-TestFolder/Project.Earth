@@ -22,4 +22,5 @@ export default async function handler(
   const response = await fetch(url, options);
   const data = await response.json();
   res.status(200).json(data);
+  console.log(res.status);
 }

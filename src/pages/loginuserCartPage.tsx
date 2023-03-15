@@ -76,16 +76,18 @@ const loginuser_cartPage = (props: any) => {
       item_id: item_id,
       quantity: 0,
     };
-    fetch("/api/cartDelete", {
+    fetch("./api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Prefer: "return=representation",
+        apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+        Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
       },
       body: JSON.stringify(deleteParam),
     }).then((res) => {
       if (res.status === 200) {
-        router.push("/loginuserCartPage");
+        router.push("./loginuserCartPage");
       }
     });
   };
@@ -101,24 +103,31 @@ const loginuser_cartPage = (props: any) => {
       quantity: 0,
     };
 
-    fetch("/api/cartDelete", {
+    fetch("./api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Prefer: "return=representation",
+        apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+        Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
       },
       body: JSON.stringify(cartInport),
     }).then((res) => {
+      console.log(res);
       if (res.status === 200) {
         for (let i = 1; i <= Number(event.target.value); i++) {
           fetch("./api/cartInport", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Prefer: "return=representation",
+              apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+              Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
             },
             body: JSON.stringify(cartInport),
           });
         }
-        router.push("/loginuserCartPage");
+        router.push("./loginuserCartPage");
       }
     });
   };

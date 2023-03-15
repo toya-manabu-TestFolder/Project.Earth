@@ -13,9 +13,9 @@ export default async function handler(
     headers: {
       "Content-Type": "application/json",
       Prefer: "return=representation",
+      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
       Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
     },
-    //JSONをJS変換
     body: JSON.stringify(req.body),
   };
   const response = await fetch(url, options);
