@@ -7,7 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const url = `${process.env["DB_URL"]}/users`;
+  const url = `${process.env["NEXT_PUBLIC_URL"]}/users`;
   const options = {
     method: "POST",
     headers: {
@@ -15,8 +15,8 @@ export default async function handler(
       //↓全部のデータを取り扱いたい時
       Prefer: "return=representation",
       //↓更新したいならTOKEN設定
-      Authorization: `Bearer ${process.env["API_KEY"]}`,
-      apikey: `${process.env["API_KEY"]}`,
+      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
     },
     //JSONをJS変換
     body: JSON.stringify(req.body),
