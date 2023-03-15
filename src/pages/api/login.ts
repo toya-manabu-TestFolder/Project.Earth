@@ -13,6 +13,8 @@ export default async function handler(
   const options = {
     method: "GET",
     headers: {
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
       "Content-Type": "application/json",
     },
   };
