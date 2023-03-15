@@ -3,15 +3,11 @@
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  const url = `http://127.0.0.1:8000/users`;
+  const url = `${process.env["NEXT_PUBLIC_URL"]}/users`;
   const options = {
     method: "POST",
     headers: {
@@ -19,7 +15,8 @@ export default async function handler(
       //↓全部のデータを取り扱いたい時
       Prefer: "return=representation",
       //↓更新したいならTOKEN設定
-      Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
+      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
     },
     //JSONをJS変換
     body: JSON.stringify(req.body),
