@@ -7,15 +7,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const url = `http://127.0.0.1:8000/cartitems`;
+  const url = `${process.env["NEXT_PUBLIC_URL"]}/cartitems`;
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //↓全部のデータを取り扱いたい時
       Prefer: "return=representation",
-      //↓更新したいならTOKEN設定
-      Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
+      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
     },
     //JSONをJS変換
     body: JSON.stringify(req.body),

@@ -3,7 +3,6 @@ import React, { SyntheticEvent } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import styles from "../styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -17,18 +16,18 @@ export async function getServerSideProps(context: {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]}`,
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]}`,
+      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
     },
   };
 
   const res = await fetch(
-    "https://zvojtawvkcxwrkvstsmg.supabase.co/rest/v1/cartitems?select=*,items(*)",
+    `${process.env["NEXT_PUBLIC_URL"]}/cartitems?select=*,items(*)`,
     options
   );
   const data = await res.json();
   const res2 = await fetch(
-    `https://zvojtawvkcxwrkvstsmg.supabase.co/rest/v1/users?id=eq.${context.req.cookies.id}`,
+    `${process.env["NEXT_PUBLIC_URL"]}/users?id=eq.${context.req.cookies.id}`,
     options
   );
   const user = await res2.json();
@@ -77,18 +76,16 @@ const loginuser_cartPage = (props: any) => {
       item_id: item_id,
       quantity: 0,
     };
-    fetch("./api/cartDelete", {
+    fetch("/api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Prefer: "return=representation",
-        apikey: `${process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]}`,
-        Authorization: `Bearer ${process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"]}`,
       },
       body: JSON.stringify(deleteParam),
     }).then((res) => {
       if (res.status === 200) {
-        router.push("./loginuserCartPage");
+        router.push("/loginuserCartPage");
       }
     });
   };
@@ -104,20 +101,16 @@ const loginuser_cartPage = (props: any) => {
       quantity: 0,
     };
 
-    fetch("http://localhost:3000/api/cartDelete", {
+    fetch("/api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //↓全部のデータを取り扱いたい時
-        Prefer: "return=representation",
-        //↓更新したいならTOKEN設定
-        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(cartInport),
     }).then((res) => {
       if (res.status === 200) {
         for (let i = 1; i <= Number(event.target.value); i++) {
-          fetch("http://localhost:3000/api/cartInport", {
+          fetch("./api/cartInport", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -125,7 +118,7 @@ const loginuser_cartPage = (props: any) => {
             body: JSON.stringify(cartInport),
           });
         }
-        router.push("http://localhost:3000/loginuserCartPage");
+        router.push("/loginuserCartPage");
       }
     });
   };

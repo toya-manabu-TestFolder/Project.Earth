@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://127.0.0.1:8000/farmer_data");
+  const res = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/farmer_data`);
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -21,11 +21,11 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const req1 = await fetch("http://127.0.0.1:8000/farmer_data");
+  const req1 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/farmer_data`);
   const farmerdata = await req1.json();
-  const req2 = await fetch("http://127.0.0.1:8000/items");
+  const req2 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/items`);
   const items = await req2.json();
-  const req3 = await fetch("http://127.0.0.1:8000/category");
+  const req3 = await fetch(`${process.env["NEXT_PUBLIC_URL"]}/category`);
   const category = await req3.json();
   return {
     props: {
@@ -140,7 +140,7 @@ export default function page(props: any) {
   useEffect(() => {
     if (cookie.user_id !== 0) {
       for (let i = 1; i <= cartData.quantity; i++) {
-        fetch("http://localhost:3000/api/cartInport", {
+        fetch("./api/cartInport", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

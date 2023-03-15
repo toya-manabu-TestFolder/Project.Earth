@@ -68,7 +68,7 @@ const loginuser_cartPage = () => {
   // 遷移先
   const checkLogin = () => {
     localStorage.setItem("cartPage", "true");
-    router.push("http://localhost:3000/relogin");
+    router.push("/relogin");
   };
   let check: number[] = [];
   // 下記JSX
