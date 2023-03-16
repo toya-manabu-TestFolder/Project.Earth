@@ -10,12 +10,12 @@ export default async function handler(
 ) {
   const { search } = req.query;
 
-  const url = `${process.env["NEXT_PUBLIC_URL"]}/farmer_data?select=*,items!inner(*)&items.items_search=like.*${search}*`;
+  const url = `${process.env["DB_URL"]}/farmer_data?select=*,items!inner(*)&items.items_search=like.*${search}*`;
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["NEXT_PUBLIC_DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["NEXT_PUBLIC_DB_KEY"]}`,
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
   const response = await fetch(url, options);
