@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "../styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
+import { fetchApiConnect } from "@/lib/fetchApiConnect";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -71,22 +72,12 @@ const loginuser_cartPage = (props: any) => {
     item_id: number
   ) => {
     e.preventDefault();
-    let deleteParam = {
-      user_id: id,
-      item_id: item_id,
-      quantity: 0,
+    let postValue: any = {
+      methodValue: "DELETE",
+      query: `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`,
     };
-    fetch("./api/cartDelete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Prefer: "return=representation",
-        apikey: `${process.env["DB_KEY"]}`,
-        Authorization: `Bearer ${process.env["DB_KEY"]}`,
-      },
-      body: JSON.stringify(deleteParam),
-    }).then((res) => {
-      console.log(res.status);
+    postValue = JSON.stringify(postValue);
+    fetchApiConnect("/api/dataConnect", postValue).then((res) => {
       if (res.status === 200) {
         router.push("/loginuserCartPage");
       }

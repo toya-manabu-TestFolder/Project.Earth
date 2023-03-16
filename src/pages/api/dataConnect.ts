@@ -1,20 +1,12 @@
-//ここからpostgrestに送る
-//リクエスト受け取ったものが正しいか確認
-
 import type { NextApiRequest, NextApiResponse } from "next";
-
-type Data = {
-  name: string;
-};
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  console.log(req.body);
-  const url = `${process.env["DB_URL"]}/cartitems?user_id=eq.${req.body.deleteParam.user_id}&item_id=eq.${req.body.deleteParam.item_id}`;
+  const url = `${process.env["DB_URL"]}${req.body.query}`;
   const options = {
-    method: "DELETE",
+    method: `${req.body.methodValue}`,
     headers: {
       "Content-Type": "application/json",
       Prefer: "return=representation",
