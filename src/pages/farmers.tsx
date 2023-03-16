@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../styles/farmers.module.css";
 import { Voice } from "@/components/voice";
+import { fetcher } from "@/lib/fecher";
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json());
 export default function Farmers() {
   const router = useRouter();
   const { search } = router.query;
