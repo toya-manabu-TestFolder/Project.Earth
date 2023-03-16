@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 import Search from "@/components/search";
 import Record from "@/components/top-record";
