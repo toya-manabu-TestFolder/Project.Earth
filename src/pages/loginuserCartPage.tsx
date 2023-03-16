@@ -13,13 +13,24 @@ const stripePromise = loadStripe(
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
 }) {
-  const res = await fetch("http://127.0.0.1:8000/cartitems?select=*,items(*)");
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: `${process.env["DB_KEY"]}`,
+      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+    },
+  };
+
+  const res = await fetch(
+    `${process.env["DB_URL"]}/cartitems?select=*,items(*)`,
+    options
+  );
   const data = await res.json();
   const res2 = await fetch(
-    `http://127.0.0.1:8000/users?id=eq.${context.req.cookies.id}`
+    `${process.env["DB_URL"]}/users?id=eq.${context.req.cookies.id}`,
+    options
   );
   const user = await res2.json();
-  // console.log(context.req.cookies.id);
   return {
     props: {
       data,
@@ -65,19 +76,16 @@ const loginuser_cartPage = (props: any) => {
       item_id: item_id,
       quantity: 0,
     };
-    fetch("http://localhost:3000/api/cartDelete", {
+    fetch("/api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //↓全部のデータを取り扱いたい時
-        Prefer: "return=representation",
-        //↓更新したいならTOKEN設定
-        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(deleteParam),
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
-        router.push("http://localhost:3000/loginuserCartPage");
+        router.push("/loginuserCartPage");
       }
     });
   };
@@ -93,20 +101,17 @@ const loginuser_cartPage = (props: any) => {
       quantity: 0,
     };
 
-    fetch("http://localhost:3000/api/cartDelete", {
+    fetch("/api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //↓全部のデータを取り扱いたい時
-        Prefer: "return=representation",
-        //↓更新したいならTOKEN設定
-        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(cartInport),
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
         for (let i = 1; i <= Number(event.target.value); i++) {
-          fetch("http://localhost:3000/api/cartInport", {
+          fetch("/api/cartInport", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -114,7 +119,7 @@ const loginuser_cartPage = (props: any) => {
             body: JSON.stringify(cartInport),
           });
         }
-        router.push("http://localhost:3000/loginuserCartPage");
+        router.push("/loginuserCartPage");
       }
     });
   };
