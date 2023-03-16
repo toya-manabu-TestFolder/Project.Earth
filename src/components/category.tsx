@@ -2,15 +2,14 @@ import Image from "next/image";
 import useSWR from "swr";
 import { useState } from "react";
 import styles from "../styles/category.module.css";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { fetcher } from "@/lib/fecher";
 
 export default function Category({ onClick }: any) {
-  const { data, error } = useSWR(`${process.env["DB_URL"]}/category`, fetcher);
-
+  const { data, error } = useSWR("api/category", fetcher);
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
-  console.log("カテゴリー", data);
+  // データ確認用
+  // console.log("カテゴリー", data);
 
   return (
     <>
