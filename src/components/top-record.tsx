@@ -25,9 +25,18 @@ export default function Record() {
   const [cookie, setCookie] = useState<number>();
   useEffect(() => {
     let cookie: string = document.cookie;
-    let id: string | number = cookie.match("id=[0-9]")[0];
-    id = Number(id.substring(3));
-    setCookie(id);
+    if (cookie !== null) {
+      const idMatch = cookie.match("id=[0-9]");
+      if (idMatch !== null) {
+        let id: string | number = idMatch[0];
+        id = Number(id.substring(3));
+        setCookie(id);
+      }
+      // let cookie: string = document.cookie;
+      //   let id: string | number = cookie.match("id=[0-9]")[0];
+      //   id = Number(id.substring(3));
+      //   setCookie(id);
+    }
   }, []);
 
   const { data, error } = useSWR<Farmer[]>(
