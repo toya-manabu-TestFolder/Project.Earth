@@ -4,7 +4,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const url = `${process.env["DB_URL"]}${req.body.query}`;
+  const url = `${process.env["DB_URL"]}${req.body.queryValue}`;
   const options = {
     method: `${req.body.methodValue}`,
     headers: {
@@ -13,6 +13,7 @@ export default async function handler(
       apikey: `${process.env["DB_KEY"]}`,
       Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
+    body: JSON.stringify(req.body.bodyValue),
   };
   const response = await fetch(url, options);
   const data = await response.json();
