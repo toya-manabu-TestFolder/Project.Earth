@@ -17,7 +17,7 @@ export default function NewFace() {
       <div className={styles.section}>
         <h2 className={styles.title}>新規の農家さん</h2>
         <div className={styles.flex}>
-          {data.map((farmer) => {
+          {data.map((farmer: any) => {
             return (
               <div key={farmer.id}>
                 <div className={styles.shape}>

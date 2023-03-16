@@ -197,7 +197,7 @@ const loginuser_cartPage = (props: any) => {
                         <div className={styles.priceBox}>
                           <p>価格&nbsp;:&nbsp;{item.items.price}</p>
                         </div>
-
+                        {/* con */}
                         <div className={styles.selectBox}>
                           <label htmlFor={item.id}>
                             数量変更&nbsp;:&nbsp;
@@ -233,6 +233,7 @@ const loginuser_cartPage = (props: any) => {
                             </select>
                           </label>
                         </div>
+                        {/* con */}
                         <div className={styles.buttonBox}>
                           <button
                             className={styles.deleteButton}

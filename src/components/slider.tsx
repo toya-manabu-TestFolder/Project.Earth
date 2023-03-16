@@ -1,5 +1,6 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css"; // デフォルトのテーマを読み込んでいます（コアスタイルのみ読み込む設定も可能）
+import Image from "next/image";
 
 export const Slider = () => {
   return (
@@ -13,25 +14,46 @@ export const Slider = () => {
         }}
       >
         <SplideSlide>
-          <img
-            className="slide-img"
-            src="/coverImages/cover2.jpg"
-            alt="かわいい猫の画像 part1"
-          />
+          <div className="img-box">
+            <Image
+              className="slide-img"
+              src="/coverImages/cover2.jpg"
+              alt="かわいい猫の画像 part1"
+              fill
+              sizes="100vw"
+              style={{
+                objectPosition: "left center",
+              }}
+            />
+          </div>
         </SplideSlide>
         <SplideSlide>
-          <img
-            className="slide-img"
-            src="/coverImages/cover1.jpg"
-            alt="かわいい猫の画像 part2"
-          />
+          <div className="img-box">
+            <Image
+              className="slide-img"
+              src="/coverImages/cover1.jpg"
+              alt="かわいい猫の画像 part2"
+              fill
+              sizes="100vw"
+              style={{
+                objectPosition: "left center",
+              }}
+            />
+          </div>
         </SplideSlide>
         <SplideSlide>
-          <img
-            className="slide-img"
-            src="/coverImages/cover3.jpg"
-            alt="かわいい猫の画像 part3"
-          />
+          <div className="img-box">
+            <Image
+              className="slide-img"
+              src="/coverImages/cover3.jpg"
+              alt="かわいい猫の画像 part3"
+              fill
+              sizes="100vw"
+              style={{
+                objectPosition: "left center",
+              }}
+            />
+          </div>
         </SplideSlide>
       </Splide>
 
@@ -45,6 +67,11 @@ export const Slider = () => {
         }
         .wpaw-slider.wpaw-slider__item {
           min-height: 540px !important;
+        }
+        .img-box {
+          position: relative;
+          width: 1920px;
+          height: 600px;
         }
       `}</style>
     </>

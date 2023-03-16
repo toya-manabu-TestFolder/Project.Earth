@@ -1,12 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type Data = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   const { email, password } = req.body;
   const url = `${process.env["DB_URL"]}/users?email=eq.${email}&password=eq.${password}`;
@@ -16,8 +12,6 @@ export default async function handler(
       apikey: `${process.env["DB_KEY"]}`,
       Authorization: `Bearer ${process.env["DB_KEY"]}`,
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
-      apikey: `${process.env["DB_KEY"]}`,
     },
   };
   const response = await fetch(url, options);

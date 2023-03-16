@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 import * as apiConnect from "@/lib/fetchApiConnect";
+import { Modal } from "@/components/modal/ModalContainer";
 
 export const getStaticPaths = async () => {
   const data = await apiConnect.getValue(`/farmer_data`);
@@ -46,7 +47,6 @@ export default function page(props: any) {
   useEffect(() => {
     let cookie: any = document.cookie;
     let category = localStorage.getItem("category");
-    console.log(cookie);
     if (document.cookie !== "") {
       let id = cookie.match("id=[0-9]")[0];
       id = id.substring(3);
@@ -172,22 +172,6 @@ export default function page(props: any) {
   }
 
   // --------------------------------------------------------
-  function Modal({ show, setShow }: { show: boolean; setShow: any }) {
-    const closeModal = () => {
-      setShow(false);
-    };
-    if (show) {
-      return (
-        <div className={styles.overlay} onClick={closeModal}>
-          <div className={styles.content}>
-            <p>カートに追加しました。</p>
-          </div>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
   const [show, setShow] = useState(false);
   // 下記JSX
   return (
@@ -238,6 +222,7 @@ export default function page(props: any) {
                 <div className={styles.priceBox}>
                   <p>価格&nbsp;&nbsp;{e.price}円</p>
                 </div>
+                {/* con */}
                 <div className={styles.selectBox}>
                   <label htmlFor={e.id}>
                     数量&nbsp;&nbsp;
@@ -260,6 +245,7 @@ export default function page(props: any) {
                     </select>
                   </label>
                 </div>
+                {/* con */}
                 <div className={styles.buttonBox}>
                   <button
                     onClick={(event) => {

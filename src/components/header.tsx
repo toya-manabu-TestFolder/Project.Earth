@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 import { FaShoppingCart } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import Image from "next/image";
 
 export default function Header() {
   const [cookie, setCookie] = useState<boolean>(false);
@@ -23,7 +24,7 @@ export default function Header() {
       <header className={styles.header}>
         <div>
           <Link href="/">
-            <img
+            <Image
               className={styles.logo}
               src="/site-image/site-logo.jpg"
               alt="ロゴ画像"

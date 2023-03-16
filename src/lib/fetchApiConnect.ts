@@ -14,7 +14,7 @@ export async function getValue(query: string) {
   return await res.json();
 }
 
-// クライアント側からのapifetch
+// クライアント側からのapifetch用
 export function postValue(
   queryValue: string,
   userValue: number,
