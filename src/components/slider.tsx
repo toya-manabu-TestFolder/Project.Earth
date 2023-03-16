@@ -18,6 +18,8 @@ export const Slider = () => {
             className="slide-img"
             src="/coverImages/cover2.jpg"
             alt="かわいい猫の画像 part1"
+            width={1920}
+            height={600}
           ></Image>
         </SplideSlide>
         <SplideSlide>
@@ -25,6 +27,8 @@ export const Slider = () => {
             className="slide-img"
             src="/coverImages/cover1.jpg"
             alt="かわいい猫の画像 part2"
+            width={1920}
+            height={600}
           ></Image>
         </SplideSlide>
         <SplideSlide>
@@ -32,6 +36,8 @@ export const Slider = () => {
             className="slide-img"
             src="/coverImages/cover3.jpg"
             alt="かわいい猫の画像 part3"
+            width={1920}
+            height={600}
           ></Image>
         </SplideSlide>
       </Splide>
