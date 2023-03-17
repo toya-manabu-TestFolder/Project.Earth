@@ -1,5 +1,6 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css"; // デフォルトのテーマを読み込んでいます（コアスタイルのみ読み込む設定も可能）
+import Image from "next/image";
 
 export const Slider = () => {
   return (
@@ -13,25 +14,31 @@ export const Slider = () => {
         }}
       >
         <SplideSlide>
-          <img
+          <Image
             className="slide-img"
             src="/coverImages/cover2.jpg"
             alt="かわいい猫の画像 part1"
-          />
+            width={1920}
+            height={600}
+          ></Image>
         </SplideSlide>
         <SplideSlide>
-          <img
+          <Image
             className="slide-img"
             src="/coverImages/cover1.jpg"
             alt="かわいい猫の画像 part2"
-          />
+            width={1920}
+            height={600}
+          ></Image>
         </SplideSlide>
         <SplideSlide>
-          <img
+          <Image
             className="slide-img"
             src="/coverImages/cover3.jpg"
             alt="かわいい猫の画像 part3"
-          />
+            width={1920}
+            height={600}
+          ></Image>
         </SplideSlide>
       </Splide>
 
