@@ -6,7 +6,7 @@ import styles from "../styles/newface.module.css";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function NewFace() {
-  const { data, error } = useSWR(`http://localhost:3000/api/newface`, fetcher);
+  const { data, error } = useSWR(`/api/newface`, fetcher);
 
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがないです</div>;
@@ -21,9 +21,7 @@ export default function NewFace() {
             return (
               <div key={farmer.id}>
                 <div className={styles.shape}>
-                  <Link
-                    href={`http://localhost:3000/farmerPage/${farmer.id}`}
-                  ></Link>
+                  <Link href={`/farmerPage/${farmer.id}`}></Link>
                   <Image
                     src={farmer.icon_imageurl}
                     alt={"農家画像"}

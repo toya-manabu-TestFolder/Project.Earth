@@ -17,7 +17,7 @@ export default async function FetchOfPost(data: User) {
     body: JSON.stringify(data),
   };
 
-  const response = await fetch("http://localhost:3000/api/users?", options);
+  const response = await fetch("/api/users?", options);
   console.log(response);
   const result = await response.json();
   console.log(result);

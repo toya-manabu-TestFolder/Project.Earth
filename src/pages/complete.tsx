@@ -12,7 +12,7 @@ export default function Complete() {
     let deleteParam = {
       user_id: Number(id),
     };
-    fetch("http://localhost:3000/api/completeCartDelete", {
+    fetch("/api/completeCartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
