@@ -8,11 +8,12 @@ export const getStaticPaths = async () => {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
     },
   };
-  const res = await fetch(`${process.env["DB_URL"]}/farmer_data`, options);
+  const res = await fetch(`${process.env.DB_URL}/farmer_data`, options);
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -31,18 +32,18 @@ export const getStaticProps = async ({ params }: { params: any }) => {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
     },
   };
 
-  const req1 = await fetch(`${process.env["DB_URL"]}/farmer_data`, options);
+  const req1 = await fetch(`${process.env.DB_URL}/farmer_data`, options);
   const farmerdata = await req1.json();
-  const req2 = await fetch(`${process.env["DB_URL"]}/items`, options);
+  const req2 = await fetch(`${process.env.DB_URL}/items`, options);
   const items = await req2.json();
-  const req3 = await fetch(`${process.env["DB_URL"]}/category`, options);
+  const req3 = await fetch(`${process.env.DB_URL}/category`, options);
   const category = await req3.json();
-  console.log(req1);
   return {
     props: {
       params,
@@ -65,7 +66,6 @@ export default function page(props: any) {
   useEffect(() => {
     let cookie: any = document.cookie;
     let category = localStorage.getItem("category");
-    console.log(cookie);
     if (document.cookie !== "") {
       let id = cookie.match("id=[0-9]")[0];
       id = id.substring(3);
@@ -78,7 +78,6 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
-    console.log(category);
     setitemSelect(Number(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

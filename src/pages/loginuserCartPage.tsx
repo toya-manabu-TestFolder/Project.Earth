@@ -16,18 +16,18 @@ export async function getServerSideProps(context: {
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
     },
   };
 
   const res = await fetch(
-    `${process.env["DB_URL"]}/cartitems?select=*,items(*)`,
+    `${process.env.DB_URL}/cartitems?select=*,items(*)`,
     options
   );
   const data = await res.json();
   const res2 = await fetch(
-    `${process.env["DB_URL"]}/users?id=eq.${context.req.cookies.id}`,
+    `${process.env.DB_URL}/users?id=eq.${context.req.cookies.id}`,
     options
   );
   const user = await res2.json();

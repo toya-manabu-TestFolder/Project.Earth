@@ -1,25 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 
-/*
-matcher : middleware.jsを適用する（呼び出す）パスを指定する
-*/
-export const config = {
-  matcher: ["/"],
-};
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
 
-export function middleware(req: NextRequest) {
-  const basicAuth = req.headers.get("authorization");
-  const url = req.nextUrl;
+  const authorizationHeader = req.headers.get("authorization");
 
-  if (basicAuth) {
-    const authValue = basicAuth.split(" ")[1];
-    const [user, pwd] = Buffer.from(authValue, "base64").toString().split(":");
+  if (authorizationHeader) {
+    const basicAuth = authorizationHeader.split(" ")[1];
+    const [user, password] = atob(basicAuth).split(":");
 
-    if (user === process.env.BASIC_USER && pwd === process.env.BASIC_PW) {
-      return NextResponse.next();
+    if (
+      user === process.env.BASIC_AUTH_USER &&
+      password === process.env.BASIC_AUTH_PASSWORD
+    ) {
+      return res;
     }
   }
+
+  const url = req.nextUrl;
   url.pathname = "/api/auth";
 
   return NextResponse.rewrite(url);
 }
+
+export const config = {
+  matcher: "/:path*",
+};
