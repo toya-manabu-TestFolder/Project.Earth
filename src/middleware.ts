@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-/*
-matcher : middleware.jsを適用する（呼び出す）パスを指定する
-*/
-export const config = {
-  matcher: ["/"],
-};
-
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const basicAuth = req.headers.get("authorization");
   const url = req.nextUrl;
 
@@ -23,3 +16,7 @@ export function middleware(req: NextRequest) {
 
   return NextResponse.rewrite(url);
 }
+
+export const config = {
+  matcher: "/",
+};

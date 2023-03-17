@@ -8,12 +8,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const url = `${process.env["DB_URL"]}/cartitems?select=*,items(*),users(*)`;
+  const url = `${process.env.DB_URL}/cartitems?select=*,items(*),users(*)`;
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
     },
   };
   const response = await fetch(url, options);
