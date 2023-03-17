@@ -22,7 +22,7 @@ export default function Login() {
       },
       body: JSON.stringify(data),
     };
-    const response = await fetch("http://localhost:3000/api/login", options);
+    const response = await fetch("/api/login", options);
     console.log(response);
     const result = await response.json();
     console.log(result);
@@ -78,10 +78,7 @@ export default function Login() {
             </form>
 
             <div className={styles.title}>新規会員登録はこちら</div>
-            <Link
-              href={"http://localhost:3000/user_register/"}
-              className={styles.link}
-            >
+            <Link href={"/user_register/"} className={styles.link}>
               <div className={styles.button}>
                 <button type="submit" className={styles.inner_button}>
                   新規会員登録をする
