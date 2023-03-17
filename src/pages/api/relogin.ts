@@ -9,12 +9,13 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const { email, password } = req.body;
-  const url = `${process.env["NEXT_PUBLIC_URL"]}/users?email=eq.${email}&password=eq.${password}`;
+  const url = `${process.env.DB_URL}/users?email=eq.${email}&password=eq.${password}`;
   const options = {
     method: "GET",
     headers: {
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
     },
   };
   const response = await fetch(url, options);

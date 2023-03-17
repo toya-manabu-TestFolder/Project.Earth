@@ -9,12 +9,12 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const response = await fetch(
-    `${process.env["DB_URL"]}/farmer_data?order=id.desc&limit=4`,
+    `${process.env.DB_URL}/farmer_data?order=id.desc&limit=4`,
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env["DB_KEY"]}`,
-        apikey: `${process.env["DB_KEY"]}`,
+        Authorization: `Bearer ${process.env.DB_KEY}`,
+        apikey: `${process.env.DB_KEY}`,
       },
     }
   );
