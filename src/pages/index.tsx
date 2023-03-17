@@ -59,7 +59,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.cover_text}>
-            農家さんの顔見て
+            農家さんの顔を見て
             <br />
             欲しいものを選べるECサイト
           </div>
