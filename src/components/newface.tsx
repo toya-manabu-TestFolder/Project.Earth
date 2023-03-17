@@ -2,8 +2,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import Image from "next/image";
 import styles from "../styles/newface.module.css";
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+import { fetcher } from "@/lib/fecher";
 
 export default function NewFace() {
   const { data, error } = useSWR(`/api/newface`, fetcher);
@@ -21,14 +20,15 @@ export default function NewFace() {
             return (
               <div key={farmer.id}>
                 <div className={styles.shape}>
-                  <Link href={`/farmerPage/${farmer.id}`}></Link>
-                  <Image
-                    src={farmer.icon_imageurl}
-                    alt={"農家画像"}
-                    width={300}
-                    height={250}
-                    className={styles.img}
-                  ></Image>
+                  <Link href={`/farmerPage/${farmer.id}`}>
+                    <Image
+                      src={farmer.icon_imageurl}
+                      alt={"農家画像"}
+                      width={300}
+                      height={250}
+                      className={styles.img}
+                    ></Image>
+                  </Link>
                 </div>
                 <p className={styles.text}>{farmer.farm_name}</p>
                 <p className={styles.text}>{farmer.comment}</p>
