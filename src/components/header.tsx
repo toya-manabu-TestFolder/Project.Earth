@@ -4,7 +4,6 @@ import Logout from "./logout";
 import Search from "./search";
 import styles from "../styles/header.module.css";
 import { useRouter } from "next/router";
-
 import { FaShoppingCart } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import Image from "next/image";
@@ -30,7 +29,7 @@ export default function Header() {
               alt="ロゴ画像"
               width={80}
               height={80}
-            />
+            ></Image>
           </Link>
           {/* <div className={styles.headerSearchForm}> */}
         </div>
