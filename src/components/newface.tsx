@@ -28,7 +28,7 @@ export default function NewFace() {
                     width={300}
                     height={250}
                     className={styles.img}
-                  />
+                  ></Image>
                 </div>
                 <p className={styles.text}>{farmer.farm_name}</p>
                 <p className={styles.text}>{farmer.comment}</p>
