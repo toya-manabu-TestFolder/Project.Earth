@@ -1,17 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  const basicAuth = req.headers.get("authorization");
-  const url = req.nextUrl;
+  const res = NextResponse.next();
 
-  if (basicAuth) {
-    const authValue = basicAuth.split(" ")[1];
-    const [user, pwd] = Buffer.from(authValue, "base64").toString().split(":");
+  const authorizationHeader = req.headers.get("authorization");
 
-    if (user === process.env.BASIC_USER && pwd === process.env.BASIC_PW) {
-      return NextResponse.next();
+  if (authorizationHeader) {
+    const basicAuth = authorizationHeader.split(" ")[1];
+    const [user, password] = atob(basicAuth).split(":");
+
+    if (
+      user === process.env.BASIC_AUTH_USER &&
+      password === process.env.BASIC_AUTH_PASSWORD
+    ) {
+      return res;
     }
   }
+
+  const url = req.nextUrl;
   url.pathname = "/api/auth";
 
   return NextResponse.rewrite(url);
