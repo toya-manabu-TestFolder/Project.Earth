@@ -91,8 +91,7 @@ const userData: UserData = {
   address: "11-22",
 };
 
-//擬似的なmockAPI関数を作る。fetchした際のreturnの内容を指定する。
-// node fetchをmock化する
+//擬似的なmock関数を作る。fetchした際のreturnの内容を指定する。
 
 //FetchOfPost関数の　returnの値が擬似APIの内容と一致するのかテストする。
 //FetchOfPost関数を実行した際に、fetchの代わりに擬似mock APIが呼び出されるようにする。
@@ -100,39 +99,26 @@ const userData: UserData = {
 test("check returnValue", async () => {
   (global as any).fetch = jest.fn<() => Promise<{}>>().mockResolvedValue({
     status: 200,
-    // .jsonはメソッドなのでjson(){}にする
+    // .jsonはメソッドなのでjson(){}にする。//なぜresponse.json()ではだめ？
     async json() {
       return [
+        //...userの値＋idも含めて使いまわせるように//これどうやるの？
         {
           id: 1,
-          //..userの値＋idも含めて使いまわせるように
-          name: "テスト",
-          email: "test@example.com",
-          password: "test",
-          zipcode: "111-2222",
-          prefecture: "東京都",
-          city: "新宿区",
-          address: "11-22",
+          ...userData,
         },
       ];
     },
   });
 
-  // ...userを変数に入れて下でも使う。上としたで同じになる
-  let result = 
-  const actual = await FetchOfPost(userData); //上の...userと同じ
+  // 上のreturnの値を変数に入れて下でも使う。
+  const actual = await FetchOfPost(userData);
   console.log("actual", actual);
   expect(actual).toEqual([
     {
       //...userの変数
       id: 1,
-      name: "テスト",
-      email: "test@example.com",
-      password: "test",
-      zipcode: "111-2222",
-      prefecture: "東京都",
-      city: "新宿区",
-      address: "11-22",
+      ...userData,
     },
   ]);
 });
