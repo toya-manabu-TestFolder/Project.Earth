@@ -6,9 +6,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY!);
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
