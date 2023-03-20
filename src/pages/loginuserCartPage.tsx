@@ -4,14 +4,17 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
-import * as apiConnect from "@/lib/fetchApiConnect";
-import SelectContener from "@/components/select/SelectContener";
+import { clientFetch } from "@/lib/fetch_relation/ClientFetch/clientFetch";
+import * as entiretyOptions from "@/lib/fetch_relation/const/entiretyOptions";
+import * as clientFetchBodys from "@/lib/fetch_relation/ClientFetch/clientFetchBodys";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
 }) {
-  const data = await apiConnect.getValue("/cartitems?select=*,items(*)");
-  const user = await apiConnect.getValue(
+  const data = await entiretyOptions.getServerSide(
+    "/cartitems?select=*,items(*)"
+  );
+  const user = await entiretyOptions.getServerSide(
     `/users?id=eq.${context.req.cookies.id}`
   );
   return {
@@ -54,17 +57,15 @@ const loginuser_cartPage = (props: any) => {
     item_id: number
   ) => {
     e.preventDefault();
-    apiConnect
-      .fetchApiConnect(
-        apiConnect.deleteValue(
-          `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
-        )
+    clientFetch(
+      clientFetchBodys.deleteValue(
+        `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
       )
-      .then((res) => {
-        if (res.status === 200) {
-          router.push("/loginuserCartPage");
-        }
-      });
+    ).then((res: any) => {
+      if (res.status === 200) {
+        router.push("/loginuserCartPage");
+      }
+    });
   };
   // -----------------------------------------------------------------------------------------
   // 数量変更ファンクション
@@ -72,24 +73,20 @@ const loginuser_cartPage = (props: any) => {
     event: ChangeEvent<HTMLSelectElement>,
     item_id: number
   ) => {
-    apiConnect
-      .fetchApiConnect(
-        apiConnect.deleteValue(
-          `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
-        )
+    clientFetch(
+      clientFetchBodys.deleteValue(
+        `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
       )
-      .then((res) => {
-        if (res.status === 200) {
-          for (let i = 1; i <= Number(event.target.value); i++) {
-            apiConnect
-              .fetchApiConnect(
-                apiConnect.postValue(`/cartitems`, id, item_id, 0)
-              )
-              .then((res) => console.log(res.status));
-          }
-          router.push("/loginuserCartPage");
+    ).then((res: any) => {
+      if (res.status === 200) {
+        for (let i = 1; i <= Number(event.target.value); i++) {
+          clientFetch(
+            clientFetchBodys.postValue(`/cartitems`, id, item_id, 0)
+          ).then((res: any) => console.log(res.status));
         }
-      });
+        router.push("/loginuserCartPage");
+      }
+    });
   };
   // -----------------------------------------------------------------------------------------
 
@@ -199,7 +196,6 @@ const loginuser_cartPage = (props: any) => {
                           <p>価格&nbsp;:&nbsp;{item.items.price}</p>
                         </div>
                         {/* con */}
-                        <SelectContener item={item} count={count} />
                         <div className={styles.selectBox}>
                           <label htmlFor={item.id}>
                             数量変更&nbsp;:&nbsp;
