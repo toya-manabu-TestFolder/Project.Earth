@@ -35,7 +35,6 @@ const loginuser_cartPage = (props: any) => {
 
   const router = useRouter();
   useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get("success")) {
       console.log("Order placed! You will receive an email confirmation.");
@@ -46,7 +45,6 @@ const loginuser_cartPage = (props: any) => {
         "Order canceled -- continue to shop around and checkout when you’re ready."
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // -----------------------------------------------------------------------------------------
