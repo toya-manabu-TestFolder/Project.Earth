@@ -11,6 +11,7 @@ export default async function handler(
   const response = await fetch(
     `${process.env.DB_URL}/farmer_data?order=id.desc&limit=4`,
     {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.DB_KEY}`,

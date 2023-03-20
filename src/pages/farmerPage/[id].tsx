@@ -3,18 +3,11 @@
 import Image from "next/image";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
+import * as apiConnect from "@/lib/fetch_relation/const/entiretyOptions";
+import { Modal } from "@/components/modal/ModalContainer";
 
 export const getStaticPaths = async () => {
-  const options = {
-    method: "GET",
-    headers: {
-      apikey: `${process.env.DB_KEY}`,
-      Authorization: `Bearer ${process.env.DB_KEY}`,
-      "Content-Type": "application/json",
-    },
-  };
-  const res = await fetch(`${process.env.DB_URL}/farmer_data`, options);
-  const data = await res.json();
+  const data = await apiConnect.getServerSide(`/farmer_data`);
   const paths = data.map((item: any) => {
     return {
       params: {
@@ -29,21 +22,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const options = {
-    method: "GET",
-    headers: {
-      apikey: `${process.env.DB_KEY}`,
-      Authorization: `Bearer ${process.env.DB_KEY}`,
-      "Content-Type": "application/json",
-    },
-  };
-
-  const req1 = await fetch(`${process.env.DB_URL}/farmer_data`, options);
-  const farmerdata = await req1.json();
-  const req2 = await fetch(`${process.env.DB_URL}/items`, options);
-  const items = await req2.json();
-  const req3 = await fetch(`${process.env.DB_URL}/category`, options);
-  const category = await req3.json();
+  const farmerdata = await apiConnect.getServerSide(`/farmer_data`);
+  const items = await apiConnect.getServerSide(`/items`);
+  const category = await apiConnect.getServerSide(`/category`);
   return {
     props: {
       params,
@@ -190,22 +171,6 @@ export default function page(props: any) {
   }
 
   // --------------------------------------------------------
-  function Modal({ show, setShow }: { show: boolean; setShow: any }) {
-    const closeModal = () => {
-      setShow(false);
-    };
-    if (show) {
-      return (
-        <div className={styles.overlay} onClick={closeModal}>
-          <div className={styles.content}>
-            <p>カートに追加しました。</p>
-          </div>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
   const [show, setShow] = useState(false);
   // 下記JSX
   return (
@@ -256,6 +221,7 @@ export default function page(props: any) {
                 <div className={styles.priceBox}>
                   <p>価格&nbsp;&nbsp;{e.price}円</p>
                 </div>
+                {/* con */}
                 <div className={styles.selectBox}>
                   <label htmlFor={e.id}>
                     数量&nbsp;&nbsp;
@@ -278,6 +244,7 @@ export default function page(props: any) {
                     </select>
                   </label>
                 </div>
+                {/* con */}
                 <div className={styles.buttonBox}>
                   <button
                     onClick={(event) => {

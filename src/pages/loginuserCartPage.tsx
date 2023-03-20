@@ -1,36 +1,22 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { SyntheticEvent } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styles from "../styles/cartpage.module.css";
+import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+import { clientFetch } from "@/lib/fetch_relation/ClientFetch/clientFetch";
+import * as entiretyOptions from "@/lib/fetch_relation/const/entiretyOptions";
+import * as clientFetchBodys from "@/lib/fetch_relation/ClientFetch/clientFetchBodys";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
 }) {
-  const options = {
-    method: "GET",
-    headers: {
-      apikey: `${process.env.DB_KEY}`,
-      Authorization: `Bearer ${process.env.DB_KEY}`,
-    },
-  };
-
-  const res = await fetch(
-    `${process.env.DB_URL}/cartitems?select=*,items(*)`,
-    options
+  const data = await entiretyOptions.getServerSide(
+    "/cartitems?select=*,items(*)"
   );
-  const data = await res.json();
-  const res2 = await fetch(
-    `${process.env.DB_URL}/users?id=eq.${context.req.cookies.id}`,
-    options
+  const user = await entiretyOptions.getServerSide(
+    `/users?id=eq.${context.req.cookies.id}`
   );
-  const user = await res2.json();
   return {
     props: {
       data,
@@ -71,19 +57,11 @@ const loginuser_cartPage = (props: any) => {
     item_id: number
   ) => {
     e.preventDefault();
-    let deleteParam = {
-      user_id: id,
-      item_id: item_id,
-      quantity: 0,
-    };
-    fetch("/api/cartDelete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(deleteParam),
-    }).then((res) => {
-      console.log(res.status);
+    clientFetch(
+      clientFetchBodys.deleteValue(
+        `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
+      )
+    ).then((res: any) => {
       if (res.status === 200) {
         router.push("/loginuserCartPage");
       }
@@ -95,29 +73,16 @@ const loginuser_cartPage = (props: any) => {
     event: ChangeEvent<HTMLSelectElement>,
     item_id: number
   ) => {
-    let cartInport = {
-      user_id: id,
-      item_id: item_id,
-      quantity: 0,
-    };
-
-    fetch("/api/cartDelete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cartInport),
-    }).then((res) => {
-      console.log(res.status);
+    clientFetch(
+      clientFetchBodys.deleteValue(
+        `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
+      )
+    ).then((res: any) => {
       if (res.status === 200) {
         for (let i = 1; i <= Number(event.target.value); i++) {
-          fetch("/api/cartInport", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(cartInport),
-          });
+          clientFetch(
+            clientFetchBodys.postValue(`/cartitems`, id, item_id, 0)
+          ).then((res: any) => console.log(res.status));
         }
         router.push("/loginuserCartPage");
       }
@@ -230,7 +195,7 @@ const loginuser_cartPage = (props: any) => {
                         <div className={styles.priceBox}>
                           <p>価格&nbsp;:&nbsp;{item.items.price}</p>
                         </div>
-
+                        {/* con */}
                         <div className={styles.selectBox}>
                           <label htmlFor={item.id}>
                             数量変更&nbsp;:&nbsp;
@@ -266,6 +231,7 @@ const loginuser_cartPage = (props: any) => {
                             </select>
                           </label>
                         </div>
+                        {/* con */}
                         <div className={styles.buttonBox}>
                           <button
                             className={styles.deleteButton}
