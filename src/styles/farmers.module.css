@@ -59,3 +59,14 @@
 .resultMessage {
   padding: 2%;
 }
+
+.pagingButtons {
+  list-style: none;
+  display: flex;
+  display: block;
+  text-align: right;
+}
+
+.pagingNumberButton {
+  padding: 1%;
+}

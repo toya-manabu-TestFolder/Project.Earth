@@ -16,7 +16,7 @@ export default function Farmers() {
     fetcher
   );
   // データ確認用
-  console.log("検索結果", data);
+  // console.log("検索結果", data);
   //
   if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
@@ -27,6 +27,8 @@ export default function Farmers() {
     //
     localStorage.setItem("category", categoryID);
   }
+
+  console.log("検索結果", data);
 
   return (
     <div>
@@ -65,7 +67,6 @@ export default function Farmers() {
                     <h2 className={styles.farmerName}>{farmer.farm_name}</h2>
                     <p className={styles.comment}>{farmer.comment}</p>
                   </div>
-
                   <div>
                     <Voice src={farmer.voiceurl} />
                   </div>
@@ -73,6 +74,23 @@ export default function Farmers() {
               );
             })}
           </div>
+        </div>
+        {/* ページング機能 */}
+        <div>
+          <ul className={styles.pagingButtons}>
+            <button className={styles.pagingNumberButton}>
+              <li>1</li>
+            </button>
+            <button className={styles.pagingNumberButton}>
+              <li>2</li>
+            </button>
+            <button className={styles.pagingNumberButton}>
+              <li>3</li>
+            </button>
+            <button className={styles.pagingNumberButton}>
+              <li>4</li>
+            </button>
+          </ul>
         </div>
       </main>
     </div>
