@@ -9,7 +9,6 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const { search } = req.query;
-
   const url = `${process.env.DB_URL}/farmer_data?select=*,items!inner(*)&items.items_search=like.*${search}*`;
   const options = {
     method: "GET",

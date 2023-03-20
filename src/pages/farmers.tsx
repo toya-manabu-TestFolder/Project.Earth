@@ -15,11 +15,17 @@ export default function Farmers() {
     !search ? "/api/farmer" : `/api/farmer/?search=${search}`,
     fetcher
   );
+  // データ確認用
+  console.log("検索結果", data);
+  //
   if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
-
   if (data.length !== 0) {
-    localStorage.setItem("category", `${data[0].items[0].category_id}`);
+    const categoryID = data[0].items[0].category_id;
+    //
+    console.log("localstrageの値", categoryID);
+    //
+    localStorage.setItem("category", categoryID);
   }
 
   return (
@@ -41,6 +47,7 @@ export default function Farmers() {
               </div>
             </section>
           )}
+
           <div className={styles.result}>
             {data.map((farmer: any) => {
               return (
