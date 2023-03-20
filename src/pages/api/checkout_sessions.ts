@@ -15,8 +15,8 @@ export default async function handler(req: any, res: any) {
         mode: "payment",
         line_items: items,
         customer: `${process.env.STRIPE_CUSTOMER_KEY}`,
-        success_url: `${process.env.STRIPE_SUCCESS_URL}`,
-        cancel_url: `${process.env.STRIPE_CANCEL_URL}`,
+        success_url: `http://localhost:3000/complete`,
+        cancel_url: `http://localhost:3000/loginuserCartPage`,
       });
       console.log("redirecting to stripe item page...");
       res.status(200).json({ redirectUrl: session.url });
