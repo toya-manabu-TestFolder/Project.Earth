@@ -1,11 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import IntoCart from "@/components/intoCart";
 import Image from "next/image";
-import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://127.0.0.1:8000/farmer_data");
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
+    },
+  };
+  const res = await fetch(`${process.env.DB_URL}/farmer_data`, options);
   const data = await res.json();
   const paths = data.map((item: any) => {
     return {
@@ -16,16 +24,25 @@ export const getStaticPaths = async () => {
   });
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const req1 = await fetch("http://127.0.0.1:8000/farmer_data");
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  const req1 = await fetch(`${process.env.DB_URL}/farmer_data`, options);
   const farmerdata = await req1.json();
-  const req2 = await fetch("http://127.0.0.1:8000/items");
+  const req2 = await fetch(`${process.env.DB_URL}/items`, options);
   const items = await req2.json();
-  const req3 = await fetch("http://127.0.0.1:8000/category");
+  const req3 = await fetch(`${process.env.DB_URL}/category`, options);
   const category = await req3.json();
   return {
     props: {
@@ -49,7 +66,6 @@ export default function page(props: any) {
   useEffect(() => {
     let cookie: any = document.cookie;
     let category = localStorage.getItem("category");
-    console.log(cookie);
     if (document.cookie !== "") {
       let id = cookie.match("id=[0-9]")[0];
       id = id.substring(3);
@@ -62,7 +78,6 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
-    console.log(category);
     setitemSelect(Number(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -140,7 +155,7 @@ export default function page(props: any) {
   useEffect(() => {
     if (cookie.user_id !== 0) {
       for (let i = 1; i <= cartData.quantity; i++) {
-        fetch("http://localhost:3000/api/cartInport", {
+        fetch("/api/cartInport", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

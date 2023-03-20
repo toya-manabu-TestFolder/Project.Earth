@@ -3,24 +3,32 @@ import React, { SyntheticEvent } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import styles from "../styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY!);
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
 }) {
-  const res = await fetch("http://127.0.0.1:8000/cartitems?select=*,items(*)");
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
+    },
+  };
+
+  const res = await fetch(
+    `${process.env.DB_URL}/cartitems?select=*,items(*)`,
+    options
+  );
   const data = await res.json();
   const res2 = await fetch(
-    `http://127.0.0.1:8000/users?id=eq.${context.req.cookies.id}`
+    `${process.env.DB_URL}/users?id=eq.${context.req.cookies.id}`,
+    options
   );
   const user = await res2.json();
-  // console.log(context.req.cookies.id);
   return {
     props: {
       data,
@@ -66,19 +74,16 @@ const loginuser_cartPage = (props: any) => {
       item_id: item_id,
       quantity: 0,
     };
-    fetch("http://localhost:3000/api/cartDelete", {
+    fetch("/api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //↓全部のデータを取り扱いたい時
-        Prefer: "return=representation",
-        //↓更新したいならTOKEN設定
-        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(deleteParam),
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
-        router.push("http://localhost:3000/loginuserCartPage");
+        router.push("/loginuserCartPage");
       }
     });
   };
@@ -94,20 +99,17 @@ const loginuser_cartPage = (props: any) => {
       quantity: 0,
     };
 
-    fetch("http://localhost:3000/api/cartDelete", {
+    fetch("/api/cartDelete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //↓全部のデータを取り扱いたい時
-        Prefer: "return=representation",
-        //↓更新したいならTOKEN設定
-        Authorization: `Bearer ${process.env["POSTGREST_API_TOKEN"]}`,
       },
       body: JSON.stringify(cartInport),
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
         for (let i = 1; i <= Number(event.target.value); i++) {
-          fetch("http://localhost:3000/api/cartInport", {
+          fetch("/api/cartInport", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -115,7 +117,7 @@ const loginuser_cartPage = (props: any) => {
             body: JSON.stringify(cartInport),
           });
         }
-        router.push("http://localhost:3000/loginuserCartPage");
+        router.push("/loginuserCartPage");
       }
     });
   };
@@ -209,71 +211,69 @@ const loginuser_cartPage = (props: any) => {
                 <>
                   {/* 下記から商品情報 */}
                   <div key={item.id} className={styles.itemBox}>
-                    <form>
-                      <div className={styles.flex}>
-                        <div className={styles.imageBox}>
-                          <Image
-                            src={item.items.image}
-                            width={200}
-                            height={200}
-                            className={styles.image}
-                            alt={"野菜画像"}
-                          />
+                    <div className={styles.flex}>
+                      <div className={styles.imageBox}>
+                        <Image
+                          src={item.items.image}
+                          width={200}
+                          height={200}
+                          className={styles.image}
+                          alt={"野菜画像"}
+                        />
+                      </div>
+                      <div className={styles.discriptionBox}>
+                        <div className={styles.nameBox}>
+                          <p> 商品名&nbsp;:&nbsp;{item.items.name}</p>
                         </div>
-                        <div className={styles.discriptionBox}>
-                          <div className={styles.nameBox}>
-                            <p> 商品名&nbsp;:&nbsp;{item.items.name}</p>
-                          </div>
-                          <div className={styles.priceBox}>
-                            <p>価格&nbsp;:&nbsp;{item.items.price}</p>
-                          </div>
+                        <div className={styles.priceBox}>
+                          <p>価格&nbsp;:&nbsp;{item.items.price}</p>
+                        </div>
 
-                          <div className={styles.selectBox}>
-                            <label htmlFor={item.id}>
-                              数量変更&nbsp;:&nbsp;
-                              <select
-                                id={item.id}
-                                defaultValue={count}
-                                onChange={(event) =>
-                                  changeItemQuantity(event, item.item_id)
-                                }
-                                className={styles.select}
-                              >
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                              </select>
-                            </label>
-                          </div>
-                          <div className={styles.buttonBox}>
-                            <button
-                              className={styles.deleteButton}
-                              onClick={(e) => deleteCartItem(e, item.item_id)}
+                        <div className={styles.selectBox}>
+                          <label htmlFor={item.id}>
+                            数量変更&nbsp;:&nbsp;
+                            <select
+                              id={item.id}
+                              defaultValue={count}
+                              onChange={(event) =>
+                                changeItemQuantity(event, item.item_id)
+                              }
+                              className={styles.select}
                             >
-                              カートから削除
-                            </button>
-                          </div>
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                              <option value="11">11</option>
+                              <option value="12">12</option>
+                              <option value="13">13</option>
+                              <option value="14">14</option>
+                              <option value="15">15</option>
+                              <option value="16">16</option>
+                              <option value="17">17</option>
+                              <option value="18">18</option>
+                              <option value="19">19</option>
+                              <option value="20">20</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div className={styles.buttonBox}>
+                          <button
+                            className={styles.deleteButton}
+                            onClick={(e) => deleteCartItem(e, item.item_id)}
+                          >
+                            カートから削除
+                          </button>
                         </div>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </>
               );

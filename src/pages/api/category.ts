@@ -1,6 +1,3 @@
-//ここからpostgrestに送る
-//リクエスト受け取ったものが正しいか確認
-
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -11,14 +8,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const url = `${process.env.DB_URL}/cartitems?user_id=eq.${req.body.user_id}`;
+  const url = `${process.env.DB_URL}/category`;
   const options = {
-    method: "DELETE",
+    method: "GET",
     headers: {
-      "Content-Type": "application/json",
-      Prefer: "return=representation",
       apikey: `${process.env.DB_KEY}`,
       Authorization: `Bearer ${process.env.DB_KEY}`,
+      "Content-Type": "application/json",
     },
   };
   const response = await fetch(url, options);

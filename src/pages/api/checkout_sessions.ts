@@ -1,3 +1,5 @@
+import process from "process";
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req: any, res: any) {
@@ -13,9 +15,9 @@ export default async function handler(req: any, res: any) {
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
         line_items: items,
-        customer: "cus_NRwUeNGeFVmjiH",
-        success_url: "http://localhost:3000/complete",
-        cancel_url: "http://localhost:3000/loginuserCartPage",
+        customer: process.env.STRIPE_CUSTOMER_KEY,
+        success_url: "/complete",
+        cancel_url: "/loginuserCartPage",
       });
       console.log("redirecting to stripe item page...");
       res.status(200).json({ redirectUrl: session.url });

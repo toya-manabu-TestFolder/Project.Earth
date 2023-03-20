@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 import Search from "@/components/search";
 import Record from "@/components/top-record";
@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <main>
         <section className={styles.top_cover}>
-          <Image
+          {/* <Image
             src="/coverImages/plant.png"
             width={100}
             height={100}
@@ -52,14 +52,14 @@ export default function Home() {
             height={100}
             className={styles.plant}
             alt={""}
-          />
+          /> */}
           <div>
             <div className={styles.cover_image}>
               <Slider />
             </div>
           </div>
           <div className={styles.cover_text}>
-            農家さんの顔見て
+            農家さんの顔を見て
             <br />
             欲しいものを選べるECサイト
           </div>

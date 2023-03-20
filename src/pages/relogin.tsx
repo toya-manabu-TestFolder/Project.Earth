@@ -56,7 +56,7 @@ export default function Login() {
       },
       body: JSON.stringify(data),
     };
-    const response = await fetch("http://localhost:3000/api/relogin", options);
+    const response = await fetch("/api/relogin", options);
     console.log(response);
     const result = await response.json();
     console.log(result[0].id);
@@ -126,7 +126,7 @@ export default function Login() {
               </div>
             </form>
             <div className={styles.title}>新規会員登録はこちら</div>
-            <Link href={"http://localhost:3000/user_register/"}>
+            <Link href={"/user_register/"}>
               <div className={styles.button}>
                 <button type="submit" className={styles.inner_button}>
                   新規会員登録をする

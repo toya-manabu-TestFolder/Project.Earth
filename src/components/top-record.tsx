@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import Image from "next/image";
 import styles from "../styles/record.module.css";
+import { fetcher } from "@/lib/fecher";
 
 //SWRを使う　indexの中でこのコンポーネントのみCSRをするイメージ
 
@@ -19,21 +20,25 @@ type Farmer = {
   };
 };
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function Record() {
   const [cookie, setCookie] = useState<number>();
   useEffect(() => {
     let cookie: string = document.cookie;
-    let id: string | number = cookie.match("id=[0-9]")[0];
-    id = Number(id.substring(3));
-    setCookie(id);
+    if (cookie !== null) {
+      const idMatch = cookie.match("id=[0-9]");
+      if (idMatch !== null) {
+        let id: string | number = idMatch[0];
+        id = Number(id.substring(3));
+        setCookie(id);
+      }
+      // let cookie: string = document.cookie;
+      //   let id: string | number = cookie.match("id=[0-9]")[0];
+      //   id = Number(id.substring(3));
+      //   setCookie(id);
+    }
   }, []);
 
-  const { data, error } = useSWR<Farmer[]>(
-    `http://localhost:3000/api/top-record`,
-    fetcher
-  );
+  const { data, error } = useSWR<Farmer[]>(`/api/top-record`, fetcher);
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
   console.log("履歴", data);
@@ -53,10 +58,7 @@ export default function Record() {
       },
       body: JSON.stringify(cartData),
     };
-    const response = await fetch(
-      "http://localhost:3000/api/cartInport",
-      options
-    );
+    const response = await fetch("/api/cartInport", options);
     console.log(response);
     const result = await response.json();
     console.log(result);
