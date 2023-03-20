@@ -2,9 +2,10 @@
 import React, { SyntheticEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styles from "../styles/cartpage.module.css";
+import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
 import * as apiConnect from "@/lib/fetchApiConnect";
+import SelectContener from "@/components/select/SelectContener";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
@@ -198,6 +199,7 @@ const loginuser_cartPage = (props: any) => {
                           <p>価格&nbsp;:&nbsp;{item.items.price}</p>
                         </div>
                         {/* con */}
+                        <SelectContener item={item} count={count} />
                         <div className={styles.selectBox}>
                           <label htmlFor={item.id}>
                             数量変更&nbsp;:&nbsp;

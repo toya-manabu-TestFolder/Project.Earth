@@ -59,7 +59,6 @@ export default function page(props: any) {
         user_id: Number(id),
       });
     }
-    console.log(category);
     setitemSelect(Number(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

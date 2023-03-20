@@ -11,15 +11,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log(req.body);
-  const url = `${process.env["DB_URL"]}/cartitems?user_id=eq.${req.body.deleteParam.user_id}&item_id=eq.${req.body.deleteParam.item_id}`;
+  const url = `${process.env.DB_URL}/cartitems?user_id=eq.${req.body.user_id}&item_id=eq.${req.body.item_id}`;
   const options = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Prefer: "return=representation",
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
+      apikey: `${process.env.DB_KEY}`,
+      Authorization: `Bearer ${process.env.DB_KEY}`,
     },
   };
   const response = await fetch(url, options);
