@@ -6,6 +6,7 @@ export async function clientFetch(clientValue: clientValueType) {
     headers: {
       "Content-Type": "application/json",
     },
+    // 下記情報をdataConnetctで活用
     body: JSON.stringify({
       methodValue: clientValue.method,
       queryValue: clientValue.query,

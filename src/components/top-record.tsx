@@ -41,7 +41,6 @@ export default function Record() {
   const { data, error } = useSWR<Farmer[]>(`/api/top-record`, fetcher);
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
-  console.log("履歴", data);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -59,9 +58,7 @@ export default function Record() {
       body: JSON.stringify(cartData),
     };
     const response = await fetch("/api/cartInport", options);
-    console.log(response);
     const result = await response.json();
-    console.log(result);
   };
 
   return (

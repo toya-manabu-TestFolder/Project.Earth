@@ -5,6 +5,8 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 import * as apiConnect from "@/lib/fetch_relation/const/entiretyOptions";
 import { Modal } from "@/components/modal/ModalContainer";
+import { clientFetch } from "@/lib/fetch_relation/ClientFetch/clientFetch";
+import * as clientFetchBodys from "@/lib/fetch_relation/ClientFetch/clientFetchBodys";
 
 export const getStaticPaths = async () => {
   const data = await apiConnect.getServerSide(`/farmer_data`);
@@ -25,6 +27,7 @@ export const getStaticProps = async ({ params }: { params: any }) => {
   const farmerdata = await apiConnect.getServerSide(`/farmer_data`);
   const items = await apiConnect.getServerSide(`/items`);
   const category = await apiConnect.getServerSide(`/category`);
+  console.log(params);
   return {
     props: {
       params,
@@ -135,15 +138,14 @@ export default function page(props: any) {
   // カートへボタン押下後
   useEffect(() => {
     if (cookie.user_id !== 0) {
-      for (let i = 1; i <= cartData.quantity; i++) {
-        fetch("/api/cartInport", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cartData),
-        });
-      }
+      clientFetch(
+        clientFetchBodys.cartImportValue(
+          `/cartitems`,
+          cartData.user_id,
+          cartData.item_id,
+          cartData.quantity
+        )
+      );
     } else {
       if (localStorage.getItem(`${oneTimeStorage.id}`) !== null) {
         let test: any = localStorage.getItem(`${oneTimeStorage.id}`);

@@ -1,5 +1,5 @@
 // POST
-export function postValue(
+export function cartImportValue(
   queryValue: string,
   userValue: number,
   itemValue: number,

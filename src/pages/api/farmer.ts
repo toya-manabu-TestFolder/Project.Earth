@@ -23,5 +23,4 @@ export default async function handler(
   const data = await response.json();
   res.status(200).json(data);
   // データ確認用
-  // console.log(data);
 }
