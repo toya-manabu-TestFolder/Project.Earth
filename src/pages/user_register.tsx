@@ -12,9 +12,12 @@ export default function User_register() {
   const [prefecture, setPrefecture] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
+  const [count, setCount] = useState("");
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    console.log(event.target);
+    console.log(event.currentTarget);
     //空欄があったら注意文を表示させる
 
     //以下fetch
@@ -30,10 +33,18 @@ export default function User_register() {
     };
     //fetchを外部ファイルで定義
     //空欄があったらfetchしない
-
-    const result = await FetchOfPost(data);
-    if (result.length === 1) {
-      router.replace("/login");
+    let ok = 0;
+    Object.keys(data).forEach(async (each) => {
+      if (each !== "") {
+        ok = ok + 1;
+      }
+    });
+    console.log("ok", ok);
+    if (ok === 7) {
+      const result = await FetchOfPost(data);
+      if (result.length === 1) {
+        router.replace("/login");
+      }
     }
   };
 

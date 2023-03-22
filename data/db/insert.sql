@@ -144,6 +144,7 @@ INSERT INTO api.sales (id,user_id,item_id,farmer_id,quantity) VALUES
 (1,1,2,1,1),
 (2,1,5,1,1)
 
+
 --@block
 -- テスト用のためinsert不要
 -- UPDATE api.items SET image = '/cabbage/cabbage1:2.jpg' Where id=2;
