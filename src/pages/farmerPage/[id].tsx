@@ -5,8 +5,8 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 import * as apiConnect from "@/lib/fetch_relation/const/entiretyOptions";
 import { Modal } from "@/components/modal/ModalContainer";
-import { clientFetch } from "@/lib/fetch_relation/ClientFetch/clientFetch";
-import * as clientFetchBodys from "@/lib/fetch_relation/ClientFetch/clientFetchBodys";
+import { cartClientFetch } from "@/lib/fetch_relation/cartRelation/cartClientFetch";
+import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
 
 export const getStaticPaths = async () => {
   const data = await apiConnect.getServerSide(`/farmer_data`);
@@ -138,8 +138,8 @@ export default function page(props: any) {
   // カートへボタン押下後
   useEffect(() => {
     if (cookie.user_id !== 0) {
-      clientFetch(
-        clientFetchBodys.cartImportValue(
+      cartClientFetch(
+        cartFetchOptions.cartImportValue(
           `/cartitems`,
           cartData.user_id,
           cartData.item_id,

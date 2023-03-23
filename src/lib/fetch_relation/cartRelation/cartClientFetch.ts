@@ -1,6 +1,6 @@
 import { clientValueType } from "@/types/typescript";
 
-export async function clientFetch(clientValue: clientValueType) {
+export async function cartClientFetch(clientValue: clientValueType) {
   let apiOptions = {
     method: "POST",
     headers: {

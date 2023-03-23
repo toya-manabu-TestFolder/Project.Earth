@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
-import { clientFetch } from "@/lib/fetch_relation/ClientFetch/clientFetch";
+import { cartClientFetch } from "@/lib/fetch_relation/cartRelation/cartClientFetch";
 import * as entiretyOptions from "@/lib/fetch_relation/const/entiretyOptions";
-import * as clientFetchBodys from "@/lib/fetch_relation/ClientFetch/clientFetchBodys";
+import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
@@ -42,8 +42,8 @@ const loginuser_cartPage = (props: any) => {
     item_id: number
   ) => {
     e.preventDefault();
-    clientFetch(
-      clientFetchBodys.deleteValue(
+    cartClientFetch(
+      cartFetchOptions.cartDeleteValue(
         `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
       )
     ).then((res: any) => {
@@ -58,8 +58,8 @@ const loginuser_cartPage = (props: any) => {
     event: ChangeEvent<HTMLSelectElement>,
     item_id: number
   ) => {
-    clientFetch(
-      clientFetchBodys.cartImportValue(
+    cartClientFetch(
+      cartFetchOptions.cartImportValue(
         `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`,
         id,
         item_id,

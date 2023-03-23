@@ -15,7 +15,7 @@ export function cartImportValue(
 }
 
 // DELETE
-export function deleteValue(queryValue: string) {
+export function cartDeleteValue(queryValue: string) {
   return {
     method: "DELETE",
     query: queryValue,
