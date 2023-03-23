@@ -9,7 +9,7 @@ type User = {
 };
 
 // バリデート？エラーパターンをつける
-export default async function FetchOfPost(data: User) {
+export default async function FetchOfPost(data: User, url: string) {
   const options = {
     method: "POST",
     headers: {
@@ -18,7 +18,7 @@ export default async function FetchOfPost(data: User) {
     body: JSON.stringify(data),
   };
 
-  const response = await fetch("/api/users?", options);
+  const response = await fetch(`/api/${url}`, options);
   console.log(response);
   const result = await response.json();
   console.log("result", result);
