@@ -8,7 +8,7 @@ export type storageType = {
   quantity: number;
 };
 
-export type postValueType = {
+export type cartImportValueType = {
   query: string;
   user: number;
   item: number;

@@ -15,6 +15,8 @@ export default function User_register() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    //空欄があったら注意文を表示させる
+
     //以下fetch
     //fetchのoptionで使うdata
     const data = {
@@ -27,6 +29,8 @@ export default function User_register() {
       address: address,
     };
     //fetchを外部ファイルで定義
+    //空欄があったらfetchしない
+
     const result = await FetchOfPost(data);
     if (result.length === 1) {
       router.replace("/login");
