@@ -1,13 +1,25 @@
 // POST
-export function cartImportValue(
-  queryValue: string,
+export function cartPostValue(
   userValue: number,
   itemValue: number,
   quantityValue: number
 ) {
   return {
     method: "POST",
-    query: queryValue,
+    user: userValue,
+    item: itemValue,
+    quantityNumber: quantityValue,
+  };
+}
+
+// PATCH
+export function cartPatchValue(
+  userValue: number,
+  itemValue: number,
+  quantityValue: number
+) {
+  return {
+    method: "PATCH",
     user: userValue,
     item: itemValue,
     quantityNumber: quantityValue,

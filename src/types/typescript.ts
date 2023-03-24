@@ -21,7 +21,6 @@ export type deleteValueType = {
 
 export type clientValueType = {
   method: string;
-  query: string;
   user: number;
   item: number;
   quantityNumber: number;

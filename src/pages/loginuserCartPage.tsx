@@ -5,16 +5,14 @@ import { useRouter } from "next/router";
 import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
 import { cartClientFetch } from "@/lib/fetch_relation/cartRelation/cartClientFetch";
-import * as entiretyOptions from "@/lib/fetch_relation/const/entiretyOptions";
 import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
+import { connectGetFetchApi } from "@/lib/fetch_relation/getFetch/connectGetFetchApi";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
 }) {
-  const data = await entiretyOptions.getServerSide(
-    "/cartitems?select=*,items(*)"
-  );
-  const user = await entiretyOptions.getServerSide(
+  const data = await connectGetFetchApi("/cartitems?select=*,items(*)");
+  const user = await connectGetFetchApi(
     `/users?id=eq.${context.req.cookies.id}`
   );
   return {
@@ -59,12 +57,7 @@ const loginuser_cartPage = (props: any) => {
     item_id: number
   ) => {
     cartClientFetch(
-      cartFetchOptions.cartImportValue(
-        `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`,
-        id,
-        item_id,
-        Number(event.target.value)
-      )
+      cartFetchOptions.cartPostValue(id, item_id, Number(event.target.value))
     ).then((res: any) => {
       if (res.status === 200) {
         router.push("/loginuserCartPage");

@@ -1,20 +1,6 @@
-// ServerSideRendering/ServerSideGeneration用
-export async function getServerSide(query: string) {
-  let options = {
-    method: "GET",
-    headers: {
-      apikey: `${process.env["DB_KEY"]}`,
-      Authorization: `Bearer ${process.env["DB_KEY"]}`,
-    },
-  };
-  const res = await fetch(`${process.env["DB_URL"]}${query}`, options);
-  return await res.json();
-}
-
-// 全体用
 // Post
-export const postOption = (postValue: any) => {
-  return {
+export const Post = async (postValue: any, query: string) => {
+  const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,11 +10,13 @@ export const postOption = (postValue: any) => {
     },
     body: JSON.stringify(postValue),
   };
+  const res = await fetch(`${process.env["DB_URL"]}${query}`, options);
+  return res.json();
 };
 
 // Get
-export const getOption = () => {
-  return {
+export const Get = async (query: string) => {
+  const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -37,11 +25,13 @@ export const getOption = () => {
       Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
+  const res = await fetch(`${process.env["DB_URL"]}${query}`, options);
+  return res.json();
 };
 
 // Delete
-export const deleteOption = () => {
-  return {
+export const Delete = async (query: string) => {
+  const options = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -50,11 +40,13 @@ export const deleteOption = () => {
       Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
   };
+  const res = await fetch(`${process.env["DB_URL"]}${query}`, options);
+  return res.json();
 };
 
-// Put
-export const patchOption = (patchValue: any) => {
-  return {
+// Patch
+export const Patch = async (patchValue: any, query: string) => {
+  const options = {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -64,4 +56,6 @@ export const patchOption = (patchValue: any) => {
     },
     body: JSON.stringify(patchValue),
   };
+  const res = await fetch(`${process.env["DB_URL"]}${query}`, options);
+  return res.json();
 };

@@ -6,10 +6,8 @@ export async function cartClientFetch(clientValue: clientValueType) {
     headers: {
       "Content-Type": "application/json",
     },
-    // 下記情報をdataConnetctで活用
     body: JSON.stringify({
       methodValue: clientValue.method,
-      queryValue: clientValue.query,
       bodyValue: {
         user_id: clientValue.user,
         item_id: clientValue.item,
@@ -17,6 +15,6 @@ export async function cartClientFetch(clientValue: clientValueType) {
       },
     }),
   };
-  let response = await fetch("/api/dataConnect", apiOptions);
+  let response = await fetch("/api/cartDataEdit", apiOptions);
   return response;
 }
