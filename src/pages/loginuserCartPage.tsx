@@ -3,7 +3,7 @@ import React, { SyntheticEvent } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import styles from "../styles/cartpage.module.css";
+import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY!);
