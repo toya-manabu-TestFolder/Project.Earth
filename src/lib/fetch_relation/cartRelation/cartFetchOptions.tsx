@@ -1,5 +1,5 @@
 // POST
-export function postValue(
+export function cartImportValue(
   queryValue: string,
   userValue: number,
   itemValue: number,
@@ -15,7 +15,7 @@ export function postValue(
 }
 
 // DELETE
-export function deleteValue(queryValue: string) {
+export function cartDeleteValue(queryValue: string) {
   return {
     method: "DELETE",
     query: queryValue,

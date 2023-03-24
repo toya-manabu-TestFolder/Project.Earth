@@ -53,15 +53,15 @@ export const deleteOption = () => {
 };
 
 // Put
-export const putOption = (putValue: any) => {
+export const patchOption = (patchValue: any) => {
   return {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Prefer: "return=representation",
       apikey: `${process.env["DB_KEY"]}`,
       Authorization: `Bearer ${process.env["DB_KEY"]}`,
     },
-    body: JSON.stringify(putValue),
+    body: JSON.stringify(patchValue),
   };
 };

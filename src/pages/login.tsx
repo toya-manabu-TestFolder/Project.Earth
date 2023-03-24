@@ -23,9 +23,7 @@ export default function Login() {
       body: JSON.stringify(data),
     };
     const response = await fetch("/api/login", options);
-    console.log(response);
     const result = await response.json();
-    console.log(result);
 
     if (response.ok !== true || result === "") {
       router.push("/login");

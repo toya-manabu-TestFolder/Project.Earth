@@ -1,11 +1,12 @@
 import { clientValueType } from "@/types/typescript";
 
-export async function clientFetch(clientValue: clientValueType) {
+export async function cartClientFetch(clientValue: clientValueType) {
   let apiOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    // 下記情報をdataConnetctで活用
     body: JSON.stringify({
       methodValue: clientValue.method,
       queryValue: clientValue.query,

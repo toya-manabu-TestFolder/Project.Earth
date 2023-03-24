@@ -39,7 +39,6 @@ export default function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   //   let inportData = cartData;
-  //   console.log(inportData);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -57,9 +56,7 @@ export default function Login() {
       body: JSON.stringify(data),
     };
     const response = await fetch("/api/relogin", options);
-    console.log(response);
     const result = await response.json();
-    console.log(result[0].id);
 
     if (response.ok !== true || result === "") {
       router.replace("/login");
@@ -72,11 +69,9 @@ export default function Login() {
         body: JSON.stringify(cartData),
       })
         .then((res) => {
-          console.log("status", res.status);
           return res.json();
         })
         .then((data) => {
-          console.log("response body", JSON.stringify(data));
           router.push(data.redirectUrl);
         })
         .catch((err) => console.error("Failed to fetch", err));
