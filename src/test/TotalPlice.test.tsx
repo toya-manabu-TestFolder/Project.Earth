@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { TotalPlice } from "@/components/TotalPlice";
+import TotalPlice from "@/components/TotalPlice";
 
 describe("購入者の情報と購入金額を表示する", () => {
-  describe("debugの確認", () => {
+  it("debugの確認", () => {
     render(<TotalPlice />);
 
     screen.debug();

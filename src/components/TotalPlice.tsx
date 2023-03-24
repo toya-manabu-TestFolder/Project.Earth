@@ -1,6 +1,12 @@
 import styles from "@/styles/cartpage.module.css";
+import { fetcher } from "@/lib/fecher";
+import useSWR from "swr";
 
 const TotalPlice = () => {
+  const { data, error, isLoading } = useSWR(`/api/`, fetcher);
+  if (error) return "エラーが発生しました";
+  if (isLoading) return "ロード中";
+
   return (
     <div>
       <h3>お届け先情報</h3>
