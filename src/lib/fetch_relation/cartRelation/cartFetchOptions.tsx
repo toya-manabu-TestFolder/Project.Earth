@@ -1,4 +1,4 @@
-// POST
+// POST----------------------------------------------------------------
 export function cartPostValue(
   userValue: number,
   itemValue: number,
@@ -6,13 +6,15 @@ export function cartPostValue(
 ) {
   return {
     method: "POST",
-    user: userValue,
-    item: itemValue,
-    quantityNumber: quantityValue,
+    bodyValue: {
+      user_id: userValue,
+      item_id: itemValue,
+      quantity: quantityValue,
+    },
   };
 }
 
-// PATCH
+// PATCH----------------------------------------------------------------
 export function cartPatchValue(
   userValue: number,
   itemValue: number,
@@ -20,19 +22,21 @@ export function cartPatchValue(
 ) {
   return {
     method: "PATCH",
-    user: userValue,
-    item: itemValue,
-    quantityNumber: quantityValue,
+    bodyValue: {
+      user_id: userValue,
+      item_id: itemValue,
+      quantity: quantityValue,
+    },
   };
 }
 
-// DELETE
-export function cartDeleteValue(queryValue: string) {
+// DELETE----------------------------------------------------------------
+export function cartDeleteValue(userValue: number, itemValue: number) {
   return {
     method: "DELETE",
-    query: queryValue,
-    user: 0,
-    item: 0,
-    quantityNumber: 0,
+    bodyValue: {
+      user_id: userValue,
+      item_id: itemValue,
+    },
   };
 }

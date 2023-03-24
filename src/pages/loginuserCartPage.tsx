@@ -4,17 +4,15 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
-import { cartClientFetch } from "@/lib/fetch_relation/cartRelation/cartClientFetch";
 import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
-import { connectGetFetchApi } from "@/lib/fetch_relation/getFetch/connectGetFetchApi";
+import { Get } from "@/lib/fetch_relation/const/apiFetchrs";
+import { apiPost } from "@/lib/fetch_relation/APIPOST/apiPost";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
 }) {
-  const data = await connectGetFetchApi("/cartitems?select=*,items(*)");
-  const user = await connectGetFetchApi(
-    `/users?id=eq.${context.req.cookies.id}`
-  );
+  const data = await Get("/cartitems?select=*,items(*)");
+  const user = await Get(`/users?id=eq.${context.req.cookies.id}`);
   return {
     props: {
       data,
@@ -40,10 +38,9 @@ const loginuser_cartPage = (props: any) => {
     item_id: number
   ) => {
     e.preventDefault();
-    cartClientFetch(
-      cartFetchOptions.cartDeleteValue(
-        `/cartitems?user_id=eq.${id}&item_id=eq.${item_id}`
-      )
+    apiPost(
+      "/cartRelation/cartDataEdit",
+      cartFetchOptions.cartDeleteValue(id, item_id)
     ).then((res: any) => {
       if (res.status === 200) {
         router.push("/loginuserCartPage");
@@ -56,8 +53,9 @@ const loginuser_cartPage = (props: any) => {
     event: ChangeEvent<HTMLSelectElement>,
     item_id: number
   ) => {
-    cartClientFetch(
-      cartFetchOptions.cartPostValue(id, item_id, Number(event.target.value))
+    apiPost(
+      "/cartRelation/cartDataEdit",
+      cartFetchOptions.cartPatchValue(id, item_id, Number(event.target.value))
     ).then((res: any) => {
       if (res.status === 200) {
         router.push("/loginuserCartPage");

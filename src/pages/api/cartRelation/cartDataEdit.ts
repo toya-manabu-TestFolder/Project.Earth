@@ -1,4 +1,4 @@
-import { Delete, Patch, Post } from "@/lib/fetch_relation/const/fetch";
+import { Delete, Patch, Post } from "@/lib/fetch_relation/const/apiFetchrs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 // カート関連のみ。
@@ -7,18 +7,21 @@ export default async function cartDataEdit(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.body.methodValue === "POST") {
-    Post(req.body.bodyValue, `${process.env["DB_URL"]}/cartitems`);
+  if (req.body.method === "POST") {
+    const data = await Post(req.body.bodyValue, `/cartitems`);
+    return res.status(200).json(data);
   }
-  if (req.body.methodValue === "PATCH") {
-    Patch(
+  if (req.body.method === "PATCH") {
+    const data = await Patch(
       req.body.bodyValue,
-      `${process.env["DB_URL"]}/cartitems?user_id=eq.${req.body.bodyValue.user_id}&item_id=eq.${req.body.bodyValue.item_id}`
+      `/cartitems?user_id=eq.${req.body.bodyValue.user_id}&item_id=eq.${req.body.bodyValue.item_id}`
     );
+    return res.status(200).json(data);
   }
-  if (req.body.methodValue === "DELETE") {
-    Delete(
-      `${process.env.DB_URL}/cartitems?user_id=eq.${req.body.bodyValue.user_id}&item_id=eq.${req.body.bodyValue.item_id}`
+  if (req.body.method === "DELETE") {
+    const data = await Delete(
+      `/cartitems?user_id=eq.${req.body.bodyValue.user_id}&item_id=eq.${req.body.bodyValue.item_id}`
     );
+    return res.status(200).json(data);
   }
 }

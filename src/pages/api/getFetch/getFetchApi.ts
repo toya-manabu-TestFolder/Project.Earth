@@ -1,4 +1,4 @@
-import { Get } from "@/lib/fetch_relation/const/fetch";
+import { Get } from "@/lib/fetch_relation/const/apiFetchrs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function getFetchApi(

@@ -4,14 +4,12 @@ import Image from "next/image";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 import { Modal } from "@/components/modal/ModalContainer";
-import { cartClientFetch } from "@/lib/fetch_relation/cartRelation/cartClientFetch";
 import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
 import { apiPost } from "@/lib/fetch_relation/APIPOST/apiPost";
+import { Get } from "@/lib/fetch_relation/const/apiFetchrs";
 
 export const getStaticPaths = async () => {
-  const data = await apiPost({
-    query: `/farmer_data`,
-  });
+  const data = await Get(`/farmer_data`);
   const paths = data.map((item: any) => {
     return {
       params: {
@@ -26,15 +24,9 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const farmerdata = await apiPost("/getFetch/getFetchApi", {
-    query: `/farmer_data`,
-  });
-  const items = await apiPost("/getFetch/getFetchApi", {
-    query: `/items`,
-  });
-  const category = await apiPost("/getFetch/getFetchApi", {
-    query: `/category`,
-  });
+  const farmerdata = await Get(`/farmer_data`);
+  const items = await Get(`/items`);
+  const category = await Get(`/category`);
   return {
     props: {
       params,
@@ -145,7 +137,8 @@ export default function page(props: any) {
   // カートへボタン押下後
   useEffect(() => {
     if (cookie.user_id !== 0) {
-      cartClientFetch(
+      apiPost(
+        "/cartRelation/cartDataEdit",
         cartFetchOptions.cartPostValue(
           cartData.user_id,
           cartData.item_id,
@@ -255,24 +248,17 @@ export default function page(props: any) {
                 {/* con */}
                 <div className={styles.buttonBox}>
                   {localStorage.getItem(`buttonCheckItem${e.id}`) === null ? (
-                    true
-                  ) : false ? (
-                    <>
-                      <button
-                        onClick={(event) => {
-                          cartInport(e, event),
-                            setShow(true),
-                            localStorage.setItem(
-                              `buttonCheckItem${e.id}`,
-                              `${e.id}`
-                            );
-                        }}
-                      >
-                        <span className={styles.buttonString}>
-                          カートに入れる
-                        </span>
-                      </button>
-                    </>
+                    <button
+                      onClick={(event) => {
+                        cartInport(e, event),
+                          setShow(true),
+                          localStorage.setItem(`buttonCheckItem${e.id}`, e.id);
+                      }}
+                    >
+                      <span className={styles.buttonString}>
+                        カートに入れる
+                      </span>
+                    </button>
                   ) : (
                     <>
                       <button
