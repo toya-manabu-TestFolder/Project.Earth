@@ -4,6 +4,7 @@ import styles from "../styles/login.module.css";
 import FetchOfPost from "@/lib/fetch_of_post";
 
 export default function User_register() {
+  // 成功パターン
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ export default function User_register() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    //空欄があったら注意文を表示させる
+    // emailの重複チェック
 
     //以下fetch
     //fetchのoptionで使うdata
@@ -30,10 +31,11 @@ export default function User_register() {
     };
     //fetchを外部ファイルで定義
     //空欄があったらfetchしない
-
-    const result = await FetchOfPost(data);
-    if (result.length === 1) {
-      router.replace("/login");
+    if (name && email && password && zipcode && prefecture && city && address) {
+      const result = await FetchOfPost(data, "users");
+      if (result.length === 1) {
+        router.replace("/login");
+      }
     }
   };
 
@@ -58,6 +60,7 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="ラクス　太郎"
                     ></input>
+                    {!name && <p className={styles.alert}>入力してください</p>}
                   </div>
                 </div>
               </div>
@@ -76,6 +79,7 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="@example.com"
                     ></input>
+                    {!email && <p className={styles.alert}>入力してください</p>}
                   </div>
                 </div>
               </div>
@@ -94,6 +98,9 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="password"
                     ></input>
+                    {!password && (
+                      <p className={styles.alert}>入力してください</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -112,6 +119,9 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="111-2222"
                     ></input>
+                    {!zipcode && (
+                      <p className={styles.alert}>入力してください</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -130,6 +140,9 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="○○県"
                     ></input>
+                    {!prefecture && (
+                      <p className={styles.alert}>入力してください</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -148,6 +161,7 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="○○市"
                     ></input>
+                    {!city && <p className={styles.alert}>入力してください</p>}
                   </div>
                 </div>
               </div>
@@ -166,6 +180,9 @@ export default function User_register() {
                       className={styles.input_form}
                       placeholder="11-22 ○○マンション 101"
                     ></input>
+                    {!address && (
+                      <p className={styles.alert}>入力してください</p>
+                    )}
                   </div>
                 </div>
               </div>
