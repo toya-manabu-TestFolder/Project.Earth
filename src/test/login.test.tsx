@@ -32,7 +32,7 @@ describe("test loginFetch関数", () => {
     const res: any = {
       status: jest.fn(() => res),
       json: jest.fn(),
-      //   error: jest.fn(),
+      setHeader: jest.fn(),
     };
     //   login.tsのloginFetch関数を呼んだ時、fetchして擬似的なpromiseを作る
     if (
@@ -47,7 +47,7 @@ describe("test loginFetch関数", () => {
         },
       });
     } else {
-      (global as any).fetch = jest.fn().mockRejectedValue({
+      (global as any).fetch = jest.fn().mockResolvedValue({
         status: 500,
         async json() {
           return {
