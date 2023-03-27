@@ -27,7 +27,7 @@ describe("test loginFetch関数", () => {
     //   fetch時に送るreqと、fetch後にセットされるresを擬似的に定義
     //   mock = 仮のブラウザ？
     const req: any = {
-      body: { email: "kakuei@example.com", password: "aaa" },
+      body: { email: "kakuei@example.com", password: "kakuei" },
     };
     const res: any = {
       status: jest.fn(() => res),
