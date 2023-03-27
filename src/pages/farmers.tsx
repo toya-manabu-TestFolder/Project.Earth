@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import Head from "next/head";
 import Image from "next/image";
@@ -9,17 +9,35 @@ import { Voice } from "@/components/voice";
 import { fetcher } from "@/lib/fecher";
 
 export default function Farmers() {
+  // console.log(props.farmerData.length);
   const router = useRouter();
   const { search } = router.query;
-  const { data, error, isLoading } = useSWR(
-    !search ? "/api/farmer" : `/api/farmer/?search=${search}`,
+  const [pageNumber, setPageNumber] = useState(1);
+  const {
+    data: result,
+    error,
+    isLoading,
+  } = useSWR(
+    !search
+      ? "/api/farmer"
+      : `/api/farmer/?search=${search}&page=${pageNumber}`,
     fetcher
   );
-  // データ確認用
-  // console.log("検索結果", data);
-  //
-  if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
+  const data = result.data;
+  const itemAmount = result.itemAmount;
+
+  // console.log("検索結果", data);
+  console.log("個数", itemAmount);
+  console.log("型", typeof itemAmount);
+  const itemAmountArr = Array(itemAmount).fill(itemAmount);
+  const pageNumberArr = itemAmountArr.map((value: number, index: number) => {
+    return index + 1;
+  });
+  console.log("個数の配列", pageNumberArr);
+  console.log("型", typeof result.itemAmount);
+
+  if (error) return "エラーが発生しました";
   if (data.length !== 0) {
     const categoryID = data[0].items[0].category_id;
     //
@@ -27,8 +45,6 @@ export default function Farmers() {
     //
     localStorage.setItem("category", categoryID);
   }
-
-  console.log("検索結果", data);
 
   return (
     <div>
@@ -76,22 +92,22 @@ export default function Farmers() {
           </div>
         </div>
         {/* ページング機能 */}
-        <div>
-          <ul className={styles.pagingButtons}>
-            <button className={styles.pagingNumberButton}>
-              <li>1</li>
-            </button>
-            <button className={styles.pagingNumberButton}>
-              <li>2</li>
-            </button>
-            <button className={styles.pagingNumberButton}>
-              <li>3</li>
-            </button>
-            <button className={styles.pagingNumberButton}>
-              <li>4</li>
-            </button>
-          </ul>
-        </div>
+        <>
+          {pageNumberArr.map((pagingPageNumber) => {
+            return (
+              <ul className={styles.pagingButtons} key={pagingPageNumber}>
+                <li>
+                  <button
+                    onClick={() => setPageNumber(pagingPageNumber)}
+                    className={styles.pagingNumberButton}
+                  >
+                    {pagingPageNumber}
+                  </button>
+                </li>
+              </ul>
+            );
+          })}
+        </>
       </main>
     </div>
   );

@@ -62,8 +62,7 @@
 
 .pagingButtons {
   list-style: none;
-  display: flex;
-  display: block;
+  display: inline-block;
   text-align: right;
 }
 
