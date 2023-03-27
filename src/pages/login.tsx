@@ -2,6 +2,7 @@ import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/login.module.css";
+import FetchOfPost from "@/lib/fetch_of_post";
 
 export default function Login() {
   const router = useRouter();
@@ -11,23 +12,14 @@ export default function Login() {
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const data = {
+    const data: {} = {
       email: email,
       password: password,
     };
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    const response = await fetch("/api/login", options);
-    console.log(response);
-    const result = await response.json();
-    console.log(result);
+    // FetchOfPostで関数の共通化
+    const result = await FetchOfPost(data, "login");
 
-    if (response.ok !== true || result === "") {
+    if (result.length < 1 || result === "") {
       router.push("/login");
     } else {
       router.push("/");
