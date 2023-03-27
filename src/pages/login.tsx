@@ -8,6 +8,7 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -21,6 +22,7 @@ export default function Login() {
 
     if (result.length < 1 || result === "") {
       router.push("/login");
+      setError(true);
     } else {
       router.push("/");
     }
@@ -60,6 +62,9 @@ export default function Login() {
                     id=""
                     placeholder="パスワード"
                   />
+                  {error && (
+                    <p>メールアドレスまたはパスワードが間違っています</p>
+                  )}
                 </div>
               </div>
               <div className={styles.button}>

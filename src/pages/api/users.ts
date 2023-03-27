@@ -12,7 +12,6 @@ export default async function handler(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //↓POSTの時はこれ
       Prefer: "return=representation",
       //↓更新したいならTOKEN設定
       Authorization: `Bearer ${process.env.DB_KEY}`,
@@ -23,5 +22,6 @@ export default async function handler(
   };
   const response = await fetch(url, options);
   const data = await response.json();
+  // console.log(data);
   res.status(200).json(data);
 }
