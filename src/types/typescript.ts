@@ -66,3 +66,10 @@ export type itemType = {
   name: string;
   price: number;
 };
+
+export type cartitemsType = {
+  id: number;
+  item_id: number;
+  quantity: number;
+  user_id: number;
+};

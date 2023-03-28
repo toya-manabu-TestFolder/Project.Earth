@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 import { Modal } from "@/components/modal/itemSelectModal";
 import { Get } from "@/lib/fetchRelation/const/apiFetchrs";
+import * as type from "@/types/typescript";
 
 export const getStaticPaths = async () => {
   const data = await Get(`/farmer_data`);
@@ -25,12 +26,14 @@ export const getStaticProps = async ({ params }: { params: any }) => {
   const farmerdata = await Get(`/farmer_data`);
   const items = await Get(`/items`);
   const category = await Get(`/category`);
+  const cartitems = await Get(`/cartitems`);
   return {
     props: {
       params,
       farmerdata,
       items,
       category,
+      cartitems,
     },
   };
 };
@@ -84,6 +87,11 @@ export default function page(props: any) {
   // 対象商品全て取得◎
   let items = props.items.filter((item: any) => {
     return item.farmer_id === id;
+  });
+
+  // ログインユーザーのカート情報
+  const userCartitems = props.cartitems.filter((item: type.cartitemsType) => {
+    return item.user_id === cookie.user_id;
   });
 
   // 重複カテゴリーidの商品削除◎
@@ -188,6 +196,7 @@ export default function page(props: any) {
         setoneTimeStorage={setoneTimeStorage}
         storage={storage}
         setstorage={setstorage}
+        userCartitems={userCartitems}
       />
     </div>
   );

@@ -16,6 +16,7 @@ export function Modal({
   setoneTimeStorage,
   storage,
   setstorage,
+  userCartitems,
 }: {
   show: boolean;
   setShow: any;
@@ -27,6 +28,7 @@ export function Modal({
   setoneTimeStorage: any;
   storage: any;
   setstorage: any;
+  userCartitems: type.cartitemsType[];
 }) {
   // カートへボタン押下後の送信
   useEffect(() => {
@@ -44,7 +46,7 @@ export function Modal({
         let cartItem: any = localStorage.getItem(`${oneTimeStorage.id}`);
         cartItem = JSON.parse(cartItem);
         cartItem[0].quantity = oneTimeStorage.quantity;
-        cartItem = JSON.stringify(test);
+        cartItem = JSON.stringify(cartItem);
         localStorage.setItem(`${oneTimeStorage.id}`, cartItem);
       } else if (storage.length > 0) {
         let item = storage;
@@ -82,9 +84,20 @@ export function Modal({
   };
 
   //   カートボタン押下後のイベント
-  function cartInport(e: any, event: any) {
-    event.preventDefault();
+  function cartInport() {
     setstorage([oneTimeStorage]);
+  }
+
+  //   数量変更ボタン押下
+  function cartPatch() {
+    apiPost(
+      "/cartRelation/cartDataEdit",
+      cartFetchOptions.cartPatchValue(
+        cartData.user_id,
+        cartData.item_id,
+        cartData.quantity
+      )
+    );
   }
 
   if (show) {
@@ -133,11 +146,34 @@ export function Modal({
                     </label>
                   </div>
                   <div className={styles.buttonBox}>
-                    <button onClick={(event: any) => cartInport(item, event)}>
-                      <span className={styles.buttonString}>
-                        カートに入れる
-                      </span>
-                    </button>
+                    {localStorage.getItem(`button${item.id}`) !== null ||
+                    userCartitems.some(
+                      (cartItem) => cartItem.item_id === item.id
+                    ) ? (
+                      <button
+                        onClick={() =>
+                          cookie.user_id !== 0 ? cartPatch() : cartInport()
+                        }
+                      >
+                        <span className={styles.buttonString}>
+                          数量を変更する。
+                        </span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          cartInport(),
+                            localStorage.setItem(
+                              `button${item.id}`,
+                              `${item.id}`
+                            );
+                        }}
+                      >
+                        <span className={styles.buttonString}>
+                          カートに入れる
+                        </span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </>
