@@ -27,12 +27,12 @@ describe("test loginFetch関数", () => {
     //   fetch時に送るreqと、fetch後にセットされるresを擬似的に定義
     //   mock = 仮のブラウザ？
     const req: any = {
-      body: { email: "kakuei@example.com", password: "kakuei" },
+      body: { email: "kakuei@example.com", password: "aaa" },
     };
     const res: any = {
+      setHeader: jest.fn(() => res),
       status: jest.fn(() => res),
       json: jest.fn(),
-      setHeader: jest.fn(),
     };
     //   login.tsのloginFetch関数を呼んだ時、fetchして擬似的なpromiseを作る
     if (
@@ -47,11 +47,10 @@ describe("test loginFetch関数", () => {
         },
       });
     } else {
-      (global as any).fetch = jest.fn().mockResolvedValue({
-        status: 500,
+      (global as any).fetch = jest.fn().mockRejectedValue({
         async json() {
           return {
-            error: "Cannot read properties of undefined (reading 'id')",
+            error: "エラーです",
           };
         },
       });
@@ -69,9 +68,7 @@ describe("test loginFetch関数", () => {
       expect(res.json.mock.lastCall).toEqual([{ ...mockData }]);
       expect(res.status.mock.lastCall).toEqual([200]);
     } else {
-      expect(res.json.mock.lastCall).toEqual([
-        { error: "Cannot read properties of undefined (reading 'id')" },
-      ]);
+      expect(res.json.mock.lastCall).toEqual(["エラーです"]);
       expect(res.status.mock.lastCall).toEqual([500]);
     }
   });
