@@ -20,7 +20,7 @@ export default function User_register() {
 
     //以下fetch
     //fetchのoptionで使うdata
-    const data = {
+    const data: {} = {
       name: name,
       email: email,
       password: password,
@@ -29,13 +29,10 @@ export default function User_register() {
       city: city,
       address: address,
     };
-    //fetchを外部ファイルで定義
-    //空欄があったらfetchしない
-    if (name && email && password && zipcode && prefecture && city && address) {
-      const result = await FetchOfPost(data, "users");
-      if (result.length === 1) {
-        router.replace("/login");
-      }
+    // FetchOfPostで関数の共通化
+    const result = await FetchOfPost(data, "users");
+    if (result.length === 1) {
+      router.replace("/login");
     }
   };
 
