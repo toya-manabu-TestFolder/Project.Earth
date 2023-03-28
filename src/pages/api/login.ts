@@ -30,11 +30,13 @@ export default async function loginFetch(
 
     // エラーも返す
   } catch (error) {
-    const errorMessage = await error.json();
-    const errorInfo = errorMessage.error;
-    console.log("エラーリザルト", errorInfo);
-    // 以下login.tsxに返しているもの,コンソールで描画されているのはtsxでconsoleしてるもの
-    res.status(500).json(errorInfo);
+    if (typeof error === "") {
+      const errorMessage = await error.json();
+      const errorInfo = errorMessage.error;
+      console.log("エラーリザルト", errorInfo);
+      // 以下login.tsxに返しているもの,コンソールで描画されているのはtsxでconsoleしてるもの
+      res.status(500).json(errorInfo);
+    }
   }
 }
 // export default async function handler(
