@@ -40,3 +40,13 @@ export function cartDeleteValue(userValue: number, itemValue: number) {
     },
   };
 }
+
+// GET---------------------------------------------------------------------
+export function cartGetValue(userValue: number) {
+  return {
+    method: "GET",
+    bodyValue: {
+      user_id: userValue,
+    },
+  };
+}

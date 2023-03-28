@@ -25,3 +25,32 @@ export type clientValueType = {
   item: number;
   quantityNumber: number;
 };
+
+export type userInfoType = {
+  address: string;
+  city: string;
+  email: string;
+  id: number;
+  name: string;
+  password: string;
+  prefecture: string;
+  zipcode: string;
+};
+
+export type cartItemDataType = {
+  id: number;
+  item_id: number;
+  items: {
+    category_id: number;
+    comment: string;
+    expaire: string;
+    farmer_id: number;
+    id: number;
+    image: string;
+    items_search: string;
+    name: string;
+    price: number;
+  };
+  quantity: number;
+  user_id: number;
+};

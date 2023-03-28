@@ -1,4 +1,9 @@
-import { Delete, Patch, Post } from "@/lib/fetch_relation/const/apiFetchrs";
+import {
+  Delete,
+  Get,
+  Patch,
+  Post,
+} from "@/lib/fetch_relation/const/apiFetchrs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 // カート関連のみ。
@@ -21,6 +26,12 @@ export default async function cartDataEdit(
   if (req.body.method === "DELETE") {
     const data = await Delete(
       `/cartitems?user_id=eq.${req.body.bodyValue.user_id}&item_id=eq.${req.body.bodyValue.item_id}`
+    );
+    return res.status(200).json(data);
+  }
+  if (req.body.method === "GET") {
+    const data = await Get(
+      `/cartitems?select=*,items(*)&user_id=eq.${req.body.bodyValue.user_id}`
     );
     return res.status(200).json(data);
   }

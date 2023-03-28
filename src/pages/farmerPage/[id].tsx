@@ -4,9 +4,9 @@ import Image from "next/image";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
 import { Modal } from "@/components/modal/ModalContainer";
-import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
-import { apiPost } from "@/lib/fetch_relation/APIPOST/apiPost";
-import { Get } from "@/lib/fetch_relation/const/apiFetchrs";
+import * as cartFetchOptions from "@/lib/fetchRelation/cartRelation/cartFetchOptions";
+import { apiPost } from "@/lib/fetchRelation/APIPOST/apiPost";
+import { Get } from "@/lib/fetchRelation/const/apiFetchrs";
 
 export const getStaticPaths = async () => {
   const data = await Get(`/farmer_data`);
@@ -306,7 +306,7 @@ export default function page(props: any) {
           })}
         </div>
       </section>
-      <Modal show={show} setShow={setShow} />
+      <Modal show={show} setShow={setShow} mode={"completed"} />
     </div>
   );
 }

@@ -4,9 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "@/styles/cartpage.module.css";
 import { ChangeEvent, useEffect, useState } from "react";
-import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
-import { Get } from "@/lib/fetch_relation/const/apiFetchrs";
-import { apiPost } from "@/lib/fetch_relation/APIPOST/apiPost";
+import * as cartFetchOptions from "@/lib/fetchRelation/cartRelation/cartFetchOptions";
+import { Get } from "@/lib/fetchRelation/const/apiFetchrs";
+import { apiPost } from "@/lib/fetchRelation/APIPOST/apiPost";
+import TotalPlice from "@/components/TotalPlice";
+import { totalPrice } from "@/lib/TotalPriceFunc/totalPrice";
 
 export async function getServerSideProps(context: {
   req: { cookies: { id: any } };
@@ -22,14 +24,14 @@ export async function getServerSideProps(context: {
 }
 // ------------------------------------------
 const loginuser_cartPage = (props: any) => {
-  let data = props.data;
+  let data: any = props.data;
   const user = props.user[0];
   const id = props.user[0].id;
   data = data.filter((e: { user_id: any }) => {
     return e.user_id === id;
   });
-
   const router = useRouter();
+  const [itemCountChange, setItemCountChange] = useState(totalPrice(data));
   // -----------------------------------------------------------------------------------------
   // 削除用ファンクション
   const deleteCartItem = async (
@@ -53,29 +55,21 @@ const loginuser_cartPage = (props: any) => {
     event: ChangeEvent<HTMLSelectElement>,
     item_id: number
   ) => {
+    event.preventDefault();
     apiPost(
       "/cartRelation/cartDataEdit",
       cartFetchOptions.cartPatchValue(id, item_id, Number(event.target.value))
-    ).then((res: any) => {
+    ).then(async (res: any) => {
       if (res.status === 200) {
-        router.push("/loginuserCartPage");
+        let itemData: any = await apiPost(
+          "/cartRelation/cartDataEdit",
+          cartFetchOptions.cartGetValue(id)
+        );
+        itemData = await itemData.json();
+        setItemCountChange(totalPrice(itemData));
       }
     });
   };
-  // -----------------------------------------------------------------------------------------
-  // 小計変数
-  const totalPrice = data.reduce(
-    (
-      sum: number,
-      item: {
-        quantity: number;
-        items: { price: number };
-      }
-    ) => {
-      return sum + item.items.price * item.quantity;
-    },
-    0
-  );
   // stripe用データ-----------------------------------------------------------------------------------------
   let checkoutData = data.map(
     (item: { items: { price: any; name: any }; quantity: any }) => {
@@ -91,7 +85,6 @@ const loginuser_cartPage = (props: any) => {
       };
     }
   );
-
   // 下記JSX
   return (
     <>
@@ -180,29 +173,7 @@ const loginuser_cartPage = (props: any) => {
                 name="data"
                 value={JSON.stringify(checkoutData)}
               />
-              <div>
-                <h3>お届け先情報</h3>
-                <div className={styles.infomation}>
-                  <ul>
-                    <li>{user.name}&nbsp;様</li>
-                    <li>&#12306;&nbsp;{user.zipcode}</li>
-                    <li>
-                      {user.prefecture}&nbsp;&nbsp;
-                      {user.city}
-                    </li>
-                    <li>{user.address}</li>
-                  </ul>
-                </div>
-                <div className={styles.totalBox}>
-                  <p>
-                    合計金額&nbsp;&nbsp;
-                    <span className={styles.total}>{totalPrice}</span>円
-                  </p>
-                </div>
-                <div className={styles.submitBox}>
-                  <button className={styles.purchase}>購入手続きへ</button>
-                </div>
-              </div>
+              <TotalPlice userInfo={user} itemCountChange={itemCountChange} />
             </form>
           </div>
         </div>
