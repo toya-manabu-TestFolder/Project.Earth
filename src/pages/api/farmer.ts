@@ -14,7 +14,6 @@ export default async function handler(
   //   return res.status(400).end();
   // }
   const farmerDataOffset = (Number(page) - 1) * 10;
-  // console.log("apipage", page);
   const url = `${process.env.DB_URL}/farmer_data?select=*,items!inner(*)&items.items_search=like.*${search}*&limit=${farmerDataLimit}&offset=${farmerDataOffset}`;
   const options = {
     method: "GET",
@@ -27,7 +26,6 @@ export default async function handler(
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  console.log(response.headers.get("content-range"));
   const contentRangeHeader = response.headers.get("content-range");
   if (contentRangeHeader) {
     const itemAmount = Math.ceil(Number(contentRangeHeader.split("/")[1]) / 10);

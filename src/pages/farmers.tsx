@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import Head from "next/head";
 import Image from "next/image";
@@ -9,33 +9,41 @@ import { Voice } from "@/components/voice";
 import { fetcher } from "@/lib/fecher";
 
 export default function Farmers() {
-  // console.log(props.farmerData.length);
   const router = useRouter();
-  const { search } = router.query;
-  const [pageNumber, setPageNumber] = useState(1);
+  const { search, page } = router.query;
+
+  const [pageNumber, setPageNumber] = useState(page ? Number(page) : 1);
+  useEffect(() => {
+    if (page === undefined) {
+      throw new error("エラー");
+    } else if (Array.isArray(page)) {
+      throw new error("エラー");
+    }
+    setPageNumber(Number(page));
+  });
+
+  console.log("page", page);
+  console.log("pageNumber", pageNumber);
+
   const {
     data: result,
     error,
     isLoading,
   } = useSWR(
-    !search
-      ? "/api/farmer"
-      : `/api/farmer/?search=${search}&page=${pageNumber}`,
+    !search ? "/api/farmer" : `/api/farmer?search=${search}&page=${pageNumber}`,
     fetcher
   );
   if (isLoading) return "ロード中";
+  console.log("search", search);
   const data = result.data;
-  const itemAmount = result.itemAmount;
 
-  // console.log("検索結果", data);
-  console.log("個数", itemAmount);
-  console.log("型", typeof itemAmount);
+  console.log("data", data);
+
+  const itemAmount = result.itemAmount;
   const itemAmountArr = Array(itemAmount).fill(itemAmount);
   const pageNumberArr = itemAmountArr.map((value: number, index: number) => {
     return index + 1;
   });
-  console.log("個数の配列", pageNumberArr);
-  console.log("型", typeof result.itemAmount);
 
   if (error) return "エラーが発生しました";
   if (data.length !== 0) {

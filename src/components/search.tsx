@@ -9,7 +9,7 @@ export default function Search() {
     event.preventDefault();
     const searchWords = search.toLowerCase();
     const uri = encodeURI(searchWords);
-    router.push(`/farmers?search=${uri}`);
+    router.push(`/farmers?search=${uri}&page=1`);
   };
   return (
     <div className={styles.search}>
@@ -19,7 +19,9 @@ export default function Search() {
       >
         <label htmlFor="search">
           <input
-            onChange={(word) => setSearch(word.target.value)}
+            onChange={(word) => {
+              setSearch(word.target.value);
+            }}
             type="text"
             id="search"
             name="search"
