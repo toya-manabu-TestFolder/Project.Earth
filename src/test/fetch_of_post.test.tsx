@@ -88,7 +88,7 @@ const userData: UserData = {
   zipcode: "111-2222",
   prefecture: "東京都",
   city: "新宿区",
-  address: "11-22",
+  address: "",
 };
 
 //擬似的なmock関数を作る。fetchした際のreturnの内容を指定する。
@@ -112,7 +112,7 @@ test("check returnValue", async () => {
   });
 
   // 上のreturnの値を変数に入れて下でも使う。
-  const actual = await FetchOfPost(userData);
+  const actual = await FetchOfPost(userData, "users");
   console.log("actual", actual);
   expect(actual).toEqual([
     {

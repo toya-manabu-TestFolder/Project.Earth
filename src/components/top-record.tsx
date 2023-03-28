@@ -25,16 +25,12 @@ export default function Record() {
   useEffect(() => {
     let cookie: string = document.cookie;
     if (cookie !== null) {
-      const idMatch = cookie.match("id=[0-9]");
+      const idMatch = cookie.match("id=[0-100]");
       if (idMatch !== null) {
         let id: string | number = idMatch[0];
         id = Number(id.substring(3));
         setCookie(id);
       }
-      // let cookie: string = document.cookie;
-      //   let id: string | number = cookie.match("id=[0-9]")[0];
-      //   id = Number(id.substring(3));
-      //   setCookie(id);
     }
   }, []);
 
@@ -42,6 +38,8 @@ export default function Record() {
   if (error) return <div>エラーです</div>;
   if (!data) return <div>データがありません</div>;
   console.log("履歴", data);
+  console.log("エラー", error);
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
