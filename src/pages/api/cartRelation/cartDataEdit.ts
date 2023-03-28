@@ -1,9 +1,4 @@
-import {
-  Delete,
-  Get,
-  Patch,
-  Post,
-} from "@/lib/fetch_relation/const/apiFetchrs";
+import { Delete, Get, Patch, Post } from "@/lib/fetchRelation/const/apiFetchrs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 // カート関連のみ。

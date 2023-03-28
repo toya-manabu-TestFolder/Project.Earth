@@ -54,3 +54,15 @@ export type cartItemDataType = {
   quantity: number;
   user_id: number;
 };
+
+export type itemType = {
+  category_id: number;
+  comment: string;
+  expaire: string;
+  farmer_id: number;
+  id: number;
+  image: string;
+  items_search: string;
+  name: string;
+  price: number;
+};
