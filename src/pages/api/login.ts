@@ -24,7 +24,7 @@ export default async function loginFetch(
     const data = await userPass.json();
     console.log("data", data);
     res
-      .setHeader("Set-Cookie", [`id=${data.id};path=/`])
+      .setHeader("Set-Cookie", [`id=${data[0].id};path=/`])
       .status(200)
       .json(data);
 

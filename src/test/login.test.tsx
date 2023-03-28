@@ -15,19 +15,27 @@ import loginFetch from "@/pages/api/login";
 describe("test loginFetch関数", () => {
   it("check res OK or Error", async () => {
     const mockData = {
-      id: 1,
-      name: "田中角栄",
-      email: "kakuei@example.com",
-      password: "kakuei",
-      prefecture: "新潟県",
-      city: "柏崎市",
-      address: "日石町2番1号",
-      zipcode: "945-8511",
+      // id: 1,
+      // name: "田中角栄",
+      // email: "kakuei@example.com",
+      // password: "kakuei",
+      // prefecture: "新潟県",
+      // city: "柏崎市",
+      // address: "日石町2番1号",
+      // zipcode: "945-8511",
+      id: 2,
+      name: "ラクス太郎",
+      email: "rakus@example.com",
+      password: "rakus",
+      prefecture: "東京都",
+      city: "新宿区",
+      address: "11-22",
+      zipcode: "111-2222",
     };
     //   fetch時に送るreqと、fetch後にセットされるresを擬似的に定義
     //   mock = 仮のブラウザ？
     const req: any = {
-      body: { email: "kakuei@example.com", password: "aaa" },
+      body: { email: "rakus@example.com", password: "rakus" },
     };
     const res: any = {
       setHeader: jest.fn(() => res),
