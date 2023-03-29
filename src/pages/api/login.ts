@@ -21,17 +21,21 @@ export default async function loginFetch(
   try {
     const userPass = await fetch(url, options);
     const data = await userPass.json();
+    console.log("data", data);
     res
-      // .setHeader("Set-Cookie", [`id=${data[0].id};path=/`])
+      .setHeader("Set-Cookie", [`id=${data[0].id};path=/`])
       .status(200)
       .json(data);
 
     // エラーも返す
   } catch (error) {
-    const errorInfo = { error: error.message };
-    console.log("エラーリザルト", errorInfo);
-    // 以下login.tsxに返しているもの,コンソールで描画されているのはtsxでconsoleしてるもの
-    res.status(500).json(errorInfo);
+    if (error instanceof Response) {
+      const errorMessage = await error.json();
+      const errorInfo = errorMessage.error;
+      console.log("エラーリザルト", errorInfo);
+      // 以下login.tsxに返しているもの,コンソールで描画されているのはtsxでconsoleしてるもの
+      res.status(500).json(errorInfo);
+    }
   }
 }
 // export default async function handler(
