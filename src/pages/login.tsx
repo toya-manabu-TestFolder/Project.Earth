@@ -2,31 +2,27 @@ import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../styles/login.module.css";
+import FetchOfPost from "@/lib/fetch_of_post";
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    const data = {
+    const data: {} = {
       email: email,
       password: password,
     };
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    const response = await fetch("/api/login", options);
-    const result = await response.json();
+    // FetchOfPostで関数の共通化
+    const result = await FetchOfPost(data, "login");
 
-    if (response.ok !== true || result === "") {
+    if (result.length < 1 || result === "") {
       router.push("/login");
+      setError(true);
     } else {
       router.push("/");
     }
@@ -66,6 +62,9 @@ export default function Login() {
                     id=""
                     placeholder="パスワード"
                   />
+                  {error && (
+                    <p>メールアドレスまたはパスワードが間違っています</p>
+                  )}
                 </div>
               </div>
               <div className={styles.button}>
