@@ -23,9 +23,9 @@ export default function Category() {
   // 試し２：farmer.tsxへつなげる。書き方はsearch.tsxと同じような記述。
   const moveSearch = (categoryName: string) => {
     console.log("検索カテゴリー名", categoryName);
-    const searchWords = categoryName.toLowerCase();
+    const searchWords = categoryName;
     const uri = encodeURI(searchWords);
-    router.push(`/farmers?search=${uri}`);
+    router.push(`/farmers?search=${uri}&page=1`);
   };
   return (
     <>
