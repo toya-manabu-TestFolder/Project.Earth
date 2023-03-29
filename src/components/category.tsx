@@ -25,7 +25,7 @@ export default function Category() {
     console.log("検索カテゴリー名", categoryName);
     const searchWords = categoryName;
     const uri = encodeURI(searchWords);
-    router.push(`/farmers?search=${uri}&page=1`);
+    router.push(`/farmers?search=${uri}`);
   };
   return (
     <>
