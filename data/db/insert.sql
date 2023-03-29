@@ -124,8 +124,8 @@ INSERT INTO api.category (id,name,image) VALUES
 
 --@block
 -- users情報追加
-INSERT INTO api.users (id,name,email,password,prefecture,city,address,zipcode) VALUES 
-(1,'田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','日石町2番1号','945-8511')
+INSERT INTO api.users (name,email,password,prefecture,city,address,zipcode) VALUES 
+('田中角栄','kakuei@example.com','kakuei','新潟県','柏崎市','日石町2番1号','945-8511')
 
 
 --@block
