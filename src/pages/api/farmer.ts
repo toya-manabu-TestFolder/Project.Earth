@@ -43,8 +43,5 @@ export default async function handler(
   }
 
   // データ確認用
-<<<<<<< HEAD
-=======
   // console.log("api", data);
->>>>>>> origin/main
 }
