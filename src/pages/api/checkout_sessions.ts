@@ -3,7 +3,12 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
-    let items = JSON.parse(req.body.data);
+    let items;
+    if (req.headers.referer === "http://localhost:3000/loginuserCartPage") {
+      items = JSON.parse(req.body.data);
+    } else {
+      items = req.body;
+    }
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card", "konbini"],
@@ -19,7 +24,11 @@ export default async function handler(req: any, res: any) {
         success_url: `${process.env.STRIPE_SUCCESS_URL}`,
         cancel_url: `${process.env.STRIPE_CANCEL_URL}`,
       });
-      res.redirect(303, session.url);
+      if (req.headers.referer === "http://localhost:3000/loginuserCartPage") {
+        res.redirect(303, session.url);
+      } else {
+        res.status(200).json({ redirectUrl: session.url });
+      }
     } catch (err: any) {
       res.status(err.statusCode || 500).json(err.message);
     }

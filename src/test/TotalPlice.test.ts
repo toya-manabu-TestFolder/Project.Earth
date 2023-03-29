@@ -15,15 +15,15 @@ describe("購入者の情報と購入金額を表示する", () => {
   };
   const mock_itemCountChange = 100;
 
-  it("debugの確認", () => {
-    render(
-      <TotalPlice
-        userInfo={mock_userInfo}
-        itemCountChange={mock_itemCountChange}
-      />
-    );
-    screen.debug();
-  });
+  // it("debugの確認", () => {
+  //   render(
+  //     <TotalPlice
+  //       userInfo={mock_userInfo}
+  //       itemCountChange={mock_itemCountChange}
+  //     />
+  //   );
+  //   screen.debug();
+  // });
 
   const mock_cartitems = [
     {

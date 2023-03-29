@@ -14,6 +14,13 @@ export function cartPostValue(
   };
 }
 
+export function localStorageDataPostValue(data: any) {
+  return {
+    method: "POST",
+    bodyValue: data,
+  };
+}
+
 // PATCH----------------------------------------------------------------
 export function cartPatchValue(
   userValue: number,
@@ -27,6 +34,13 @@ export function cartPatchValue(
       item_id: itemValue,
       quantity: quantityValue,
     },
+  };
+}
+
+export function localStorageDataPatchValue(data: any) {
+  return {
+    method: "PATCH",
+    bodyValue: data,
   };
 }
 
