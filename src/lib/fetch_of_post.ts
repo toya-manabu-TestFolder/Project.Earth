@@ -1,15 +1,4 @@
-type User = {
-  name: string;
-  email: string;
-  password: string;
-  zipcode: string;
-  prefecture: string;
-  city: string;
-  address: string;
-};
-
-// バリデート？エラーパターンをつける
-export default async function FetchOfPost(data: User, url: string) {
+export default async function FetchOfPost(data: {}, url: string) {
   const options = {
     method: "POST",
     headers: {
@@ -21,7 +10,7 @@ export default async function FetchOfPost(data: User, url: string) {
   const response = await fetch(`/api/${url}`, options);
   console.log(response);
   const result = await response.json();
-  console.log("result", result);
+  console.log(result);
   return result;
 }
 // async関数の戻り値は強制的promiseの形になる。

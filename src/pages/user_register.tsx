@@ -18,7 +18,7 @@ export default function User_register() {
     event.preventDefault();
     //以下fetch
     //fetchのoptionで使うdata
-    const data = {
+    const data: {} = {
       name: name,
       email: email,
       password: password,
@@ -27,7 +27,7 @@ export default function User_register() {
       city: city,
       address: address,
     };
-    //fetchを外部ファイルで定義
+    // FetchOfPostで関数の共通化
     //空欄があったらfetchしない
     if (name && email && password && zipcode && prefecture && city && address) {
       const result = await FetchOfPost(data, "users");
