@@ -30,7 +30,7 @@ export default async function loginFetch(
 
     // エラーも返す
   } catch (error) {
-    if (typeof error === "") {
+    if (error instanceof Response) {
       const errorMessage = await error.json();
       const errorInfo = errorMessage.error;
       console.log("エラーリザルト", errorInfo);
