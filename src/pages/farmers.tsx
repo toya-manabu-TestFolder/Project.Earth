@@ -11,16 +11,11 @@ import { fetcher } from "@/lib/fecher";
 export default function Farmers() {
   const router = useRouter();
   const { search, page } = router.query;
-
   const [pageNumber, setPageNumber] = useState(page ? Number(page) : 1);
   useEffect(() => {
-    if (page === undefined) {
-      throw new error("エラー");
-    } else if (Array.isArray(page)) {
-      throw new error("エラー");
-    }
     setPageNumber(Number(page));
-  });
+    // console.log("useEffect");
+  }, [page]);
 
   console.log("page", page);
   console.log("pageNumber", pageNumber);
@@ -34,23 +29,14 @@ export default function Farmers() {
     fetcher
   );
   if (isLoading) return "ロード中";
-  console.log("search", search);
+
+  // useSWRで取得したデータ（result.data）と、データの個数を最大値とする配列(result.pageNumberArr)
   const data = result.data;
-
-  console.log("data", data);
-
-  const itemAmount = result.itemAmount;
-  const itemAmountArr = Array(itemAmount).fill(itemAmount);
-  const pageNumberArr = itemAmountArr.map((value: number, index: number) => {
-    return index + 1;
-  });
-
+  const pageNumberArr = result.pageNumberArr;
   if (error) return "エラーが発生しました";
   if (data.length !== 0) {
     const categoryID = data[0].items[0].category_id;
-    //
-    console.log("localstrageの値", categoryID);
-    //
+    // console.log("localstrageの値", categoryID);
     localStorage.setItem("category", categoryID);
   }
 
@@ -101,20 +87,24 @@ export default function Farmers() {
         </div>
         {/* ページング機能 */}
         <>
-          {pageNumberArr.map((pagingPageNumber) => {
-            return (
-              <ul className={styles.pagingButtons} key={pagingPageNumber}>
-                <li>
+          <ul className={styles.pagingButtons}>
+            {pageNumberArr.map((pagingPageNumber: number) => {
+              return (
+                <li key={pagingPageNumber}>
                   <button
-                    onClick={() => setPageNumber(pagingPageNumber)}
+                    onClick={() => {
+                      router.push(
+                        `/farmers?search=${search}&page=${pagingPageNumber}`
+                      );
+                    }}
                     className={styles.pagingNumberButton}
                   >
                     {pagingPageNumber}
                   </button>
                 </li>
-              </ul>
-            );
-          })}
+              );
+            })}
+          </ul>
         </>
       </main>
     </div>

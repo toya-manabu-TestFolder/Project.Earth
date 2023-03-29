@@ -29,9 +29,13 @@ export default async function handler(
   const contentRangeHeader = response.headers.get("content-range");
   if (contentRangeHeader) {
     const itemAmount = Math.ceil(Number(contentRangeHeader.split("/")[1]) / 10);
+    const itemAmountArr = Array(itemAmount).fill(itemAmount);
+    const pageNumberArr = itemAmountArr.map((value: number, index: number) => {
+      return index + 1;
+    });
     const result = {
       data: data,
-      itemAmount: itemAmount,
+      pageNumberArr: pageNumberArr,
     };
     res.status(200).json(result);
   } else {

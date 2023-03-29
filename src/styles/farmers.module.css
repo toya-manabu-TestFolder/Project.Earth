@@ -46,7 +46,7 @@
 }
 
 .resultBlock {
-  padding: 1%;
+  padding: 0.8%;
   position: relative;
   padding-bottom: 3%;
 }
@@ -61,9 +61,9 @@
 }
 
 .pagingButtons {
-  list-style: none;
-  display: inline-block;
-  text-align: right;
+  display: flex;
+  /* flex-wrap: wrap; */
+  list-style-type: none;
 }
 
 .pagingNumberButton {
