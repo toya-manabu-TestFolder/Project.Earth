@@ -16,8 +16,6 @@ export default function User_register() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    // emailの重複チェック
-
     //以下fetch
     //fetchのoptionで使うdata
     const data = {
