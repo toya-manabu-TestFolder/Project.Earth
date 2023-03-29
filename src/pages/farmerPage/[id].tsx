@@ -61,6 +61,7 @@ export default function page(props: any) {
         ...cartData,
         user_id: Number(id),
       });
+      localStorage.clear();
     }
     setitemSelect(Number(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
