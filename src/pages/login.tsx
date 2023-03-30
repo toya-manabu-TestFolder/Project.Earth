@@ -21,7 +21,7 @@ export default function Login() {
     const result = await FetchOfPost(data, "login");
     console.log("ログインリザルト", result);
 
-    if (result.length === 0) {
+    if (result === "データが見つかりませんでした") {
       router.push("/login");
       setError(true);
     } else if (result.length === 1) {
