@@ -100,6 +100,7 @@ export function Modal({
     );
   }
 
+  console.log(userCartitems);
   if (show) {
     return (
       <div className={styles.overlay}>

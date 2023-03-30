@@ -75,6 +75,10 @@
 .link{
   text-decoration: none;
 }
+
+.alert{
+  color:red;
+}
 /* 
 /*------------------------------------
 - COLOR primary

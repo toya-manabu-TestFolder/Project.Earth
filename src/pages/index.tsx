@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <main>
         <section className={styles.top_cover}>
-          {/* <Image
+          <Image
             src="/coverImages/plant.png"
             width={100}
             height={100}
@@ -52,7 +52,7 @@ export default function Home() {
             height={100}
             className={styles.plant}
             alt={""}
-          /> */}
+          />
           <div>
             <div className={styles.cover_image}>
               <Slider />
