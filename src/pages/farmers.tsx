@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import Head from "next/head";
 import Image from "next/image";
@@ -10,16 +10,34 @@ import { fetcher } from "@/lib/fecher";
 
 export default function Farmers() {
   const router = useRouter();
-  const { search } = router.query;
-  const { data, error, isLoading } = useSWR(
-    !search ? "/api/farmer" : `/api/farmer/?search=${search}`,
+  const { search, page } = router.query;
+  const [pageNumber, setPageNumber] = useState(page ? Number(page) : 1);
+  useEffect(() => {
+    setPageNumber(Number(page));
+    // console.log("useEffect");
+  }, [page]);
+
+  console.log("page", page);
+  console.log("pageNumber", pageNumber);
+
+  const {
+    data: result,
+    error,
+    isLoading,
+  } = useSWR(
+    !search ? "/api/farmer" : `/api/farmer?search=${search}&page=${pageNumber}`,
     fetcher
   );
-  if (error) return "エラーが発生しました";
   if (isLoading) return "ロード中";
 
+  // useSWRで取得したデータ（result.data）と、データの個数を最大値とする配列(result.pageNumberArr)
+  const data = result.data;
+  const pageNumberArr = result.pageNumberArr;
+  if (error) return "エラーが発生しました";
   if (data.length !== 0) {
-    localStorage.setItem("category", `${data[0].items[0].category_id}`);
+    const categoryID = data[0].items[0].category_id;
+    // console.log("localstrageの値", categoryID);
+    localStorage.setItem("category", categoryID);
   }
 
   return (
@@ -41,6 +59,7 @@ export default function Farmers() {
               </div>
             </section>
           )}
+
           <div className={styles.result}>
             {data.map((farmer: any) => {
               return (
@@ -58,7 +77,6 @@ export default function Farmers() {
                     <h2 className={styles.farmerName}>{farmer.farm_name}</h2>
                     <p className={styles.comment}>{farmer.comment}</p>
                   </div>
-
                   <div>
                     <Voice src={farmer.voiceurl} />
                   </div>
@@ -67,6 +85,27 @@ export default function Farmers() {
             })}
           </div>
         </div>
+        {/* ページング機能 */}
+        <>
+          <ul className={styles.pagingButtons}>
+            {pageNumberArr.map((pagingPageNumber: number) => {
+              return (
+                <li key={pagingPageNumber}>
+                  <button
+                    onClick={() => {
+                      router.push(
+                        `/farmers?search=${search}&page=${pagingPageNumber}`
+                      );
+                    }}
+                    className={styles.pagingNumberButton}
+                  >
+                    {pagingPageNumber}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </>
       </main>
     </div>
   );
