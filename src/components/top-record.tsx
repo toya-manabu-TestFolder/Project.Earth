@@ -57,7 +57,9 @@ export default function Record() {
       body: JSON.stringify(cartData),
     };
     const response = await fetch("/api/cartInport", options);
+    console.log(response);
     const result = await response.json();
+    console.log(result);
   };
 
   return (
