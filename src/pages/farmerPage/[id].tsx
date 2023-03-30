@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import IntoCart from "@/components/intoCart";
 import Image from "next/image";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/itemList.module.css";
-import * as apiConnect from "@/lib/fetch_relation/const/entiretyOptions";
-import { Modal } from "@/components/modal/ModalContainer";
-import { cartClientFetch } from "@/lib/fetch_relation/cartRelation/cartClientFetch";
-import * as cartFetchOptions from "@/lib/fetch_relation/cartRelation/cartFetchOptions";
+import { Modal } from "@/components/modal/itemSelectModal";
+import { Get } from "@/lib/fetchRelation/const/apiFetchrs";
+import * as type from "@/types/typescript";
 
 export const getStaticPaths = async () => {
-  const data = await apiConnect.getServerSide(`/farmer_data`);
+  const data = await Get(`/farmer_data`);
   const paths = data.map((item: any) => {
     return {
       params: {
@@ -24,16 +23,17 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: any }) => {
-  const farmerdata = await apiConnect.getServerSide(`/farmer_data`);
-  const items = await apiConnect.getServerSide(`/items`);
-  const category = await apiConnect.getServerSide(`/category`);
-  console.log(params);
+  const farmerdata = await Get(`/farmer_data`);
+  const items = await Get(`/items`);
+  const category = await Get(`/category`);
+  const cartitems = await Get(`/cartitems`);
   return {
     props: {
       params,
       farmerdata,
       items,
       category,
+      cartitems,
     },
   };
 };
@@ -61,6 +61,7 @@ export default function page(props: any) {
         ...cartData,
         user_id: Number(id),
       });
+      localStorage.clear();
     }
     setitemSelect(Number(category));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,6 +78,9 @@ export default function page(props: any) {
   let [oneTimeStorage, setoneTimeStorage] = useState<any>({});
   let [storage, setstorage] = useState<any>([]);
 
+  // モーダル用
+  const [show, setShow] = useState(false);
+
   //   id◎
   const id = Number(props.params.id);
   // 対象農家情報取得◎
@@ -84,6 +88,11 @@ export default function page(props: any) {
   // 対象商品全て取得◎
   let items = props.items.filter((item: any) => {
     return item.farmer_id === id;
+  });
+
+  // ログインユーザーのカート情報
+  const userCartitems = props.cartitems.filter((item: type.cartitemsType) => {
+    return item.user_id === cookie.user_id;
   });
 
   // 重複カテゴリーidの商品削除◎
@@ -114,66 +123,6 @@ export default function page(props: any) {
     itemfunction();
   };
 
-  // Select選択後
-  const itemQuantityChange = (
-    e: any,
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    event.preventDefault();
-    if (cookie.user_id === 0) {
-      setoneTimeStorage({
-        id: e.id,
-        item: e,
-        quantity: Number(event.target.value),
-      });
-    } else {
-      setcartData({
-        ...cartData,
-        item_id: Number(e.id),
-        quantity: Number(event.target.value),
-      });
-    }
-  };
-
-  // カートへボタン押下後
-  useEffect(() => {
-    if (cookie.user_id !== 0) {
-      cartClientFetch(
-        cartFetchOptions.cartImportValue(
-          `/cartitems`,
-          cartData.user_id,
-          cartData.item_id,
-          cartData.quantity
-        )
-      );
-    } else {
-      if (localStorage.getItem(`${oneTimeStorage.id}`) !== null) {
-        let test: any = localStorage.getItem(`${oneTimeStorage.id}`);
-        test = JSON.parse(test);
-        test[0].quantity = test[0].quantity + oneTimeStorage.quantity;
-        test = JSON.stringify(test);
-        localStorage.setItem(`${oneTimeStorage.id}`, test);
-      } else if (storage.length > 0) {
-        let item = storage;
-        item = JSON.stringify(item);
-        localStorage.setItem(`${oneTimeStorage.id}`, item);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storage]);
-
-  function cartInport(
-    e: any,
-    event: /* eslint-disable react-hooks/rules-of-hooks */
-    // import IntoCart from "@/components/intoCart";
-    MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
-    event.preventDefault();
-    setstorage([oneTimeStorage]);
-  }
-
-  // --------------------------------------------------------
-  const [show, setShow] = useState(false);
   // 下記JSX
   return (
     <div
@@ -202,94 +151,54 @@ export default function page(props: any) {
         <pre>{farmerData.carryr}</pre>
       </div>
 
-      <section className={styles.sec2}>
-        <h2>商品一覧</h2>
-        <div className={styles.items}>
-          {items.map((e: any) => {
-            return (
-              <div className={styles.sec2_itemSelect} key={e.id}>
-                <div className={styles.imageBox}>
-                  <Image
-                    src={e.image}
-                    width={250}
-                    height={250}
-                    className={styles.sec2_Image}
-                    alt={"野菜画像"}
-                  />
-                </div>
-                <div className={styles.nameBox}>
-                  <p>{e.name}</p>
-                </div>
-                <div className={styles.priceBox}>
-                  <p>価格&nbsp;&nbsp;{e.price}円</p>
-                </div>
-                {/* con */}
-                <div className={styles.selectBox}>
-                  <label htmlFor={e.id}>
-                    数量&nbsp;&nbsp;
-                    <select
-                      className={styles.select}
-                      id={e.id}
-                      onChange={(event) => itemQuantityChange(e, event)}
-                    >
-                      <option value="0">0</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    </select>
-                  </label>
-                </div>
-                {/* con */}
-                <div className={styles.buttonBox}>
-                  <button
-                    onClick={(event) => {
-                      cartInport(e, event), setShow(true);
-                    }}
-                  >
-                    <span className={styles.buttonString}>カートに入れる</span>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
       <section className={styles.sec3}>
-        <h2>その他関連商品</h2>
+        <h2>商品一覧</h2>
         <div className={styles.otherItems}>
           {categoryItem.map((e: any, index) => {
             if (e.category_id !== itemSelect) {
               return (
-                <div
-                  className={styles.otherItem}
-                  key={e.id}
-                  onClick={() => changeItem(e.category_id)}
-                >
-                  <div>
-                    <p>{categoryArr[index].name}の商品一覧</p>
-                  </div>
+                <>
+                  <div
+                    className={styles.otherItem}
+                    key={e.id}
+                    onClick={() => {
+                      changeItem(e.category_id), setShow(true);
+                    }}
+                  >
+                    <div>
+                      <p>{categoryArr[index].name}の商品一覧へ</p>
+                    </div>
 
-                  <Image
-                    src={categoryArr[index].image}
-                    width={250}
-                    height={250}
-                    className={styles.sec3_ImageBox}
-                    alt={"野菜画像"}
-                  />
-                </div>
+                    <Image
+                      src={categoryArr[index].image}
+                      width={250}
+                      height={250}
+                      className={styles.sec3_ImageBox}
+                      alt={"野菜画像"}
+                    />
+                    <div className={styles.mask}>
+                      <div className={styles.caption}>CLICK</div>
+                    </div>
+                  </div>
+                </>
               );
             }
           })}
         </div>
       </section>
-      <Modal show={show} setShow={setShow} />
+      <Modal
+        show={show}
+        setShow={setShow}
+        farmerItems={items}
+        cookie={cookie}
+        cartData={cartData}
+        setcartData={setcartData}
+        oneTimeStorage={oneTimeStorage}
+        setoneTimeStorage={setoneTimeStorage}
+        storage={storage}
+        setstorage={setstorage}
+        userCartitems={userCartitems}
+      />
     </div>
   );
 }
