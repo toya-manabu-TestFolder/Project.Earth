@@ -31,7 +31,7 @@ export default async function loginFetch(
   } catch (error) {
     // if () {
     console.log("テストエラー確認", error);
-    const errorMessage = await error.json;
+    const errorMessage = await error.json();
     const errorInfo = errorMessage.error;
     console.log("エラーリザルト", errorInfo);
     // 以下login.tsxに返しているもの,コンソールで描画されているのはtsxでconsoleしてるもの
