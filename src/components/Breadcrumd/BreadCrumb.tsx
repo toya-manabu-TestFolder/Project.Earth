@@ -6,7 +6,6 @@ import { useState } from "react";
 
 export const BreadCrumb: NextPage = () => {
   const router = useRouter();
-  const [test, settest] = useState<any>([]);
 
   // pathを「/」で分解
   let paths = decodeURI(router.asPath).substring(1).split("/");
@@ -14,13 +13,6 @@ export const BreadCrumb: NextPage = () => {
   // リンク先アドレスの取得
   let roots: string[] = [""];
   for (let i = 0; i < paths.length; i++) roots.push(roots[i] + "/" + paths[i]);
-
-  let obj = [
-    {
-      path: "/farmers?search=キャベツ&page=1",
-      text: "検索結果",
-    },
-  ];
 
   let text = paths.map((path) => {
     if (path.search(/farmers/) !== -1) {
@@ -35,13 +27,8 @@ export const BreadCrumb: NextPage = () => {
     if (path === "nologinuserCartPage" || path === "loginuserCartPage") {
       return (path = "買い物かご");
     }
-    settest([...test, path]);
   });
 
-  console.log("test", test);
-  console.log("pats", paths);
-  console.log("text", text);
-  console.log("roots", roots);
   return (
     <div className={styles.container}>
       {/* Homeのリンク */}
